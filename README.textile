@@ -1,0 +1,14 @@
+h1.EEProgressHUD
+
+EEProgressHUD is an easy-to-use, clean and lightweight progress HUD for iOS.
+
+EEProgressHUD features:
+
+* singleton
+* call @+ (void)showWithMessage:showStyle:progressViewStyle:@ when you want to show HUD
+* call @+ (void)hideWithMessage:hideStyle:resultViewStyle:@ when you want to hide HUD
+
+
+----------
+Copyright &copy; 2011 Yoshiki Kudo
+Distributed under the MIT license[http://www.opensource.org/licenses/mit-license.php]
