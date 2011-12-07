@@ -1,4 +1,4 @@
-h1.EEProgressHUD
+h1. EEProgressHUD
 
 EEProgressHUD is an easy-to-use, clean and lightweight progress HUD for iOS.
 
