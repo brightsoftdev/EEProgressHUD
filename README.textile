@@ -2,6 +2,8 @@ h1. EEProgressHUD
 
 EEProgressHUD is an easy-to-use, clean and lightweight progress HUD for iOS.
 
+!http://f.cl.ly/items/231Y2A0t0t1J0B0r3N0p/svprogresshud3.png!
+
 EEProgressHUD features:
 
 * singleton
@@ -11,4 +13,4 @@ EEProgressHUD features:
 
 ----------
 Copyright &copy; 2011 Yoshiki Kudo
-Distributed under the "MIT license":http://www.opensource.org/licenses/mit-license.php.
+Distributed under the "MIT license":http://www.opensource.org/licenses/mit-license.php
