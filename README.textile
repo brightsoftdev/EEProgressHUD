@@ -19,6 +19,9 @@ h2. Installation
 * Drag the @EEProgressHUD.h@ & @EEProgressHUD.m@ into your project.
 * Add the *QuartzCore* framework to your project
 
+h2. Credits
+Expansion will continue. Please use this HUD. Please request what you thing for this HUD.
+
 ----------
 Copyright &copy; 2011 Yoshiki Kudo
 Distributed under the "MIT license":http://www.opensource.org/licenses/mit-license.php
