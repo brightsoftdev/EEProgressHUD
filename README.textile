@@ -20,6 +20,7 @@ h2. Installation
 * Add the *QuartzCore* framework to your project
 
 h2. Credits
+
 Expansion will continue. Please use this HUD. Please request what you thing for this HUD.
 
 ----------
