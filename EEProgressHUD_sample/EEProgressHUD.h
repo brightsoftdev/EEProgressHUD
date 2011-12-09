@@ -10,12 +10,14 @@
 
 typedef enum _EEProgressHUDShowStyle {
     EEProgressHUDShowStyleNone = 0,
-    EEProgressHUDShowStyleFadeIn = 1
+    EEProgressHUDShowStyleFadeIn = 1,
+    EEProgressHUDShowStyleLutz = 2
 } EEProgressHUDShowStyle;
 
 typedef enum _EEProgressHUDHideStyle {
     EEProgressHUDHideStyleNone = 0,
-    EEProgressHUDHideStyleFadeOut = 1
+    EEProgressHUDHideStyleFadeOut = 1,
+    EEProgressHUDHideStyleLutz = 2,
 } EEProgressHUDHideStyle;
 
 typedef enum _EEProgressHUDProgressViewStyle {
@@ -37,12 +39,16 @@ typedef enum _EEProgressHUDResultViewStyle {
     EEProgressHUDHideStyle hideStyle_;
     EEProgressHUDProgressViewStyle progressViewStyle_;
     EEProgressHUDResultViewStyle resultViewStyle_;
+    
+    NSString *message_;
 }
 
 @property (nonatomic) EEProgressHUDShowStyle showStyle;
 @property (nonatomic) EEProgressHUDHideStyle hideStyle;
 @property (nonatomic) EEProgressHUDProgressViewStyle progressViewStyle;
 @property (nonatomic) EEProgressHUDResultViewStyle resultViewStyle;
+
+@property (nonatomic, strong) NSString *message;
 
 + (void)showWithMessage:(NSString *)message 
               showStyle:(EEProgressHUDShowStyle)showStyle 

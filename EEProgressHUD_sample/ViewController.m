@@ -12,6 +12,7 @@
 
 @implementation ViewController
 @synthesize textField;
+@synthesize segIn, segOut;
 
 - (void)didReceiveMemoryWarning
 {
@@ -44,18 +45,38 @@
 - (IBAction)show:(id)sender
 {
     NSString *message = self.textField.text;
+    NSInteger selected = self.segIn.selectedSegmentIndex;
     
+    EEProgressHUDShowStyle showStyle;
+    if (selected == 0) {
+        showStyle = EEProgressHUDShowStyleFadeIn;
+    }else if (selected == 1) {
+        showStyle = EEProgressHUDShowStyleLutz;
+    }
+
     [EEProgressHUD showWithMessage:message
-                         showStyle:EEProgressHUDShowStyleFadeIn
+                         showStyle:showStyle
                  progressViewStyle:EEProgressHUDProgressViewStyleIndicator];
+    
 }
 
 - (IBAction)hideOK:(id)sender
 {
     NSString *message = self.textField.text;
     
+    NSInteger selected = self.segOut.selectedSegmentIndex;
+    
+    EEProgressHUDHideStyle hideStyle;
+    if (selected == 0) {
+        hideStyle = EEProgressHUDHideStyleFadeOut;
+    }else if (selected == 1){
+        hideStyle = EEProgressHUDHideStyleLutz;
+    }
+    
+    NSLog(@"%d", selected);
+    
     [EEProgressHUD hideWithMessage:message
-                         hideStyle:EEProgressHUDHideStyleFadeOut
+                         hideStyle:hideStyle
                    resultViewStyle:EEProgressHUDResultViewStyleOK];
 }
 
@@ -63,8 +84,19 @@
 {
     NSString *message = self.textField.text;
     
+    NSInteger selected = self.segOut.selectedSegmentIndex;
+    
+    EEProgressHUDHideStyle hideStyle;
+    if (selected == 0) {
+        hideStyle = EEProgressHUDHideStyleFadeOut;
+    }else if (selected == 1){
+        hideStyle = EEProgressHUDHideStyleLutz;
+    }
+    
+    NSLog(@"%d", selected);
+    
     [EEProgressHUD hideWithMessage:message
-                         hideStyle:EEProgressHUDHideStyleFadeOut
+                         hideStyle:hideStyle
                    resultViewStyle:EEProgressHUDResultViewStyleNG];
 }
 
@@ -72,15 +104,28 @@
 {
     NSString *message = self.textField.text;
     
+    NSInteger selected = self.segOut.selectedSegmentIndex;
+    
+    EEProgressHUDHideStyle hideStyle;
+    if (selected == 0) {
+        hideStyle = EEProgressHUDHideStyleFadeOut;
+    }else if (selected == 1){
+        hideStyle = EEProgressHUDHideStyleLutz;
+    }
+    
+    NSLog(@"%d", selected);
+    
     [EEProgressHUD hideWithMessage:message
-                         hideStyle:EEProgressHUDHideStyleFadeOut
+                         hideStyle:hideStyle
                    resultViewStyle:EEProgressHUDResultViewStyleChecked];
 }
 
 #pragma mark - UITextField Delegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
 {
-    [textField resignFirstResponder];
+    [aTextField resignFirstResponder];
+    
+    return YES;
 }
 
 @end

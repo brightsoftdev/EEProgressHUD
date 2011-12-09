@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextField *textField;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *segIn, *segOut;
 
 - (IBAction)show:(id)sender;
 - (IBAction)hideOK:(id)sender;
