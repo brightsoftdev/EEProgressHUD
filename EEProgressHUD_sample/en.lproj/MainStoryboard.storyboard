@@ -97,21 +97,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="cot-gE-IFo">
-                                <rect key="frame" x="20" y="149" width="280" height="44"/>
+                                <rect key="frame" x="13" y="149" width="295" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Fadein"/>
                                     <segment title="Lutz"/>
                                     <segment title="Shake"/>
+                                    <segment title="No"/>
                                 </segments>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="znh-m3-4e1">
-                                <rect key="frame" x="20" y="352" width="280" height="44"/>
+                                <rect key="frame" x="13" y="352" width="295" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Fadeout"/>
                                     <segment title="Lutz"/>
                                     <segment title="Shake"/>
+                                    <segment title="No"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -124,7 +126,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="18" y="41"/>
+            <point key="canvasLocation" x="-64" y="31"/>
         </scene>
     </scenes>
     <classes>

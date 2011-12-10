@@ -54,6 +54,8 @@
         showStyle = EEProgressHUDShowStyleLutz;
     }else if (selected == 2) {
         showStyle = EEProgressHUDShowStyleShake;
+    }else if (selected == 3) {
+        showStyle = EEProgressHUDShowStyleNoAnime;
     }
 
     [EEProgressHUD showWithMessage:message
@@ -75,6 +77,8 @@
         hideStyle = EEProgressHUDHideStyleLutz;
     }else if (selected == 2){
         hideStyle = EEProgressHUDHideStyleShake;
+    }else if (selected == 3){
+        hideStyle = EEProgressHUDHideStyleNoAnime;
     }
     
     NSLog(@"%d", selected);
@@ -97,6 +101,8 @@
         hideStyle = EEProgressHUDHideStyleLutz;
     }else if (selected == 2){
         hideStyle = EEProgressHUDHideStyleShake;
+    }else if (selected == 3){
+        hideStyle = EEProgressHUDHideStyleNoAnime;
     }
     
     NSLog(@"%d", selected);
@@ -119,6 +125,8 @@
         hideStyle = EEProgressHUDHideStyleLutz;
     }else if (selected == 2){
         hideStyle = EEProgressHUDHideStyleShake;
+    }else if (selected == 3){
+        hideStyle = EEProgressHUDHideStyleNoAnime;
     }
     
     NSLog(@"%d", selected);

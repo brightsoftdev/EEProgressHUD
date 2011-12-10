@@ -30,6 +30,8 @@
 #define HUD_DURATION_SHAKE_HIDE 0.25
 #define HUD_COUNT_SHAKE 9
 
+#define HUD_DURATION_NO_ANIME 0.001
+
 #define HUD_RATIO_FADESIZE 0.9
 #define HUD_TIME_DELAY 1.6
 
@@ -705,6 +707,30 @@ static EEProgressHUD *sharedInstance_ = nil;
         group.animations = [NSArray arrayWithObjects:alpha, shakes, nil];
         
         [hudView_.layer addAnimation:group forKey:key];
+        
+    }else if (showStyle_ == EEProgressHUDShowStyleNoAnime || hideStyle_ == EEProgressHUDHideStyleNoAnime) {
+        
+        CGFloat fromAlpha, toAlpha;
+        NSString *key;
+        if (isAppear) {
+            fromAlpha = 0.0;
+            toAlpha = 1.0;
+            key = @"hud_no_anime_show";
+        }else {
+            fromAlpha = 1.0;
+            toAlpha = 0.0;
+            key = @"hud_no_anime_hide";
+        }
+        
+        CABasicAnimation *alpha = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alpha.fromValue = [NSNumber numberWithFloat:fromAlpha];
+        alpha.toValue = [NSNumber numberWithFloat:toAlpha];
+        alpha.duration = HUD_DURATION_NO_ANIME;
+        alpha.removedOnCompletion = NO;
+        alpha.fillMode = kCAFillModeForwards;
+        alpha.delegate = self;
+        
+        [hudView_.layer addAnimation:alpha forKey:key];
     }
 }
 
@@ -835,6 +861,52 @@ static EEProgressHUD *sharedInstance_ = nil;
         
         /* 終了処理 */
         [self cleaning];
+        
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_no_anime_show"]]) {
+        
+        CALayer *layer = [hudView_.layer presentationLayer];
+        
+        hudView_.layer.opacity = layer.opacity;
+        
+        [hudView_.layer removeAnimationForKey:@"hud_no_anime_show"];
+        
+        // リフレッシュ
+        self.showStyle = EEProgressHUDShowStyleNone;
+        
+        /* インジケーターならスタート */
+        if (self.progressViewStyle == EEProgressHUDProgressViewStyleIndicator) {
+            UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)self.imageView;
+            
+            double delayInSeconds = 0.2;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                
+                [indicator startAnimating];
+            });
+        }
+        
+        /* 文字更新 */
+        double delayInSeconds = 0.2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            messageLabel_.text = [NSString stringWithString:message_];
+            self.message = nil;
+        });
+        
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_no_anime_hide"]]) {
+        
+        // 更新
+        CALayer *layer = [hudView_.layer presentationLayer];
+        
+        /* サイズを大きいのを基準にするため更新はしない */
+        hudView_.layer.opacity = layer.opacity;
+        
+        [hudView_.layer removeAnimationForKey:@"hud_no_anime_hide"];
+        
+        /* 終了処理 */
+        [self cleaning];
+        
     }
 }
 
