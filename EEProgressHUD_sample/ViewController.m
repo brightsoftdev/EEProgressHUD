@@ -52,6 +52,8 @@
         showStyle = EEProgressHUDShowStyleFadeIn;
     }else if (selected == 1) {
         showStyle = EEProgressHUDShowStyleLutz;
+    }else if (selected == 2) {
+        showStyle = EEProgressHUDShowStyleShake;
     }
 
     [EEProgressHUD showWithMessage:message
@@ -71,6 +73,8 @@
         hideStyle = EEProgressHUDHideStyleFadeOut;
     }else if (selected == 1){
         hideStyle = EEProgressHUDHideStyleLutz;
+    }else if (selected == 2){
+        hideStyle = EEProgressHUDHideStyleShake;
     }
     
     NSLog(@"%d", selected);
@@ -91,6 +95,8 @@
         hideStyle = EEProgressHUDHideStyleFadeOut;
     }else if (selected == 1){
         hideStyle = EEProgressHUDHideStyleLutz;
+    }else if (selected == 2){
+        hideStyle = EEProgressHUDHideStyleShake;
     }
     
     NSLog(@"%d", selected);
@@ -111,6 +117,8 @@
         hideStyle = EEProgressHUDHideStyleFadeOut;
     }else if (selected == 1){
         hideStyle = EEProgressHUDHideStyleLutz;
+    }else if (selected == 2){
+        hideStyle = EEProgressHUDHideStyleShake;
     }
     
     NSLog(@"%d", selected);

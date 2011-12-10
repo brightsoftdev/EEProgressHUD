@@ -26,6 +26,10 @@
 #define HUD_RATIO_EXPANDING 0.5 // 膨張
 #define HUD_RATIO_REDUCTION 0.55 // 縮小
 
+#define HUD_DURATION_SHAKE_SHOW 0.25
+#define HUD_DURATION_SHAKE_HIDE 0.25
+#define HUD_COUNT_SHAKE 9
+
 #define HUD_RATIO_FADESIZE 0.9
 #define HUD_TIME_DELAY 1.6
 
@@ -120,16 +124,6 @@
     path.lineCapStyle = kCGLineCapRound;
     path.lineWidth = 9.0;
     
-//    CGFloat red, blue, green;
-//    CGFloat alpha;
-//    red = 1.0;
-//    green = 1.0;
-//    blue = 1.0;
-//    alpha = 1.0;
-//    [[UIColor colorWithRed:red
-//                     green:green
-//                      blue:blue
-//                     alpha:alpha] set];
     [[UIColor colorWithWhite:1.0 alpha:1.0] set];
     
     [path stroke];
@@ -219,13 +213,13 @@ static EEProgressHUD *sharedInstance_ = nil;
 
 + (id)sharedView
 {
-    NSLog(@"sharedView");
+    //NSLog(@"sharedView");
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSLog(@"dispatch");
+        //NSLog(@"dispatch");
         if (!sharedInstance_) {
-            NSLog(@"Init");
+            //NSLog(@"Init");
             sharedInstance_ = [[self alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         }
     });
@@ -354,7 +348,8 @@ static EEProgressHUD *sharedInstance_ = nil;
         rect.size.width = HUD_VIEW_WIDTH;
         rect.size.height = HUD_VIEW_HEIGHT;
         hudView_ = [[UIView alloc] initWithFrame:rect];
-        hudView_.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.9];
+        hudView_.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.8];
+        //hudView_.backgroundColor = [UIColor colorWithWhite:0.0 alpha:1.0];
         hudView_.layer.cornerRadius = 7.0;
         hudView_.clipsToBounds = YES;
         
@@ -487,9 +482,9 @@ static EEProgressHUD *sharedInstance_ = nil;
         }
         
         /* hudView_ */
-        CABasicAnimation *alphaHUDAnime = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        alphaHUDAnime.fromValue = [NSNumber numberWithFloat:fromAlpha];
-        alphaHUDAnime.toValue = [NSNumber numberWithFloat:toAlpha];
+        CABasicAnimation *alpha = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alpha.fromValue = [NSNumber numberWithFloat:fromAlpha];
+        alpha.toValue = [NSNumber numberWithFloat:toAlpha];
         
         CABasicAnimation *bounceHUDAnime = [CABasicAnimation animationWithKeyPath:@"bounds"];
         bounceHUDAnime.fromValue = [NSValue valueWithCGRect:fromHUDRect];
@@ -502,7 +497,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         group.duration = duration;
         group.delegate = self;
         
-        NSArray *animations = [NSArray arrayWithObjects:alphaHUDAnime, bounceHUDAnime, nil];
+        NSArray *animations = [NSArray arrayWithObjects:alpha, bounceHUDAnime, nil];
         group.animations = animations;
         
         [hudView_.layer addAnimation:group forKey:hudKey];
@@ -562,12 +557,12 @@ static EEProgressHUD *sharedInstance_ = nil;
             alphaBeginTimeRatio = 0.5;
         }
         
-        CABasicAnimation *alphaHUDAnime = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        alphaHUDAnime.fromValue = [NSNumber numberWithFloat:fromAlpha];
-        alphaHUDAnime.toValue = [NSNumber numberWithFloat:toAlpha];
-        alphaHUDAnime.duration = duration * 0.5;
-        alphaHUDAnime.beginTime = duration * alphaBeginTimeRatio;
-        alphaHUDAnime.timingFunction = alphaTimingFunction;
+        CABasicAnimation *alpha = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alpha.fromValue = [NSNumber numberWithFloat:fromAlpha];
+        alpha.toValue = [NSNumber numberWithFloat:toAlpha];
+        alpha.duration = duration * 0.5;
+        alpha.beginTime = duration * alphaBeginTimeRatio;
+        alpha.timingFunction = alphaTimingFunction;
         
         CABasicAnimation *jumpUP = [CABasicAnimation animationWithKeyPath:@"position"];
         jumpUP.fromValue = [NSValue valueWithCGPoint:fromPoint];
@@ -606,8 +601,108 @@ static EEProgressHUD *sharedInstance_ = nil;
         group.duration = duration;
         group.delegate = self;
         
-        NSArray *animations = [NSArray arrayWithObjects:alphaHUDAnime, jumpUP, jumpDown, rotate, expanding, nil];
+        NSArray *animations = [NSArray arrayWithObjects:alpha, jumpUP, jumpDown, rotate, expanding, nil];
         group.animations = animations;
+        
+        [hudView_.layer addAnimation:group forKey:key];
+        
+    }else if (showStyle_ == EEProgressHUDShowStyleShake || hideStyle_ == EEProgressHUDHideStyleShake) {
+        
+        CGFloat fromAlpha, toAlpha;
+        CGFloat duration;
+        CGFloat alphaBeginTimeRatio;
+        CAMediaTimingFunction *alphaTimingFunction;
+        NSString *key;
+        
+        if (isAppear) {
+            // 出現
+            fromAlpha = 0.0;
+            toAlpha = 1.0;
+            
+            duration = HUD_DURATION_SHAKE_SHOW;
+            alphaBeginTimeRatio = 0.0;
+            alphaTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            
+            key = @"hud_shake_show";
+            
+        }else {
+            // 消去
+            fromAlpha = 1.0;
+            toAlpha = 0.0;
+            
+            duration = HUD_DURATION_SHAKE_HIDE;
+            alphaBeginTimeRatio = 0.2;
+            alphaTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            
+            key = @"hud_shake_hide";
+        }
+        
+        CABasicAnimation *alpha = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alpha.fromValue = [NSNumber numberWithFloat:fromAlpha];
+        alpha.toValue = [NSNumber numberWithFloat:toAlpha];
+        alpha.duration = duration * 0.8;
+        alpha.beginTime = duration * alphaBeginTimeRatio;
+        alpha.timingFunction = alphaTimingFunction;
+        
+        CAKeyframeAnimation *shakes = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+        
+        NSMutableArray *transforms = [NSMutableArray array];
+        NSMutableArray *timingFunctions = [NSMutableArray array];
+        NSMutableArray *durations = [NSMutableArray array];
+        
+        for (int i = 0; i < HUD_COUNT_SHAKE; i++) {
+            
+            CATransform3D transform = CATransform3DIdentity;
+            CAMediaTimingFunction *function;
+            CGFloat durationRatioPerShake;
+            
+            CGFloat theta = 0.03 * M_PI;
+            
+            /* transform */
+            if (i == 0) {
+                transform = CATransform3DMakeRotation(0.0f, 0.0f, 0.0f, 1.0f);
+                durationRatioPerShake = 0.0;
+                
+            }else if (i == HUD_COUNT_SHAKE - 1){
+                transform = CATransform3DMakeRotation(0.0f, 0.0f, 0.0f, 1.0f);
+                durationRatioPerShake = (i - 0.5)/((CGFloat)HUD_COUNT_SHAKE - 1.0);
+            
+            }else if (i % 2 == 0){
+                transform = CATransform3DMakeRotation(theta, 0.0f, 0.0f, 1.0f);
+                durationRatioPerShake = (i - 0.5)/((CGFloat)HUD_COUNT_SHAKE - 1.0);
+                
+            }else {
+                transform = CATransform3DMakeRotation(-theta, 0.0f, 0.0f, 1.0f);
+                durationRatioPerShake = (i - 0.5)/((CGFloat)HUD_COUNT_SHAKE - 1.0);
+            }
+            
+            /* timingFunction */
+            if (i == 0) {
+                function = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+                
+            }else {
+                function = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            }
+            
+            NSValue *value = [NSValue valueWithCATransform3D:transform];
+            
+            [transforms addObject:value];
+            [timingFunctions addObject:function];
+            [durations addObject:[NSNumber numberWithFloat:durationRatioPerShake]];
+        }
+        
+        shakes.values = transforms;
+        shakes.timingFunctions = timingFunctions;
+        shakes.keyTimes = durations;
+        shakes.duration = duration;
+        
+        CAAnimationGroup *group = [CAAnimationGroup animation];
+        group.removedOnCompletion = NO;
+        group.fillMode = kCAFillModeForwards;
+        group.delegate = self;
+        group.duration = duration;
+        
+        group.animations = [NSArray arrayWithObjects:alpha, shakes, nil];
         
         [hudView_.layer addAnimation:group forKey:key];
     }
@@ -661,6 +756,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         // リフレッシュ
         self.showStyle = EEProgressHUDShowStyleNone;
         
+        /* indicatorならスタート */
         if (self.progressViewStyle == EEProgressHUDProgressViewStyleIndicator) {
             UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)self.imageView;
             
@@ -668,13 +764,20 @@ static EEProgressHUD *sharedInstance_ = nil;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 
-                // 文字更新
-                messageLabel_.text = [NSString stringWithString:message_];
-                self.message = nil;
-                
                 [indicator startAnimating];
             });
         }
+        
+        // 文字更新
+        double delayInSeconds = 0.2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            messageLabel_.text = [NSString stringWithString:message_];
+            self.message = nil;
+        });
+        
+        
     }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_lutz_hide"]]) {
         
         // 更新
@@ -686,6 +789,51 @@ static EEProgressHUD *sharedInstance_ = nil;
         [hudView_.layer removeAnimationForKey:@"hud_lutz_hide"];
         
         // 終了処理
+        [self cleaning];
+        
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_shake_show"]]){
+        
+        CALayer *layer = [hudView_.layer presentationLayer];
+        
+        hudView_.layer.opacity = layer.opacity;
+        
+        [hudView_.layer removeAnimationForKey:@"hud_shake_show"];
+        
+        // リフレッシュ
+        self.showStyle = EEProgressHUDShowStyleNone;
+        
+        /* インジケーターならスタート */
+        if (self.progressViewStyle == EEProgressHUDProgressViewStyleIndicator) {
+            UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)self.imageView;
+            
+            double delayInSeconds = 0.2;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                
+                [indicator startAnimating];
+            });
+        }
+        
+        /* 文字更新 */
+        double delayInSeconds = 0.2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            messageLabel_.text = [NSString stringWithString:message_];
+            self.message = nil;
+        });
+        
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_shake_hide"]]){
+        
+        // 更新
+        CALayer *layer = [hudView_.layer presentationLayer];
+        
+        /* サイズを大きいのを基準にするため更新はしない */
+        hudView_.layer.opacity = layer.opacity;
+        
+        [hudView_.layer removeAnimationForKey:@"hud_shake_hide"];
+        
+        /* 終了処理 */
         [self cleaning];
     }
 }
@@ -720,7 +868,7 @@ static EEProgressHUD *sharedInstance_ = nil;
     //sharedInstance_ = nil;
     
     
-    NSLog(@"cleaned");
+    //NSLog(@"cleaned");
 }
 
 @end

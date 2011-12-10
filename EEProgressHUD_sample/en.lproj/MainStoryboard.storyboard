@@ -102,6 +102,7 @@
                                 <segments>
                                     <segment title="Fadein"/>
                                     <segment title="Lutz"/>
+                                    <segment title="Shake"/>
                                 </segments>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="znh-m3-4e1">
@@ -110,6 +111,7 @@
                                 <segments>
                                     <segment title="Fadeout"/>
                                     <segment title="Lutz"/>
+                                    <segment title="Shake"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -122,7 +124,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="141" y="40"/>
+            <point key="canvasLocation" x="18" y="41"/>
         </scene>
     </scenes>
     <classes>
