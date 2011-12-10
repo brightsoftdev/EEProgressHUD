@@ -32,6 +32,10 @@
 
 #define HUD_DURATION_NO_ANIME 0.001
 
+#define HUD_LENGTH_FROM_RIGHT 10.0
+#define HUD_LENGTH_TO_LEFT 15.0
+#define HUD_DURATION_SLIDE 0.25
+
 #define HUD_RATIO_FADESIZE 0.9
 #define HUD_TIME_DELAY 1.6
 
@@ -731,6 +735,57 @@ static EEProgressHUD *sharedInstance_ = nil;
         alpha.delegate = self;
         
         [hudView_.layer addAnimation:alpha forKey:key];
+        
+    }else if (showStyle_ == EEProgressHUDShowStyleFromRight || hideStyle_ == EEProgressHUDHideStyleToLeft) {
+        
+        CGFloat fromAlpha, toAlpha;
+        NSString *key;
+        
+        CGPoint fromPosition, toPosition;
+        CAMediaTimingFunction *function;
+        
+        if (isAppear) {
+            fromAlpha = 0.0;
+            toAlpha = 1.0;
+            key = @"hud_from_right_show";
+            
+            fromPosition = hudView_.layer.position;
+            fromPosition.x += HUD_LENGTH_FROM_RIGHT;
+            
+            toPosition = hudView_.layer.position;
+            
+            function = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+            
+        }else {
+            fromAlpha = 1.0;
+            toAlpha = 0.0;
+            key = @"hud_to_left_hide";
+            
+            fromPosition = hudView_.layer.position;
+            
+            toPosition = hudView_.layer.position;
+            toPosition.x -= HUD_LENGTH_TO_LEFT;
+            
+            function = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+        }
+        
+        CABasicAnimation *alpha = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alpha.fromValue = [NSNumber numberWithFloat:fromAlpha];
+        alpha.toValue = [NSNumber numberWithFloat:toAlpha];
+        
+        CABasicAnimation *ido = [CABasicAnimation animationWithKeyPath:@"position"];
+        ido.fromValue = [NSValue valueWithCGPoint:fromPosition];
+        ido.toValue = [NSValue valueWithCGPoint:toPosition];
+        
+        CAAnimationGroup *group = [CAAnimationGroup animation];
+        group.fillMode = kCAFillModeForwards;
+        group.removedOnCompletion = NO;
+        group.animations = [NSArray arrayWithObjects:alpha, ido, nil];
+        group.duration = HUD_DURATION_SLIDE;
+        group.timingFunction = function;
+        group.delegate = self;
+        
+        [hudView_.layer addAnimation:group forKey:key];
     }
 }
 
@@ -907,6 +962,50 @@ static EEProgressHUD *sharedInstance_ = nil;
         /* 終了処理 */
         [self cleaning];
         
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_from_right_show"]]) {
+        
+        CALayer *layer = [hudView_.layer presentationLayer];
+        
+        hudView_.layer.opacity = layer.opacity;
+        hudView_.frame = layer.frame;
+        
+        [hudView_.layer removeAnimationForKey:@"hud_from_right_show"];
+        
+        // リフレッシュ
+        self.showStyle = EEProgressHUDShowStyleNone;
+        
+        /* インジケーターならスタート */
+        if (self.progressViewStyle == EEProgressHUDProgressViewStyleIndicator) {
+            UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)self.imageView;
+            
+            double delayInSeconds = 0.2;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                
+                [indicator startAnimating];
+            });
+        }
+        
+        /* 文字更新 */
+        double delayInSeconds = 0.2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            messageLabel_.text = [NSString stringWithString:message_];
+            self.message = nil;
+        });
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_to_left_hide"]]) {
+        
+        // 更新
+        CALayer *layer = [hudView_.layer presentationLayer];
+        
+        /* サイズを大きいのを基準にするため更新はしない */
+        hudView_.layer.opacity = layer.opacity;
+        
+        [hudView_.layer removeAnimationForKey:@"hud_to_left_hide"];
+        
+        /* 終了処理 */
+        [self cleaning];
     }
 }
 

@@ -13,7 +13,8 @@ typedef enum _EEProgressHUDShowStyle {
     EEProgressHUDShowStyleFadeIn = 1,
     EEProgressHUDShowStyleLutz = 2,
     EEProgressHUDShowStyleShake = 3,
-    EEProgressHUDShowStyleNoAnime = 4
+    EEProgressHUDShowStyleNoAnime = 4,
+    EEProgressHUDShowStyleFromRight = 5
 } EEProgressHUDShowStyle;
 
 typedef enum _EEProgressHUDHideStyle {
@@ -21,7 +22,8 @@ typedef enum _EEProgressHUDHideStyle {
     EEProgressHUDHideStyleFadeOut = 1,
     EEProgressHUDHideStyleLutz = 2,
     EEProgressHUDHideStyleShake = 3,
-    EEProgressHUDHideStyleNoAnime = 4
+    EEProgressHUDHideStyleNoAnime = 4,
+    EEProgressHUDHideStyleToLeft = 5
 } EEProgressHUDHideStyle;
 
 typedef enum _EEProgressHUDProgressViewStyle {

@@ -56,6 +56,8 @@
         showStyle = EEProgressHUDShowStyleShake;
     }else if (selected == 3) {
         showStyle = EEProgressHUDShowStyleNoAnime;
+    }else if (selected == 4) {
+        showStyle = EEProgressHUDShowStyleFromRight;
     }
 
     [EEProgressHUD showWithMessage:message
@@ -79,9 +81,9 @@
         hideStyle = EEProgressHUDHideStyleShake;
     }else if (selected == 3){
         hideStyle = EEProgressHUDHideStyleNoAnime;
+    }else if (selected == 4){
+        hideStyle = EEProgressHUDHideStyleToLeft;
     }
-    
-    NSLog(@"%d", selected);
     
     [EEProgressHUD hideWithMessage:message
                          hideStyle:hideStyle
@@ -103,9 +105,9 @@
         hideStyle = EEProgressHUDHideStyleShake;
     }else if (selected == 3){
         hideStyle = EEProgressHUDHideStyleNoAnime;
+    }else if (selected == 4){
+        hideStyle = EEProgressHUDHideStyleToLeft;
     }
-    
-    NSLog(@"%d", selected);
     
     [EEProgressHUD hideWithMessage:message
                          hideStyle:hideStyle
@@ -127,9 +129,9 @@
         hideStyle = EEProgressHUDHideStyleShake;
     }else if (selected == 3){
         hideStyle = EEProgressHUDHideStyleNoAnime;
+    }else if (selected == 4){
+        hideStyle = EEProgressHUDHideStyleToLeft;
     }
-    
-    NSLog(@"%d", selected);
     
     [EEProgressHUD hideWithMessage:message
                          hideStyle:hideStyle

@@ -96,24 +96,26 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="cot-gE-IFo">
-                                <rect key="frame" x="13" y="149" width="295" height="44"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="cot-gE-IFo">
+                                <rect key="frame" x="13" y="156" width="295" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Fadein"/>
+                                    <segment title="Fade"/>
                                     <segment title="Lutz"/>
                                     <segment title="Shake"/>
                                     <segment title="No"/>
+                                    <segment title="Right"/>
                                 </segments>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="znh-m3-4e1">
-                                <rect key="frame" x="13" y="352" width="295" height="44"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="znh-m3-4e1">
+                                <rect key="frame" x="13" y="359" width="295" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Fadeout"/>
+                                    <segment title="Fade"/>
                                     <segment title="Lutz"/>
                                     <segment title="Shake"/>
                                     <segment title="No"/>
+                                    <segment title="Left"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -126,7 +128,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-64" y="31"/>
+            <point key="canvasLocation" x="-233" y="37"/>
         </scene>
     </scenes>
     <classes>
