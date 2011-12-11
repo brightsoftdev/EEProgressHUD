@@ -39,6 +39,11 @@
 #define HUD_RATIO_FADESIZE 0.9
 #define HUD_TIME_DELAY 1.6
 
+/* color */
+#define HUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.2 alpha:0.8]
+#define HUD_COLOR_LABEL [UIColor whiteColor]
+#define HUD_COLOR_IMAGE [UIColor whiteColor]
+
 /*****************************************
  original result view
  
@@ -93,7 +98,7 @@
                                                      clockwise:YES];
     path.lineWidth = 9.0;
     
-    [[UIColor colorWithWhite:1.0 alpha:1.0] set];
+    [HUD_COLOR_IMAGE set];
     
     [path stroke];
     
@@ -130,7 +135,7 @@
     path.lineCapStyle = kCGLineCapRound;
     path.lineWidth = 9.0;
     
-    [[UIColor colorWithWhite:1.0 alpha:1.0] set];
+    [HUD_COLOR_IMAGE set];
     
     [path stroke];
 }
@@ -165,7 +170,7 @@
     path.lineWidth = 9.0;
     path.lineJoinStyle = kCGLineJoinRound;
     
-    [[UIColor colorWithWhite:1.0 alpha:1.0] set];
+    [HUD_COLOR_IMAGE set];
     
     [path stroke];
 }
@@ -219,13 +224,9 @@ static EEProgressHUD *sharedInstance_ = nil;
 
 + (id)sharedView
 {
-    //NSLog(@"sharedView");
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        //NSLog(@"dispatch");
         if (!sharedInstance_) {
-            //NSLog(@"Init");
             sharedInstance_ = [[self alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         }
     });
@@ -354,8 +355,11 @@ static EEProgressHUD *sharedInstance_ = nil;
         rect.size.width = HUD_VIEW_WIDTH;
         rect.size.height = HUD_VIEW_HEIGHT;
         hudView_ = [[UIView alloc] initWithFrame:rect];
-        hudView_.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.8];
+        
+        /* For Dev*/
         //hudView_.backgroundColor = [UIColor colorWithWhite:0.0 alpha:1.0];
+        hudView_.backgroundColor = HUD_COLOR_HUDVIEW;
+        
         hudView_.layer.cornerRadius = 7.0;
         hudView_.clipsToBounds = YES;
         
@@ -378,7 +382,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         messageLabel_.backgroundColor = [UIColor clearColor];
         messageLabel_.font = [UIFont fontWithName:@"Helvetica-Bold" size:16.0];
         messageLabel_.textAlignment = UITextAlignmentCenter;
-        messageLabel_.textColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+        messageLabel_.textColor = HUD_COLOR_LABEL;
         messageLabel_.text = @"";
         
         [self.hudView addSubview:messageLabel_];
