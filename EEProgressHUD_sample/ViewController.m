@@ -13,6 +13,7 @@
 @implementation ViewController
 @synthesize textField;
 @synthesize segIn, segOut;
+@synthesize inScrollView, outScrollView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -26,6 +27,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    CGSize inSize = inScrollView.contentSize;
+    inSize.width = 640.0;
+    inScrollView.contentSize = inSize;
+    
+    CGSize outSize = outScrollView.contentSize;
+    outSize.width = 640.0;
+    outScrollView.contentSize = outSize;
 }
 
 - (void)viewDidUnload
@@ -58,6 +67,8 @@
         showStyle = EEProgressHUDShowStyleNoAnime;
     }else if (selected == 4) {
         showStyle = EEProgressHUDShowStyleFromRight;
+    }else if (selected == 5) {
+        showStyle = EEProgressHUDShowStyleFromLeft;
     }
 
     [EEProgressHUD showWithMessage:message
@@ -83,6 +94,8 @@
         hideStyle = EEProgressHUDHideStyleNoAnime;
     }else if (selected == 4){
         hideStyle = EEProgressHUDHideStyleToLeft;
+    }else if (selected == 5){
+        hideStyle = EEProgressHUDHideStyleToRight;
     }
     
     [EEProgressHUD hideWithMessage:message
@@ -107,6 +120,8 @@
         hideStyle = EEProgressHUDHideStyleNoAnime;
     }else if (selected == 4){
         hideStyle = EEProgressHUDHideStyleToLeft;
+    }else if (selected == 5){
+        hideStyle = EEProgressHUDHideStyleToRight;
     }
     
     [EEProgressHUD hideWithMessage:message
@@ -131,6 +146,8 @@
         hideStyle = EEProgressHUDHideStyleNoAnime;
     }else if (selected == 4){
         hideStyle = EEProgressHUDHideStyleToLeft;
+    }else if (selected == 5){
+        hideStyle = EEProgressHUDHideStyleToRight;
     }
     
     [EEProgressHUD hideWithMessage:message

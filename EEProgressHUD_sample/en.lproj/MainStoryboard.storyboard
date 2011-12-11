@@ -83,7 +83,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hide" lineBreakMode="tailTruncation" minimumFontSize="10" id="T4g-3N-EGj">
-                                <rect key="frame" x="20" y="323" width="42" height="21"/>
+                                <rect key="frame" x="13" y="281" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -96,39 +96,55 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="cot-gE-IFo">
-                                <rect key="frame" x="13" y="156" width="295" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Fade"/>
-                                    <segment title="Lutz"/>
-                                    <segment title="Shake"/>
-                                    <segment title="No"/>
-                                    <segment title="Right"/>
-                                </segments>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="znh-m3-4e1">
-                                <rect key="frame" x="13" y="359" width="295" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Fade"/>
-                                    <segment title="Lutz"/>
-                                    <segment title="Shake"/>
-                                    <segment title="No"/>
-                                    <segment title="Left"/>
-                                </segments>
-                            </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" id="CUe-bq-FuY">
+                                <rect key="frame" x="0.0" y="149" width="320" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="cot-gE-IFo">
+                                        <rect key="frame" x="13" y="20" width="295" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Fade"/>
+                                            <segment title="Lutz"/>
+                                            <segment title="Shake"/>
+                                            <segment title="No"/>
+                                            <segment title="Right"/>
+                                            <segment title="Left"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Yno-9W-ifr">
+                                <rect key="frame" x="0.0" y="305" width="320" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="znh-m3-4e1">
+                                        <rect key="frame" x="13" y="20" width="295" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Fade"/>
+                                            <segment title="Lutz"/>
+                                            <segment title="Shake"/>
+                                            <segment title="No"/>
+                                            <segment title="Left"/>
+                                            <segment title="Right"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.83163265306122447" green="0.83163265306122447" blue="0.83163265306122447" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="inScrollView" destination="CUe-bq-FuY" id="QEd-QI-E3p"/>
+                        <outlet property="outScrollView" destination="Yno-9W-ifr" id="H5Q-KY-X4Y"/>
                         <outlet property="segIn" destination="cot-gE-IFo" id="LBC-Vd-Zn4"/>
                         <outlet property="segOut" destination="znh-m3-4e1" id="t5Y-hj-Ksq"/>
                         <outlet property="textField" destination="DfA-SP-Oqf" id="czf-1F-k5M"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-233" y="37"/>
+            <point key="canvasLocation" x="-362" y="28"/>
         </scene>
     </scenes>
     <classes>
@@ -139,6 +155,8 @@
                 <relationship kind="action" name="hideNG:"/>
                 <relationship kind="action" name="hideOK:"/>
                 <relationship kind="action" name="show:"/>
+                <relationship kind="outlet" name="inScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="outScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="segIn" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="segOut" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="textField" candidateClass="UITextField"/>

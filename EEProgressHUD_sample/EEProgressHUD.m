@@ -39,6 +39,9 @@
 #define HUD_RATIO_FADESIZE 0.9
 #define HUD_TIME_DELAY 1.6
 
+#define HUD_LENGTH_FROM_LEFT 10.0
+#define HUD_LENGTH_TO_RIGHT 15.0
+
 /* color */
 #define HUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.2 alpha:0.8]
 #define HUD_COLOR_LABEL [UIColor whiteColor]
@@ -467,7 +470,7 @@ static EEProgressHUD *sharedInstance_ = nil;
             timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
             duration = HUD_DURATION_APPEAR;
             
-            hudKey = @"hud_fadein";
+            hudKey = @"hud_fadein_show";
             
             
         }else {
@@ -487,7 +490,7 @@ static EEProgressHUD *sharedInstance_ = nil;
             timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
             duration = HUD_DURATION_DISAPPEAR;
             
-            hudKey = @"hud_fadeout";
+            hudKey = @"hud_fadeout_hide";
             
         }
         
@@ -751,7 +754,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         if (isAppear) {
             fromAlpha = 0.0;
             toAlpha = 1.0;
-            key = @"hud_from_right_show";
+            key = @"hud_slide_show";
             
             fromPosition = hudView_.layer.position;
             fromPosition.x += HUD_LENGTH_FROM_RIGHT;
@@ -763,12 +766,62 @@ static EEProgressHUD *sharedInstance_ = nil;
         }else {
             fromAlpha = 1.0;
             toAlpha = 0.0;
-            key = @"hud_to_left_hide";
+            key = @"hud_slide_hide";
             
             fromPosition = hudView_.layer.position;
             
             toPosition = hudView_.layer.position;
             toPosition.x -= HUD_LENGTH_TO_LEFT;
+            
+            function = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+        }
+        
+        CABasicAnimation *alpha = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alpha.fromValue = [NSNumber numberWithFloat:fromAlpha];
+        alpha.toValue = [NSNumber numberWithFloat:toAlpha];
+        
+        CABasicAnimation *ido = [CABasicAnimation animationWithKeyPath:@"position"];
+        ido.fromValue = [NSValue valueWithCGPoint:fromPosition];
+        ido.toValue = [NSValue valueWithCGPoint:toPosition];
+        
+        CAAnimationGroup *group = [CAAnimationGroup animation];
+        group.fillMode = kCAFillModeForwards;
+        group.removedOnCompletion = NO;
+        group.animations = [NSArray arrayWithObjects:alpha, ido, nil];
+        group.duration = HUD_DURATION_SLIDE;
+        group.timingFunction = function;
+        group.delegate = self;
+        
+        [hudView_.layer addAnimation:group forKey:key];
+    }else if (showStyle_ == EEProgressHUDShowStyleFromLeft || hideStyle_ == EEProgressHUDHideStyleToRight) {
+        
+        CGFloat fromAlpha, toAlpha;
+        NSString *key;
+        
+        CGPoint fromPosition, toPosition;
+        CAMediaTimingFunction *function;
+        
+        if (isAppear) {
+            fromAlpha = 0.0;
+            toAlpha = 1.0;
+            key = @"hud_slide_show";
+            
+            fromPosition = hudView_.layer.position;
+            fromPosition.x -= HUD_LENGTH_FROM_LEFT;
+            
+            toPosition = hudView_.layer.position;
+            
+            function = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+            
+        }else {
+            fromAlpha = 1.0;
+            toAlpha = 0.0;
+            key = @"hud_slide_hide";
+            
+            fromPosition = hudView_.layer.position;
+            
+            toPosition = hudView_.layer.position;
+            toPosition.x += HUD_LENGTH_TO_RIGHT;
             
             function = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
         }
@@ -796,14 +849,15 @@ static EEProgressHUD *sharedInstance_ = nil;
 #pragma mark - Aniamtion delegate
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    if ([anim isEqual:[hudView_.layer animationForKey:@"hud_fadein"]]) {
+    
+    if ([anim isEqual:[hudView_.layer animationForKey:@"hud_fadein_show"]]) {
         
         CALayer *layer = [hudView_.layer presentationLayer];
         
         hudView_.layer.opacity = layer.opacity;
         hudView_.frame = layer.frame;
         
-        [hudView_.layer removeAnimationForKey:@"hud_fadein"];
+        [hudView_.layer removeAnimationForKey:@"hud_fadein_show"];
         
         // 文字更新
         messageLabel_.text = [NSString stringWithString:message_];
@@ -816,7 +870,7 @@ static EEProgressHUD *sharedInstance_ = nil;
             UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)self.imageView;
             [indicator startAnimating];
         }
-    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_fadeout"]]) {
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_fadeout_hide"]]) {
         
         // 更新
         CALayer *layer = [hudView_.layer presentationLayer];
@@ -824,7 +878,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         /* サイズを大きいのを基準にするため更新はしない */
         hudView_.layer.opacity = layer.opacity;
         
-        [hudView_.layer removeAnimationForKey:@"hud_fadeout"];
+        [hudView_.layer removeAnimationForKey:@"hud_fadeout_hide"];
         
         // 終了処理
         [self cleaning];
@@ -966,14 +1020,14 @@ static EEProgressHUD *sharedInstance_ = nil;
         /* 終了処理 */
         [self cleaning];
         
-    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_from_right_show"]]) {
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_slide_show"]]) {
         
         CALayer *layer = [hudView_.layer presentationLayer];
         
         hudView_.layer.opacity = layer.opacity;
         hudView_.frame = layer.frame;
         
-        [hudView_.layer removeAnimationForKey:@"hud_from_right_show"];
+        [hudView_.layer removeAnimationForKey:@"hud_slide_show"];
         
         // リフレッシュ
         self.showStyle = EEProgressHUDShowStyleNone;
@@ -998,7 +1052,7 @@ static EEProgressHUD *sharedInstance_ = nil;
             messageLabel_.text = [NSString stringWithString:message_];
             self.message = nil;
         });
-    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_to_left_hide"]]) {
+    }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_slide_hide"]]) {
         
         // 更新
         CALayer *layer = [hudView_.layer presentationLayer];
@@ -1006,7 +1060,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         /* サイズを大きいのを基準にするため更新はしない */
         hudView_.layer.opacity = layer.opacity;
         
-        [hudView_.layer removeAnimationForKey:@"hud_to_left_hide"];
+        [hudView_.layer removeAnimationForKey:@"hud_slide_hide"];
         
         /* 終了処理 */
         [self cleaning];

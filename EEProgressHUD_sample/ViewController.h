@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *segIn, *segOut;
+@property (nonatomic, strong) IBOutlet UIScrollView *inScrollView, *outScrollView;
 
 - (IBAction)show:(id)sender;
 - (IBAction)hideOK:(id)sender;
