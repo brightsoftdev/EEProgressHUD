@@ -8,11 +8,11 @@ EEHUDView features:
 
 * singleton class
 
-* Progress Mode
+* ＜Progress Mode＞
 call @+ (void)showWithMessage:showStyle:progressViewStyle:@ when you want to show HUD
 call @+ (void)hideWithMessage:hideStyle:resultViewStyle:@ when you want to hide HUD
 
-* Growl Mode
+* ＜Growl Mode＞
 call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@ when you want to show HUD (like growl)
 
 * showStyle: How to show HUD
