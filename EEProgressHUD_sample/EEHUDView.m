@@ -6,16 +6,19 @@
 //  Copyright (c) 2011年 Milestoneeee.com. All rights reserved.
 //
 
-#import "EEProgressHUD.h"
+#import "EEHUDView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#pragma mark - -- Constants --
 #define HUD_VIEW_WIDTH 161.8
 #define HUD_VIEW_HEIGHT 100.0
 #define HUD_IMAGE_ORIGINY 10.0
 #define HUD_IMAGE_WIDTH 161.8
 #define HUD_IMAGE_HEIGHT 60.0
+
+#define HUD_LABEL_ORIGINX_OFFSET 5.0
 #define HUD_LABEL_ORIGINY_OFFSET 10.0
-#define HUD_LABEL_WIDTH 161.8
+#define HUD_LABEL_WIDTH 151.8 // 161.8 - 2*offsetX
 #define HUD_LABEL_HEIGHT 20.0
 
 #define HUD_DURATION_APPEAR 0.25
@@ -46,6 +49,9 @@
 #define HUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.2 alpha:0.8]
 #define HUD_COLOR_LABEL [UIColor whiteColor]
 #define HUD_COLOR_IMAGE [UIColor whiteColor]
+
+//#pragma mark - for Growl
+//#define HUD_DURATION_GROWL_WAIT 2.0
 
 /*****************************************
  original result view
@@ -186,7 +192,27 @@
  
  *********************************************/
 #pragma mark - ** EEProgressHUD **
-@interface EEProgressHUD ()
+@interface EEHUDView ()
+
+{
+    EEProgressHUDShowStyle showStyle_;
+    EEProgressHUDHideStyle hideStyle_;
+    EEProgressHUDProgressViewStyle progressViewStyle_;
+    EEProgressHUDResultViewStyle resultViewStyle_;
+    
+    NSString *message_;
+    CGFloat showTime_;
+    
+    /* switch [progress] OR [growl] */
+    //BOOL isProgressType_;
+}
+
+@property (nonatomic) EEProgressHUDShowStyle showStyle;
+@property (nonatomic) EEProgressHUDHideStyle hideStyle;
+@property (nonatomic) EEProgressHUDProgressViewStyle progressViewStyle;
+@property (nonatomic) EEProgressHUDResultViewStyle resultViewStyle;
+
+@property (nonatomic, strong) NSString *message;
 
 @property (nonatomic, weak) UIWindow *previousKeyWindow;
 @property (nonatomic, strong) UIView *hudView;
@@ -201,7 +227,11 @@
 - (void)hideWithMessage:(NSString *)message
               hideStyle:(EEProgressHUDHideStyle)hideStyle
         resultViewStyle:(EEProgressHUDResultViewStyle)resultViewStyle;
-
+- (void)growlWithMessage:(NSString *)message
+               showStyle:(EEProgressHUDShowStyle)showStyle
+               hideStyle:(EEProgressHUDHideStyle)hideStyle
+         resultViewStyle:(EEProgressHUDResultViewStyle)resultViewStyle
+                showTime:(CGFloat)time;
 
 - (void)cleaning;
 
@@ -209,7 +239,7 @@
 - (void)animationAppear:(BOOL)isAppear;
 @end
 
-@implementation EEProgressHUD
+@implementation EEHUDView
 
 @synthesize showStyle = showStyle_;
 @synthesize hideStyle = hideStyle_;
@@ -223,7 +253,8 @@
 
 @synthesize message = message_;
 
-static EEProgressHUD *sharedInstance_ = nil;
+static EEHUDView *sharedInstance_ = nil;
+static BOOL isProgressType_ = YES;
 
 + (id)sharedView
 {
@@ -243,6 +274,8 @@ static EEProgressHUD *sharedInstance_ = nil;
     if ((self = [super initWithFrame:frame])) {
 		self.userInteractionEnabled = NO;
         self.backgroundColor = [UIColor clearColor];
+        
+        showTime_ = 0.0;
     }
 	
     return self;
@@ -253,18 +286,46 @@ static EEProgressHUD *sharedInstance_ = nil;
               showStyle:(EEProgressHUDShowStyle)showStyle
       progressViewStyle:(EEProgressHUDProgressViewStyle)progressViewStyle
 {
-    [[EEProgressHUD sharedView] showWithMessage:message
-                                      showStyle:showStyle
-                              progressViewStyle:progressViewStyle];
+    isProgressType_ = YES;
+    [[EEHUDView sharedView] showWithMessage:message
+                                  showStyle:showStyle
+                          progressViewStyle:progressViewStyle];
 }
 
 + (void)hideWithMessage:(NSString *)message
               hideStyle:(EEProgressHUDHideStyle)hideStyle
         resultViewStyle:(EEProgressHUDResultViewStyle)resultViewStyle
 {
-    [[EEProgressHUD sharedView] hideWithMessage:message
-                                      hideStyle:hideStyle
-                                resultViewStyle:resultViewStyle];
+    isProgressType_ = YES;
+    [[EEHUDView sharedView] hideWithMessage:message
+                                  hideStyle:hideStyle
+                            resultViewStyle:resultViewStyle];
+}
+
++ (void)growlWithMessage:(NSString *)message
+               showStyle:(EEProgressHUDShowStyle)showStyle
+               hideStyle:(EEProgressHUDHideStyle)hideStyle
+         resultViewStyle:(EEProgressHUDResultViewStyle)resultViewStyle
+                showTime:(CGFloat)time
+{
+    isProgressType_ = NO;
+    [[EEHUDView sharedView] growlWithMessage:message
+                                   showStyle:showStyle
+                                   hideStyle:hideStyle
+                             resultViewStyle:resultViewStyle
+                                    showTime:time];
+}
+
++ (BOOL)isShowing
+{
+    BOOL is = NO;
+    
+    EEHUDView *hud = [EEHUDView sharedView];
+    if (hud.previousKeyWindow) {
+        is = YES;
+    }
+    
+    return is;
 }
 
 #pragma mark - Private
@@ -288,7 +349,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         
         [[UIApplication sharedApplication].windows enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             UIWindow *window = (UIWindow*)obj;
-            if(window.windowLevel == UIWindowLevelNormal && ![[window class] isEqual:[EEProgressHUD class]]) {
+            if(window.windowLevel == UIWindowLevelNormal && ![[window class] isEqual:[EEHUDView class]]) {
                 self.previousKeyWindow = window;
                 *stop = YES;
             }
@@ -309,6 +370,7 @@ static EEProgressHUD *sharedInstance_ = nil;
     self.resultViewStyle = aResultViewStyle;
     
     /* set message */
+    NSLog(@" message:%@", message);
     self.messageLabel.text = message;
     
     /* make imageView */
@@ -316,17 +378,26 @@ static EEProgressHUD *sharedInstance_ = nil;
         UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)self.imageView;
         [indicator stopAnimating];
     }
-    if (self.imageView.superview) {
-        [self.imageView removeFromSuperview];
+    
+    if (isProgressType_) {
+        
+        if (self.imageView.superview) {
+            [self.imageView removeFromSuperview];
+        }
+        
+        self.imageView = nil;
+        
+        /* make imageView */
+        [self imageView];
     }
-    
-    self.imageView = nil;
-    
-    /* make imageView */
-    [self imageView];
     
     /* hide with delay */
     double delayInSeconds = HUD_TIME_DELAY;
+    if (!isProgressType_) {
+        // ** didShowのタイミングでdelayしてる **
+        delayInSeconds = 0.0;
+    }
+    
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
@@ -340,6 +411,46 @@ static EEProgressHUD *sharedInstance_ = nil;
         [self animationAppear:NO];
     });
     
+}
+
+- (void)growlWithMessage:(NSString *)aMessage
+               showStyle:(EEProgressHUDShowStyle)aShowStyle
+               hideStyle:(EEProgressHUDHideStyle)aHideStyle
+         resultViewStyle:(EEProgressHUDResultViewStyle)aResultViewStyle
+                showTime:(CGFloat)time
+{
+    self.showStyle = aShowStyle;
+    self.hideStyle = aHideStyle;
+    self.resultViewStyle = aResultViewStyle;
+    self.progressViewStyle = EEProgressHUDProgressViewStyleNone;
+    self.message = aMessage;
+    
+    NSLog(@"message_:%@", message_);
+    
+    showTime_ = time;
+    
+    /* make messageLabel */
+    [self messageLabel];
+    
+    /* make imageView */
+    [self imageView];
+    
+    /* show */
+    if(![self isKeyWindow]) {
+        
+        [[UIApplication sharedApplication].windows enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIWindow *window = (UIWindow*)obj;
+            if(window.windowLevel == UIWindowLevelNormal && ![[window class] isEqual:[EEHUDView class]]) {
+                self.previousKeyWindow = window;
+                *stop = YES;
+            }
+        }];
+        
+        [self makeKeyAndVisible];
+    }
+    
+    /* Animation */
+    [self animationAppear:YES];
 }
 
 #pragma mark - Setter
@@ -377,7 +488,7 @@ static EEProgressHUD *sharedInstance_ = nil;
     if (!messageLabel_) {
         
         CGRect rect;
-        rect.origin.x = 0.0;
+        rect.origin.x = HUD_LABEL_ORIGINX_OFFSET;
         rect.origin.y = HUD_IMAGE_HEIGHT + HUD_LABEL_ORIGINY_OFFSET;
         rect.size.width = HUD_LABEL_WIDTH;
         rect.size.height = HUD_LABEL_HEIGHT;
@@ -443,12 +554,76 @@ static EEProgressHUD *sharedInstance_ = nil;
 #pragma mark - Animation
 - (void)animationAppear:(BOOL)isAppear
 {
+    /* 場合分け */
+    BOOL showFadeIn = NO;
+    BOOL showLuts = NO;
+    BOOL showShake = NO;
+    BOOL showNoAnime = NO;
+    BOOL showFromRight = NO;
+    BOOL showFromLeft = NO;
+    BOOL hideFadeOut = NO;
+    BOOL hideLuts = NO;
+    BOOL hideShake = NO;
+    BOOL hideNoAnime = NO;
+    BOOL hideToLeft = NO;
+    BOOL hideToRight = NO;
+    
+    if (isAppear) {
+        switch (showStyle_) {
+            case EEProgressHUDShowStyleFadeIn:
+                showFadeIn = YES;
+                break;
+            case EEProgressHUDShowStyleLutz:
+                showLuts = YES;
+                break;
+            case EEProgressHUDShowStyleShake:
+                showShake = YES;
+                break;
+            case EEProgressHUDShowStyleNoAnime:
+                showNoAnime = YES;
+                break;
+            case EEProgressHUDShowStyleFromRight:
+                showFromRight = YES;
+                break;
+            case EEProgressHUDShowStyleFromLeft:
+                showFromLeft = YES;
+                break;
+            default:
+                showNoAnime = YES;
+                break;
+        }
+    }else {
+        switch (hideStyle_) {
+            case EEProgressHUDHideStyleFadeOut:
+                hideFadeOut = YES;
+                break;
+            case EEProgressHUDHideStyleLutz:
+                hideLuts = YES;
+                break;
+            case EEProgressHUDHideStyleShake:
+                hideShake = YES;
+                break;
+            case EEProgressHUDHideStyleNone:
+                hideNoAnime = YES;
+                break;
+            case EEProgressHUDHideStyleToLeft:
+                hideToLeft = YES;
+                break;
+            case EEProgressHUDHideStyleToRight:
+                hideToRight = YES;
+                break;
+            default:
+                hideNoAnime = YES;
+                break;
+        }
+    }
+    
     /* Fade */
-    if (showStyle_ == EEProgressHUDShowStyleFadeIn || hideStyle_ == EEProgressHUDHideStyleFadeOut) {
+    if (showFadeIn || hideFadeOut) {
         
         CGFloat fromAlpha, toAlpha;
         CGRect fromHUDRect, toHUDRect;
-        NSString *hudKey;
+        NSString *key;
         CAMediaTimingFunction *timingFunction;
         
         CGFloat duration;
@@ -470,7 +645,7 @@ static EEProgressHUD *sharedInstance_ = nil;
             timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
             duration = HUD_DURATION_APPEAR;
             
-            hudKey = @"hud_fadein_show";
+            key = @"hud_fadein_show";
             
             
         }else {
@@ -490,7 +665,7 @@ static EEProgressHUD *sharedInstance_ = nil;
             timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
             duration = HUD_DURATION_DISAPPEAR;
             
-            hudKey = @"hud_fadeout_hide";
+            key = @"hud_fadeout_hide";
             
         }
         
@@ -513,9 +688,9 @@ static EEProgressHUD *sharedInstance_ = nil;
         NSArray *animations = [NSArray arrayWithObjects:alpha, bounceHUDAnime, nil];
         group.animations = animations;
         
-        [hudView_.layer addAnimation:group forKey:hudKey];
+        [hudView_.layer addAnimation:group forKey:key];
         
-    }else if (showStyle_ == EEProgressHUDShowStyleLutz || hideStyle_ == EEProgressHUDHideStyleLutz) {
+    }else if (showLuts || hideLuts) {
         
         CGFloat fromAlpha, toAlpha;
         CGPoint fromPoint, topPoint;
@@ -619,7 +794,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         
         [hudView_.layer addAnimation:group forKey:key];
         
-    }else if (showStyle_ == EEProgressHUDShowStyleShake || hideStyle_ == EEProgressHUDHideStyleShake) {
+    }else if (showShake || hideShake) {
         
         CGFloat fromAlpha, toAlpha;
         CGFloat duration;
@@ -719,7 +894,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         
         [hudView_.layer addAnimation:group forKey:key];
         
-    }else if (showStyle_ == EEProgressHUDShowStyleNoAnime || hideStyle_ == EEProgressHUDHideStyleNoAnime) {
+    }else if (showNoAnime || hideNoAnime) {
         
         CGFloat fromAlpha, toAlpha;
         NSString *key;
@@ -743,7 +918,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         
         [hudView_.layer addAnimation:alpha forKey:key];
         
-    }else if (showStyle_ == EEProgressHUDShowStyleFromRight || hideStyle_ == EEProgressHUDHideStyleToLeft) {
+    }else if (showFromRight || hideToLeft) {
         
         CGFloat fromAlpha, toAlpha;
         NSString *key;
@@ -793,7 +968,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         group.delegate = self;
         
         [hudView_.layer addAnimation:group forKey:key];
-    }else if (showStyle_ == EEProgressHUDShowStyleFromLeft || hideStyle_ == EEProgressHUDHideStyleToRight) {
+    }else if (showFromLeft || hideToRight) {
         
         CGFloat fromAlpha, toAlpha;
         NSString *key;
@@ -849,19 +1024,36 @@ static EEProgressHUD *sharedInstance_ = nil;
 #pragma mark - Aniamtion delegate
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
+    /**************************************************************
+     ＜growl show アニメーション終了時＞
+     
+     show完了とともに showStyleをEEProgressHUDShowStyleNoneに設定している
+     **************************************************************/
+    if (!isProgressType_ && self.showStyle != EEProgressHUDShowStyleNone) {
+        
+        double delayInSeconds = showTime_;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            [self hideWithMessage:message_
+                        hideStyle:hideStyle_
+                  resultViewStyle:resultViewStyle_];
+        });
+    }
     
+    /* 終了後処理 */
     if ([anim isEqual:[hudView_.layer animationForKey:@"hud_fadein_show"]]) {
         
         CALayer *layer = [hudView_.layer presentationLayer];
         
         hudView_.layer.opacity = layer.opacity;
-        hudView_.frame = layer.frame;
+        //hudView_.frame = layer.frame;
         
         [hudView_.layer removeAnimationForKey:@"hud_fadein_show"];
         
         // 文字更新
         messageLabel_.text = [NSString stringWithString:message_];
-        self.message = nil;
+        //self.message = nil;
         
         // リフレッシュ
         self.showStyle = EEProgressHUDShowStyleNone;
@@ -888,7 +1080,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         CALayer *layer = [hudView_.layer presentationLayer];
         
         hudView_.layer.opacity = layer.opacity;
-        hudView_.frame = layer.frame;
+        //hudView_.frame = layer.frame;
         
         [hudView_.layer removeAnimationForKey:@"hud_lutz_show"];
         
@@ -913,7 +1105,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            self.message = nil;
+            //self.message = nil;
         });
         
         
@@ -922,7 +1114,6 @@ static EEProgressHUD *sharedInstance_ = nil;
         // 更新
         CALayer *layer = [hudView_.layer presentationLayer];
         
-        /* サイズを大きいのを基準にするため更新はしない */
         hudView_.layer.opacity = layer.opacity;
         
         [hudView_.layer removeAnimationForKey:@"hud_lutz_hide"];
@@ -959,7 +1150,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            self.message = nil;
+            //self.message = nil;
         });
         
     }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_shake_hide"]]){
@@ -967,7 +1158,6 @@ static EEProgressHUD *sharedInstance_ = nil;
         // 更新
         CALayer *layer = [hudView_.layer presentationLayer];
         
-        /* サイズを大きいのを基準にするため更新はしない */
         hudView_.layer.opacity = layer.opacity;
         
         [hudView_.layer removeAnimationForKey:@"hud_shake_hide"];
@@ -1004,7 +1194,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            self.message = nil;
+            //self.message = nil;
         });
         
     }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_no_anime_hide"]]) {
@@ -1012,7 +1202,6 @@ static EEProgressHUD *sharedInstance_ = nil;
         // 更新
         CALayer *layer = [hudView_.layer presentationLayer];
         
-        /* サイズを大きいのを基準にするため更新はしない */
         hudView_.layer.opacity = layer.opacity;
         
         [hudView_.layer removeAnimationForKey:@"hud_no_anime_hide"];
@@ -1025,7 +1214,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         CALayer *layer = [hudView_.layer presentationLayer];
         
         hudView_.layer.opacity = layer.opacity;
-        hudView_.frame = layer.frame;
+        //hudView_.frame = layer.frame;
         
         [hudView_.layer removeAnimationForKey:@"hud_slide_show"];
         
@@ -1050,7 +1239,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            self.message = nil;
+            //self.message = nil;
         });
     }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_slide_hide"]]) {
         
@@ -1065,6 +1254,7 @@ static EEProgressHUD *sharedInstance_ = nil;
         /* 終了処理 */
         [self cleaning];
     }
+    
 }
 
 #pragma mark - END
@@ -1090,12 +1280,14 @@ static EEProgressHUD *sharedInstance_ = nil;
     self.imageView = nil;
     self.messageLabel = nil;
     self.hudView = nil;
+    self.message = nil;
+    
+    showTime_ = 0.0;
     
     [sharedInstance_.previousKeyWindow makeKeyWindow];
     sharedInstance_.previousKeyWindow = nil;
     
     //sharedInstance_ = nil;
-    
     
     //NSLog(@"cleaned");
 }

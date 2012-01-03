@@ -41,28 +41,24 @@ typedef enum _EEProgressHUDResultViewStyle {
     
 } EEProgressHUDResultViewStyle;
 
-@interface EEProgressHUD : UIWindow {
-    
-    EEProgressHUDShowStyle showStyle_;
-    EEProgressHUDHideStyle hideStyle_;
-    EEProgressHUDProgressViewStyle progressViewStyle_;
-    EEProgressHUDResultViewStyle resultViewStyle_;
-    
-    NSString *message_;
-}
+@interface EEHUDView : UIWindow 
 
-@property (nonatomic) EEProgressHUDShowStyle showStyle;
-@property (nonatomic) EEProgressHUDHideStyle hideStyle;
-@property (nonatomic) EEProgressHUDProgressViewStyle progressViewStyle;
-@property (nonatomic) EEProgressHUDResultViewStyle resultViewStyle;
-
-@property (nonatomic, strong) NSString *message;
-
+/* Progress Type */
 + (void)showWithMessage:(NSString *)message 
               showStyle:(EEProgressHUDShowStyle)showStyle 
       progressViewStyle:(EEProgressHUDProgressViewStyle)progressViewStyle;
 + (void)hideWithMessage:(NSString *)message
               hideStyle:(EEProgressHUDHideStyle)hideStyle
         resultViewStyle:(EEProgressHUDResultViewStyle)resultViewStyle;
+
+/* Growl Type */
++ (void)growlWithMessage:(NSString *)message
+               showStyle:(EEProgressHUDShowStyle)showStyle
+               hideStyle:(EEProgressHUDHideStyle )hideStyle
+         resultViewStyle:(EEProgressHUDResultViewStyle)resultViewStyle
+                showTime:(CGFloat )time;
+
+/* information */
++ (BOOL)isShowing;
 
 @end

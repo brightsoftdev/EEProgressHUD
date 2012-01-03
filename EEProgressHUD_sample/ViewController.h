@@ -18,4 +18,7 @@
 - (IBAction)hideOK:(id)sender;
 - (IBAction)hideNG:(id)sender;
 - (IBAction)hideChecked:(id)sender;
+
+- (IBAction)checkIsShowing:(id)sender;
+- (IBAction)growl:(id)sender;
 @end
