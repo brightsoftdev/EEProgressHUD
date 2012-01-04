@@ -46,7 +46,7 @@
 #define HUD_LENGTH_TO_RIGHT 15.0
 
 /* color */
-#define HUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.2 alpha:0.8]
+#define HUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.2 alpha:0.5]
 #define HUD_COLOR_LABEL [UIColor whiteColor]
 #define HUD_COLOR_IMAGE [UIColor whiteColor]
 
@@ -341,6 +341,10 @@ static BOOL isProgressType_ = YES;
     //self.messageLabel.text = message;
     [self messageLabel];
     
+    if (showStyle_ == EEProgressHUDShowStyleNoAnime) {
+        self.messageLabel.text = aMessage;
+    }
+    
     /* make imageView */
     [self imageView];
     
@@ -370,7 +374,6 @@ static BOOL isProgressType_ = YES;
     self.resultViewStyle = aResultViewStyle;
     
     /* set message */
-    NSLog(@" message:%@", message);
     self.messageLabel.text = message;
     
     /* make imageView */
@@ -424,8 +427,6 @@ static BOOL isProgressType_ = YES;
     self.resultViewStyle = aResultViewStyle;
     self.progressViewStyle = EEProgressHUDProgressViewStyleNone;
     self.message = aMessage;
-    
-    NSLog(@"message_:%@", message_);
     
     showTime_ = time;
     
@@ -1180,7 +1181,7 @@ static BOOL isProgressType_ = YES;
         if (self.progressViewStyle == EEProgressHUDProgressViewStyleIndicator) {
             UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)self.imageView;
             
-            double delayInSeconds = 0.2;
+            double delayInSeconds = 0.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 
@@ -1189,7 +1190,7 @@ static BOOL isProgressType_ = YES;
         }
         
         /* 文字更新 */
-        double delayInSeconds = 0.2;
+        double delayInSeconds = 0.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
