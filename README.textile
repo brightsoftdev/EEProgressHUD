@@ -22,7 +22,7 @@ call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@ wh
 
 h2. Installation
 
-* Drag the @EEProgressHUD.h@ & @EEProgressHUD.m@ into your project.
+* Drag the @EEHUDView.h@ & @EEHUDView.m@ & @EEHUDViewConstants.h@ into your project.
 * Add the *QuartzCore* framework to your project
 
 h2. Credits
