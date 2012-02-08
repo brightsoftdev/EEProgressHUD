@@ -8,47 +8,11 @@
 
 #import "EEHUDView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "EEHUDViewConstants.h"
 
-#pragma mark - -- Constants --
-#define HUD_VIEW_WIDTH 161.8
-#define HUD_VIEW_HEIGHT 100.0
-#define HUD_IMAGE_ORIGINY 10.0
-#define HUD_IMAGE_WIDTH 161.8
-#define HUD_IMAGE_HEIGHT 60.0
 
-#define HUD_LABEL_ORIGINX_OFFSET 5.0
-#define HUD_LABEL_ORIGINY_OFFSET 10.0
-#define HUD_LABEL_WIDTH 151.8 // 161.8 - 2*offsetX
-#define HUD_LABEL_HEIGHT 20.0
 
-#define HUD_DURATION_APPEAR 0.25
-#define HUD_DURATION_DISAPPEAR 0.25
 
-#define HUD_DURATION_JUMP 0.4
-#define HUD_COUNT_ROTATION 6
-#define HUD_RATIO_EXPANDING 0.5 // 膨張
-#define HUD_RATIO_REDUCTION 0.55 // 縮小
-
-#define HUD_DURATION_SHAKE_SHOW 0.25
-#define HUD_DURATION_SHAKE_HIDE 0.25
-#define HUD_COUNT_SHAKE 9
-
-#define HUD_DURATION_NO_ANIME 0.001
-
-#define HUD_LENGTH_FROM_RIGHT 10.0
-#define HUD_LENGTH_TO_LEFT 15.0
-#define HUD_DURATION_SLIDE 0.25
-
-#define HUD_RATIO_FADESIZE 0.9
-#define HUD_TIME_DELAY 1.6
-
-#define HUD_LENGTH_FROM_LEFT 10.0
-#define HUD_LENGTH_TO_RIGHT 15.0
-
-/* color */
-#define HUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.2 alpha:0.5]
-#define HUD_COLOR_LABEL [UIColor whiteColor]
-#define HUD_COLOR_IMAGE [UIColor whiteColor]
 
 //#pragma mark - for Growl
 //#define HUD_DURATION_GROWL_WAIT 2.0
@@ -203,8 +167,6 @@
     NSString *message_;
     CGFloat showTime_;
     
-    /* switch [progress] OR [growl] */
-    //BOOL isProgressType_;
 }
 
 @property (nonatomic) EEProgressHUDShowStyle showStyle;
@@ -392,6 +354,7 @@ static BOOL isProgressType_ = YES;
         
         /* make imageView */
         [self imageView];
+    
     }
     
     /* hide with delay */
@@ -434,7 +397,7 @@ static BOOL isProgressType_ = YES;
     [self messageLabel];
     
     /* make imageView */
-    [self imageView];
+    //[self imageView];
     
     /* show */
     if(![self isKeyWindow]) {
@@ -508,26 +471,53 @@ static BOOL isProgressType_ = YES;
 
 - (UIView *)imageView
 {
-    if ((showStyle_ != EEProgressHUDShowStyleNone) && (hideStyle_ == EEProgressHUDHideStyleNone)) {
+    if (isProgressType_) {
+        // show OR hide
         
-        /* SHOW */
-        if (!imageView_) {
+        if ((showStyle_ != EEProgressHUDShowStyleNone) && (hideStyle_ == EEProgressHUDHideStyleNone)) {
             
-            if (self.progressViewStyle == EEProgressHUDProgressViewStyleIndicator) {
+            /* SHOW */
+            if (!imageView_) {
                 
-                imageView_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                if (self.progressViewStyle == EEProgressHUDProgressViewStyleIndicator) {
+                    
+                    imageView_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                    
+                    CGRect indicatorRect = imageView_.frame;
+                    CGSize indicatorSize = indicatorRect.size;
+                    indicatorRect.origin.x = (HUD_IMAGE_WIDTH - indicatorSize.width) * 0.5;
+                    indicatorRect.origin.y = HUD_IMAGE_ORIGINY + (HUD_IMAGE_HEIGHT - indicatorSize.height) * 0.5;
+                    
+                    imageView_.frame = indicatorRect;
+                    
+                    [self.hudView addSubview:imageView_];
+                }
+            }
+            
+        }else if (hideStyle_ != EEProgressHUDHideStyleNone) {
+            
+            /* HIDE */
+            if (!imageView_) {
                 
-                CGRect indicatorRect = imageView_.frame;
-                CGSize indicatorSize = indicatorRect.size;
-                indicatorRect.origin.x = (HUD_IMAGE_WIDTH - indicatorSize.width) * 0.5;
-                indicatorRect.origin.y = HUD_IMAGE_ORIGINY + (HUD_IMAGE_HEIGHT - indicatorSize.height) * 0.5;
-                
-                imageView_.frame = indicatorRect;
-                
-                [self.hudView addSubview:imageView_];
+                /* OK */
+                if (self.resultViewStyle == EEProgressHUDResultViewStyleOK) {
+                    
+                    imageView_ = [[EEProgressHUDResultViewOK alloc] init];
+                    [self.hudView addSubview:imageView_];
+                }else if (self.resultViewStyle == EEProgressHUDResultViewStyleNG) {
+                    
+                    imageView_ = [[EEProgressHUDResultViewNG alloc] init];
+                    [self.hudView addSubview:imageView_];
+                }else if (self.resultViewStyle == EEProgressHUDResultViewStyleChecked) {
+                    
+                    imageView_ = [[EEProgressHUDResultViewChecked alloc] init];
+                    [self.hudView addSubview:imageView_];
+                }
             }
         }
-    }else if (hideStyle_ != EEProgressHUDHideStyleNone) {
+        
+    }else {
+        // growl
         
         /* HIDE */
         if (!imageView_) {
@@ -548,6 +538,7 @@ static BOOL isProgressType_ = YES;
             }
         }
     }
+    
     
     return imageView_;
 }
@@ -790,7 +781,8 @@ static BOOL isProgressType_ = YES;
         group.duration = duration;
         group.delegate = self;
         
-        NSArray *animations = [NSArray arrayWithObjects:alpha, jumpUP, jumpDown, rotate, expanding, nil];
+        //NSArray *animations = [NSArray arrayWithObjects:alpha, jumpUP, jumpDown, rotate, expanding, nil];
+        NSArray *animations = [NSArray arrayWithObjects:alpha, jumpUP, jumpDown, rotate, nil];
         group.animations = animations;
         
         [hudView_.layer addAnimation:group forKey:key];
@@ -1032,6 +1024,7 @@ static BOOL isProgressType_ = YES;
      **************************************************************/
     if (!isProgressType_ && self.showStyle != EEProgressHUDShowStyleNone) {
         
+        // ディレイかけて消去
         double delayInSeconds = showTime_;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -1048,13 +1041,14 @@ static BOOL isProgressType_ = YES;
         CALayer *layer = [hudView_.layer presentationLayer];
         
         hudView_.layer.opacity = layer.opacity;
-        //hudView_.frame = layer.frame;
         
         [hudView_.layer removeAnimationForKey:@"hud_fadein_show"];
         
         // 文字更新
         messageLabel_.text = [NSString stringWithString:message_];
-        //self.message = nil;
+        
+        // growlモードの時は文字更新と同時に画像表示
+        if (!isProgressType_) { [self imageView]; }
         
         // リフレッシュ
         self.showStyle = EEProgressHUDShowStyleNone;
@@ -1081,7 +1075,6 @@ static BOOL isProgressType_ = YES;
         CALayer *layer = [hudView_.layer presentationLayer];
         
         hudView_.layer.opacity = layer.opacity;
-        //hudView_.frame = layer.frame;
         
         [hudView_.layer removeAnimationForKey:@"hud_lutz_show"];
         
@@ -1106,7 +1099,9 @@ static BOOL isProgressType_ = YES;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            //self.message = nil;
+            
+            // growlモードの時は文字更新と同時に画像表示
+            if (!isProgressType_) { [self imageView]; }
         });
         
         
@@ -1151,7 +1146,9 @@ static BOOL isProgressType_ = YES;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            //self.message = nil;
+            
+            // growlモードの時は文字更新と同時に画像表示
+            if (!isProgressType_) { [self imageView]; }
         });
         
     }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_shake_hide"]]){
@@ -1195,7 +1192,9 @@ static BOOL isProgressType_ = YES;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            //self.message = nil;
+            
+            // growlモードの時は文字更新と同時に画像表示
+            if (!isProgressType_) { [self imageView]; }
         });
         
     }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_no_anime_hide"]]) {
@@ -1240,7 +1239,9 @@ static BOOL isProgressType_ = YES;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             messageLabel_.text = [NSString stringWithString:message_];
-            //self.message = nil;
+            
+            // growlモードの時は文字更新と同時に画像表示
+            if (!isProgressType_) { [self imageView]; }
         });
     }else if ([anim isEqual:[hudView_.layer animationForKey:@"hud_slide_hide"]]) {
         
