@@ -1,4 +1,4 @@
-h1. EEHUDView (EEProgressHUD)
+h1. EEHUDView
 
 EEHUDView is an easy-to-use, clean and lightweight HUD for iOS.
 
@@ -8,21 +8,17 @@ EEHUDView features:
 
 * singleton class
 
-* ＜Progress Mode＞
-call @+ (void)showWithMessage:showStyle:progressViewStyle:@ when you want to show HUD
-call @+ (void)hideWithMessage:hideStyle:resultViewStyle:@ when you want to hide HUD
-
-* ＜Growl Mode＞
+* how to use EEHUDView
 call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@ when you want to show HUD (like growl)
 
 * showStyle: How to show HUD
-* progressViewStyle: How to display in progress
 * hideStyle: How to hide HUD
-* resultViewStyle: last image type
+* resultViewStyle: image type
+* showTime: time to show message and image
 
 h2. Installation
 
-* Drag the @EEHUDView.h@ & @EEHUDView.m@ & @EEHUDViewConstants.h@ into your project.
+* Drag the @EEHUDView@ directory into your project.
 * Add the *QuartzCore* framework to your project
 
 h2. Credits

@@ -1,0 +1,9 @@
+ld
+.DS_Store
+*.o
+*.ob
+*.pbxuser
+*.tmproj
+*.model*
+*.mode*
+*.build
