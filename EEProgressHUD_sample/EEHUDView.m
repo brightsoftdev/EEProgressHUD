@@ -389,7 +389,7 @@ static EEHUDView *sharedInstance_ = nil;
             alphaAnime.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
             alphaAnime.removedOnCompletion = NO;
             alphaAnime.fillMode = kCAFillModeForwards;
-            alphaAnime.duration = duration * 0.7;
+            alphaAnime.duration = duration * 0.5;
             alphaAnime.beginTime = 0.0;
             
             // シェイク

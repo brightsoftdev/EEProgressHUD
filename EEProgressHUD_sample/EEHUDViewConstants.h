@@ -51,8 +51,8 @@
 // animation (Shake)
 #define EEHUD_THETA_DEGREE_SHAKEIN      12.0
 #define EEHUD_THETA_DEGREE_SHAKEOUT     12.0
-#define EEHUD_COUNT_SHAKEIN             11           // odd
-#define EEHUD_COUNT_SHAKEOUT            11           // odd
+#define EEHUD_COUNT_SHAKEIN             9           // odd
+#define EEHUD_COUNT_SHAKEOUT            9           // odd
 #define EEHUD_DURATION_SHAKEIN          0.3
 #define EEHUD_DURATION_SHAKEOUT         0.3
 
