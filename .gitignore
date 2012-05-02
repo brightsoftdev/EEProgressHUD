@@ -7,3 +7,5 @@ ld
 *.model*
 *.mode*
 *.build
+.gitignore
+
