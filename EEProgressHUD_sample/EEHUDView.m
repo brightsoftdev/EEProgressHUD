@@ -537,6 +537,76 @@ static EEHUDView *sharedInstance_ = nil;
             
             break;
             
+        case EEHUDViewShowStyleFromTop:
+            
+            fromAlpha = 0.0;
+            toAlpha = 1.0;
+            
+            point1 = self.hudView.layer.position;
+            point2 = point1;
+            point1.y -= EEHUD_LENGTH_FROM_TOP;
+            
+            duration = EEHUD_DURATION_FROM_TOP;
+            
+            // 透明度
+            alphaAnime = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            alphaAnime.fromValue = [NSNumber numberWithFloat:fromAlpha];
+            alphaAnime.toValue = [NSNumber numberWithFloat:toAlpha];
+            
+            // 移動
+            moveAnime = [CABasicAnimation animationWithKeyPath:@"position"];
+            moveAnime.fromValue = [NSValue valueWithCGPoint:point1];
+            moveAnime.toValue = [NSValue valueWithCGPoint:point2];
+            
+            // 合体
+            allAnimationGroup = [CAAnimationGroup animation];
+            allAnimationGroup.animations = [NSArray arrayWithObjects:alphaAnime, moveAnime, nil];
+            allAnimationGroup.removedOnCompletion = NO;
+            allAnimationGroup.fillMode = kCAFillModeForwards;
+            allAnimationGroup.duration = duration;
+            allAnimationGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+            allAnimationGroup.delegate = self;
+            
+            // 
+            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            
+            break;
+            
+        case EEHUDViewShowStyleFromBottom:
+            
+            fromAlpha = 0.0;
+            toAlpha = 1.0;
+            
+            point1 = self.hudView.layer.position;
+            point2 = point1;
+            point1.y += EEHUD_LENGTH_FROM_BOTTOM;
+            
+            duration = EEHUD_DURATION_FROM_BOTTOM;
+            
+            // 透明度
+            alphaAnime = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            alphaAnime.fromValue = [NSNumber numberWithFloat:fromAlpha];
+            alphaAnime.toValue = [NSNumber numberWithFloat:toAlpha];
+            
+            // 移動
+            moveAnime = [CABasicAnimation animationWithKeyPath:@"position"];
+            moveAnime.fromValue = [NSValue valueWithCGPoint:point1];
+            moveAnime.toValue = [NSValue valueWithCGPoint:point2];
+            
+            // 合体
+            allAnimationGroup = [CAAnimationGroup animation];
+            allAnimationGroup.animations = [NSArray arrayWithObjects:alphaAnime, moveAnime, nil];
+            allAnimationGroup.removedOnCompletion = NO;
+            allAnimationGroup.fillMode = kCAFillModeForwards;
+            allAnimationGroup.duration = duration;
+            allAnimationGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+            allAnimationGroup.delegate = self;
+            
+            // 
+            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            
+            break;
+            
         default:
             break;
     }
@@ -849,6 +919,76 @@ static EEHUDView *sharedInstance_ = nil;
             
             //
             [self.hudView.layer addAnimation:alphaAnime forKey:animationKey];
+            
+            break;
+            
+        case EEHUDViewHideStyleToBottom:
+            
+            fromAlpha = 1.0;
+            toAlpha = 0.0;
+            
+            point1 = self.hudView.layer.position;
+            point2 = point1;
+            point2.y += EEHUD_LENGTH_TO_BOTTOM;
+            
+            duration = EEHUD_DURATION_TO_BOTTOM;
+            
+            // 透明度
+            alphaAnime = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            alphaAnime.fromValue = [NSNumber numberWithFloat:fromAlpha];
+            alphaAnime.toValue = [NSNumber numberWithFloat:toAlpha];
+            
+            // 移動
+            moveAnime = [CABasicAnimation animationWithKeyPath:@"position"];
+            moveAnime.fromValue = [NSValue valueWithCGPoint:point1];
+            moveAnime.toValue = [NSValue valueWithCGPoint:point2];
+            
+            // 合体
+            allAnimationGroup = [CAAnimationGroup animation];
+            allAnimationGroup.animations = [NSArray arrayWithObjects:alphaAnime, moveAnime, nil];
+            allAnimationGroup.removedOnCompletion = NO;
+            allAnimationGroup.fillMode = kCAFillModeForwards;
+            allAnimationGroup.duration = duration;
+            allAnimationGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+            allAnimationGroup.delegate = self;
+            
+            // 
+            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            
+            break;
+            
+        case EEHUDViewHideStyleToTop:
+            
+            fromAlpha = 1.0;
+            toAlpha = 0.0;
+            
+            point1 = self.hudView.layer.position;
+            point2 = point1;
+            point2.y -= EEHUD_LENGTH_TO_TOP;
+            
+            duration = EEHUD_DURATION_TO_TOP;
+            
+            // 透明度
+            alphaAnime = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            alphaAnime.fromValue = [NSNumber numberWithFloat:fromAlpha];
+            alphaAnime.toValue = [NSNumber numberWithFloat:toAlpha];
+            
+            // 移動
+            moveAnime = [CABasicAnimation animationWithKeyPath:@"position"];
+            moveAnime.fromValue = [NSValue valueWithCGPoint:point1];
+            moveAnime.toValue = [NSValue valueWithCGPoint:point2];
+            
+            // 合体
+            allAnimationGroup = [CAAnimationGroup animation];
+            allAnimationGroup.animations = [NSArray arrayWithObjects:alphaAnime, moveAnime, nil];
+            allAnimationGroup.removedOnCompletion = NO;
+            allAnimationGroup.fillMode = kCAFillModeForwards;
+            allAnimationGroup.duration = duration;
+            allAnimationGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+            allAnimationGroup.delegate = self;
+            
+            // 
+            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             

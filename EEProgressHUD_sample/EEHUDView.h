@@ -16,7 +16,9 @@ typedef enum _EEHUDViewShowStyle {
     EEHUDViewShowStyleShake = 3,
     EEHUDViewShowStyleNoAnime = 4,
     EEHUDViewShowStyleFromRight = 5,
-    EEHUDViewShowStyleFromLeft = 6
+    EEHUDViewShowStyleFromLeft = 6,
+    EEHUDViewShowStyleFromTop = 7,
+    EEHUDViewShowStyleFromBottom = 8
 } EEHUDViewShowStyle;
 
 typedef enum _EEHUDViewHideStyle {
@@ -26,7 +28,9 @@ typedef enum _EEHUDViewHideStyle {
     EEHUDViewHideStyleShake = 3,
     EEHUDViewHideStyleNoAnime = 4,
     EEHUDViewHideStyleToLeft = 5,
-    EEHUDViewHideStyleToRight = 6
+    EEHUDViewHideStyleToRight = 6,
+    EEHUDViewHideStyleToBottom = 7,
+    EEHUDViewHideStyleToTop = 8
 } EEHUDViewHideStyle;
 
 @interface EEHUDView : UIWindow 

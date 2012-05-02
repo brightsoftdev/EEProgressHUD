@@ -76,6 +76,13 @@
             break;
         case 5:
             title = @"Left";
+            break;
+        case 6:
+            title = @"Top";
+            break;
+        case 7:
+            title = @"Bottom";
+            break;
         default:
             break;
     }
@@ -85,7 +92,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 6;
+	return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,6 +147,15 @@
         case 5:
             showStyle = EEHUDViewShowStyleFromLeft;
             hideStyle = EEHUDViewHideStyleToLeft;
+            break;
+        case 6:
+            showStyle = EEHUDViewShowStyleFromTop;
+            hideStyle = EEHUDViewHideStyleToTop;
+            break;
+        case 7:
+            showStyle = EEHUDViewShowStyleFromBottom;
+            hideStyle = EEHUDViewHideStyleToBottom;
+            break;
         default:
             break;
     }
