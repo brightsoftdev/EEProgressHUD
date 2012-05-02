@@ -6,42 +6,66 @@
 //  Copyright (c) 2012年 Milestoneeee.com. All rights reserved.
 //
 
-#define HUD_VIEW_WIDTH 161.8
-#define HUD_VIEW_HEIGHT 100.0
-#define HUD_IMAGE_ORIGINY 10.0
-#define HUD_IMAGE_WIDTH 161.8
-#define HUD_IMAGE_HEIGHT 60.0
 
-#define HUD_LABEL_ORIGINX_OFFSET 5.0
-#define HUD_LABEL_ORIGINY_OFFSET 10.0
-#define HUD_LABEL_WIDTH 151.8 // 161.8 - 2*offsetX
-#define HUD_LABEL_HEIGHT 20.0
+// HUDView (golden ratio)
+#define EEHUD_VIEW_WIDTH            161.8
+#define EEHUD_VIEW_HEIGHT           100.0
+#define EEHUD_VIEW_BOTHENDS_MARGIN  5.0
+#define EEHUD_VIEW_CORNER_RADIUS    7.0
 
-#define HUD_DURATION_APPEAR 0.25
-#define HUD_DURATION_DISAPPEAR 0.25
+// image
+#define EEHUD_IMAGE_ORIGINY 10.0
+#define EEHUD_IMAGE_WIDTH 161.8
+#define EEHUD_IMAGE_HEIGHT 60.0
 
-#define HUD_DURATION_JUMP 0.4
-#define HUD_COUNT_ROTATION 8  //6
-#define HUD_RATIO_EXPANDING 0.5 // 膨張
-#define HUD_RATIO_REDUCTION 0.55 // 縮小
+// label
+#define EEHUD_LABEL_BOTTOM_MARGIN       5.0
+#define EEHUD_LABEL_HEIGHT              20.0
+#define EEHUD_LABEL_FONT                [UIFont fontWithName:@"Helvetica-Bold" size:16.0];
+#define EEHUD_LABEL_TEXTCOLOR           [UIColor whiteColor]
 
-#define HUD_DURATION_SHAKE_SHOW 0.25
-#define HUD_DURATION_SHAKE_HIDE 0.25
-#define HUD_COUNT_SHAKE 9
+// color of HUDView
+#define EEHUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.0 alpha:0.75]
+#define EEHUD_COLOR_LABEL [UIColor whiteColor]
+#define EEHUD_COLOR_IMAGE [UIColor whiteColor]
 
-#define HUD_DURATION_NO_ANIME 0.001
+// 
+//#define EEHUD_DURATION_STARTWAIT    3.0
 
-#define HUD_LENGTH_FROM_RIGHT 10.0
-#define HUD_LENGTH_TO_LEFT 15.0
-#define HUD_DURATION_SLIDE 0.25
+// animation (Fade)
+#define EEHUD_SIZERATIO_FADEIN          0.9
+#define EEHUD_SIZERATIO_FADEOUT         0.9
+#define EEHUD_DURATION_FADEIN           0.25
+#define EEHUD_DURATION_FADEOUT          0.25
 
-#define HUD_RATIO_FADESIZE 0.9
-#define HUD_TIME_DELAY 1.6
+// animation (Lutz)
+#define EEHUD_SIZERATIO_LUTZIN          0.95
+#define EEHUD_SIZERATIO_LUTZOUT         0.95
+#define EEHUD_DURATION_LUTZIN           0.4
+#define EEHUD_DURATION_LUTZOUT          0.4
+#define EEHUD_COUNT_ROTATION_LUTZIN     8
+#define EEHUD_COUNT_ROTATION_LUTZOUT    8
+#define EEHUD_HEIGHT_JUMP_LUTZIN        30.0
+#define EEHUD_HEIGHT_JUMP_LUTZOUT       30.0
 
-#define HUD_LENGTH_FROM_LEFT 10.0
-#define HUD_LENGTH_TO_RIGHT 15.0
+// animation (Shake)
+#define EEHUD_THETA_DEGREE_SHAKEIN      12.0
+#define EEHUD_THETA_DEGREE_SHAKEOUT     12.0
+#define EEHUD_COUNT_SHAKEIN             11           // odd
+#define EEHUD_COUNT_SHAKEOUT            11           // odd
+#define EEHUD_DURATION_SHAKEIN          0.3
+#define EEHUD_DURATION_SHAKEOUT         0.3
 
-/* color */
-#define HUD_COLOR_HUDVIEW [UIColor colorWithWhite:0.0 alpha:0.75]
-#define HUD_COLOR_LABEL [UIColor whiteColor]
-#define HUD_COLOR_IMAGE [UIColor whiteColor]
+// animation (Holizontal Slide)
+#define EEHUD_LENGTH_FROM_LEFT          10.0
+#define EEHUD_LENGTH_FROM_RIGHT         10.0
+#define EEHUD_LENGTH_TO_LEFT            15.0
+#define EEHUD_LENGTH_TO_RIGHT           15.0
+#define EEHUD_DURATION_FROM_LEFT        0.25
+#define EEHUD_DURATION_FROM_RIGHT       0.25
+#define EEHUD_DURATION_TO_LEFT          0.25
+#define EEHUD_DURATION_TO_RIGHT         0.25
+
+// animation (no anime)
+#define EEHUD_DURATION_NOANIME          0.001
+

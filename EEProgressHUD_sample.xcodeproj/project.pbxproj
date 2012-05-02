@@ -17,6 +17,7 @@
 		845728D3148F914100715B6B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845728D1148F914100715B6B /* MainStoryboard.storyboard */; };
 		845728D6148F914100715B6B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845728D5148F914100715B6B /* ViewController.m */; };
 		845728E0148F931000715B6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845728DF148F931000715B6B /* QuartzCore.framework */; };
+		8458944614E7B744002D32C4 /* EEHUDResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8458944514E7B744002D32C4 /* EEHUDResultView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		845728D4148F914100715B6B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		845728D5148F914100715B6B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		845728DF148F931000715B6B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8458944414E7B744002D32C4 /* EEHUDResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEHUDResultView.h; sourceTree = "<group>"; };
+		8458944514E7B744002D32C4 /* EEHUDResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEHUDResultView.m; sourceTree = "<group>"; };
 		845D572E14E29E2200C5941C /* EEHUDViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEHUDViewConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +115,8 @@
 			children = (
 				8452D26014B3DFBA005F5D8C /* EEHUDView.h */,
 				8452D26114B3DFBA005F5D8C /* EEHUDView.m */,
+				8458944414E7B744002D32C4 /* EEHUDResultView.h */,
+				8458944514E7B744002D32C4 /* EEHUDResultView.m */,
 				845D572E14E29E2200C5941C /* EEHUDViewConstants.h */,
 			);
 			name = EEHUDView;
@@ -184,6 +189,7 @@
 				845728D0148F914100715B6B /* AppDelegate.m in Sources */,
 				845728D6148F914100715B6B /* ViewController.m in Sources */,
 				8452D26214B3DFBA005F5D8C /* EEHUDView.m in Sources */,
+				8458944614E7B744002D32C4 /* EEHUDResultView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

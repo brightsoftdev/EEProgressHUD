@@ -7,13 +7,20 @@
 //
 
 #import "ViewController.h"
-#import "EEHUDView.h"
-#import <QuartzCore/QuartzCore.h>
 
+#import "EEHUDView.h"
+
+#pragma mark - Private Interface
+@interface ViewController(){
+    
+    BOOL is_;
+    int count;
+    int index;
+}
+@end
+
+#pragma mark - Implementation
 @implementation ViewController
-@synthesize textField;
-@synthesize segIn, segOut;
-@synthesize inScrollView, outScrollView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -21,20 +28,14 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    CGSize inSize = inScrollView.contentSize;
-    inSize.width = 640.0;
-    inScrollView.contentSize = inSize;
-    
-    CGSize outSize = outScrollView.contentSize;
-    outSize.width = 640.0;
-    outScrollView.contentSize = outSize;
+    is_ = NO;
+    count = 0;
+    index = 0;
 }
 
 - (void)viewDidUnload
@@ -50,178 +51,150 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-#pragma mark - 
-- (IBAction)show:(id)sender
+// tableView 必要メソッド とりあえず一式
+#pragma mark - TableView DataSource Method
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *message = self.textField.text;
-    NSInteger selected = self.segIn.selectedSegmentIndex;
+	NSString *title;
+    int row = indexPath.row;
     
-    EEProgressHUDShowStyle showStyle;
-    if (selected == 0) {
-        showStyle = EEProgressHUDShowStyleFadeIn;
-    }else if (selected == 1) {
-        showStyle = EEProgressHUDShowStyleLutz;
-    }else if (selected == 2) {
-        showStyle = EEProgressHUDShowStyleShake;
-    }else if (selected == 3) {
-        showStyle = EEProgressHUDShowStyleNoAnime;
-    }else if (selected == 4) {
-        showStyle = EEProgressHUDShowStyleFromRight;
-    }else if (selected == 5) {
-        showStyle = EEProgressHUDShowStyleFromLeft;
+    switch (row) {
+        case 0:
+            title = @"Fade";
+            break;
+        case 1:
+            title = @"Lutz";
+            break;
+        case 2:
+            title = @"Shake";
+            break;
+        case 3:
+            title = @"NoAnime";
+            break;
+        case 4:
+            title = @"Right";
+            break;
+        case 5:
+            title = @"Left";
+        default:
+            break;
     }
-
-    [EEHUDView showWithMessage:message
-                     showStyle:showStyle
-             progressViewStyle:EEProgressHUDProgressViewStyleIndicator];
     
+    cell.textLabel.text = title;
 }
 
-- (IBAction)hideOK:(id)sender
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *message = self.textField.text;
-    
-    NSInteger selected = self.segOut.selectedSegmentIndex;
-    
-    EEProgressHUDHideStyle hideStyle;
-    if (selected == 0) {
-        hideStyle = EEProgressHUDHideStyleFadeOut;
-    }else if (selected == 1){
-        hideStyle = EEProgressHUDHideStyleLutz;
-    }else if (selected == 2){
-        hideStyle = EEProgressHUDHideStyleShake;
-    }else if (selected == 3){
-        hideStyle = EEProgressHUDHideStyleNoAnime;
-    }else if (selected == 4){
-        hideStyle = EEProgressHUDHideStyleToLeft;
-    }else if (selected == 5){
-        hideStyle = EEProgressHUDHideStyleToRight;
-    }
-    
-    [EEHUDView hideWithMessage:message
-                     hideStyle:hideStyle
-               resultViewStyle:EEProgressHUDResultViewStyleOK];
+	return 6;
 }
 
-- (IBAction)hideNG:(id)sender
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *message = self.textField.text;
-    
-    NSInteger selected = self.segOut.selectedSegmentIndex;
-    
-    EEProgressHUDHideStyle hideStyle;
-    if (selected == 0) {
-        hideStyle = EEProgressHUDHideStyleFadeOut;
-    }else if (selected == 1){
-        hideStyle = EEProgressHUDHideStyleLutz;
-    }else if (selected == 2){
-        hideStyle = EEProgressHUDHideStyleShake;
-    }else if (selected == 3){
-        hideStyle = EEProgressHUDHideStyleNoAnime;
-    }else if (selected == 4){
-        hideStyle = EEProgressHUDHideStyleToLeft;
-    }else if (selected == 5){
-        hideStyle = EEProgressHUDHideStyleToRight;
-    }
-    
-    [EEHUDView hideWithMessage:message
-                     hideStyle:hideStyle
-               resultViewStyle:EEProgressHUDResultViewStyleNG];
+	static NSString *CellIdentifier = @"cellIdentifier";
+	
+	UITableViewCell	*cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	if (cell == nil) {
+		
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+	}
+	
+	// セル表示
+	[self configureCell:cell atIndexPath:indexPath];
+	
+	return cell;
 }
 
-- (IBAction)hideChecked:(id)sender
+#pragma mark - TableView Delegate Method
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *message = self.textField.text;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSInteger selected = self.segOut.selectedSegmentIndex;
     
-    EEProgressHUDHideStyle hideStyle;
-    if (selected == 0) {
-        hideStyle = EEProgressHUDHideStyleFadeOut;
-    }else if (selected == 1){
-        hideStyle = EEProgressHUDHideStyleLutz;
-    }else if (selected == 2){
-        hideStyle = EEProgressHUDHideStyleShake;
-    }else if (selected == 3){
-        hideStyle = EEProgressHUDHideStyleNoAnime;
-    }else if (selected == 4){
-        hideStyle = EEProgressHUDHideStyleToLeft;
-    }else if (selected == 5){
-        hideStyle = EEProgressHUDHideStyleToRight;
+	int row = indexPath.row;
+    
+    EEHUDViewShowStyle showStyle;
+    EEHUDViewHideStyle hideStyle;
+    
+    switch (row) {
+        case 0:
+            showStyle = EEHUDViewShowStyleFadeIn;
+            hideStyle = EEHUDViewHideStyleFadeOut;
+            break;
+        case 1:
+            showStyle = EEHUDViewShowStyleLutz;
+            hideStyle = EEHUDViewHideStyleLutz;
+            break;
+        case 2:
+            showStyle = EEHUDViewShowStyleShake;
+            hideStyle = EEHUDViewHideStyleShake;
+            break;
+        case 3:
+            showStyle = EEHUDViewShowStyleNoAnime;
+            hideStyle = EEHUDViewHideStyleNoAnime;
+            break;
+        case 4:
+            showStyle = EEHUDViewShowStyleFromRight;
+            hideStyle = EEHUDViewHideStyleToRight;
+            break;
+        case 5:
+            showStyle = EEHUDViewShowStyleFromLeft;
+            hideStyle = EEHUDViewHideStyleToLeft;
+        default:
+            break;
     }
     
-    [EEHUDView hideWithMessage:message
-                     hideStyle:hideStyle
-               resultViewStyle:EEProgressHUDResultViewStyleChecked];
-}
-
-- (IBAction)checkIsShowing:(id)sender
-{
-    BOOL isShowing = [EEHUDView isShowing];
-    
-    NSString *string = [NSString stringWithFormat:@"%d", isShowing];
-    
-    UIAlertView *alert;
-    alert = [[UIAlertView alloc] initWithTitle:string
-                                       message:@""
-                                      delegate:self
-                             cancelButtonTitle:nil
-                             otherButtonTitles:@"OK", nil];
-    
-    [alert show];
-}
-
-- (IBAction)growl:(id)sender
-{
-    NSString *message = self.textField.text;
-    
-    NSInteger selected1 = self.segIn.selectedSegmentIndex;
-
-    EEProgressHUDShowStyle showStyle;
-    if (selected1 == 0) {
-        showStyle = EEProgressHUDShowStyleFadeIn;
-    }else if (selected1 == 1) {
-        showStyle = EEProgressHUDShowStyleLutz;
-    }else if (selected1 == 2) {
-        showStyle = EEProgressHUDShowStyleShake;
-    }else if (selected1 == 3) {
-        showStyle = EEProgressHUDShowStyleNoAnime;
-    }else if (selected1 == 4) {
-        showStyle = EEProgressHUDShowStyleFromRight;
-    }else if (selected1 == 5) {
-        showStyle = EEProgressHUDShowStyleFromLeft;
+    EEHUDResultViewStyle resultViewStyle;
+    switch (index%7) {
+        case 0:
+            resultViewStyle = EEHUDResultViewStyleOK;
+            break;
+        case 1:
+            resultViewStyle = EEHUDResultViewStyleNG;
+            break;
+        case 2:
+            resultViewStyle = EEHUDResultViewStyleChecked;
+            break;
+        case 3:
+            resultViewStyle = EEHUDResultViewStyleUpArrow;
+            break;
+        case 4:
+            resultViewStyle = EEHUDResultViewStyleDownArrow;
+            break;
+        case 5:
+            resultViewStyle = EEHUDResultViewStyleRightArrow;
+            break;
+        case 6:
+            resultViewStyle = EEHUDResultViewStyleLeftArrow;
+            break;
+        default:
+            resultViewStyle = EEHUDResultViewStyleOK;
+            break;
     }
     
-    NSInteger selected = self.segOut.selectedSegmentIndex;
+//    if (is_) {
+//        [EEHUDView hideWithMessage:@"OK"
+//                         hideStyle:hideStyle
+//                   resultViewStyle:EEProgressHUDResultViewStyleOK];
+//    }else {
+//        [EEHUDView showWithMessage:@"Downloading..."
+//                         showStyle:showStyle
+//                 progressViewStyle:EEProgressHUDProgressViewStyleIndicator];
+//    }
     
-    EEProgressHUDHideStyle hideStyle;
-    if (selected == 0) {
-        hideStyle = EEProgressHUDHideStyleFadeOut;
-    }else if (selected == 1){
-        hideStyle = EEProgressHUDHideStyleLutz;
-    }else if (selected == 2){
-        hideStyle = EEProgressHUDHideStyleShake;
-    }else if (selected == 3){
-        hideStyle = EEProgressHUDHideStyleNoAnime;
-    }else if (selected == 4){
-        hideStyle = EEProgressHUDHideStyleToLeft;
-    }else if (selected == 5){
-        hideStyle = EEProgressHUDHideStyleToRight;
-    }
-    
-    [EEHUDView growlWithMessage:message
+    NSString *countString = [NSString stringWithFormat:@"%d", count];
+    [EEHUDView growlWithMessage:countString
                       showStyle:showStyle
                       hideStyle:hideStyle
-                resultViewStyle:EEProgressHUDResultViewStyleNG
-                       showTime:2.0];
+                resultViewStyle:resultViewStyle
+                       showTime:3.0];
+    
+    is_ = !is_;
+    
+    // countUP
+    count++;
+    index++;
 }
 
-#pragma mark - UITextField Delegate
-- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
-{
-    [aTextField resignFirstResponder];
-    
-    return YES;
-}
 
 @end
