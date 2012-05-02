@@ -8,9 +8,9 @@ EEHUDView features:
 
 * singleton class
 
-* how to use EEHUDView
-call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
- when you want to show HUD (like growl)
+* how to use EEHUDView (when you want to show HUD with message)
+ → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
+ 
 
 h2. Installation
 
