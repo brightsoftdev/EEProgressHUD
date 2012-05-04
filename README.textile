@@ -12,7 +12,7 @@ EEHUDView features:
  → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
  
  
-!Images/001_OK.png!
+!https://github.com/335g/EEProgressHUD/tree/master/Images/001_OK.png!
 
 h2. Installation
 
