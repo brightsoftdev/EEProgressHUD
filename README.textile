@@ -12,21 +12,9 @@ EEHUDView features:
  → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
  
  
- 
- 
-- EEHUDResultViewStyleOK := !https://lh5.googleusercontent.com/-CUMWGJrnF0U/T6NC-g6Px9I/AAAAAAAAAFg/YJAHH5Z-tuc/s800/120504-0001.png!
-
-- EEHUDResultViewStyleNG := !https://lh5.googleusercontent.com/-iGkr-FOK7Ew/T6NNXWUg_9I/AAAAAAAAAGs/hHcYeCOSekE/s800/002_NG.png!
-
-- EEHUDResultViewStyleChecked := !https://lh4.googleusercontent.com/-FHd0DyQSKJw/T6NNaJdoTHI/AAAAAAAAAGs/lnQh6vFkDQo/s800/003_Checked.png!
-
-- EEHUDResultViewStyleUpArrow := !https://lh4.googleusercontent.com/-FeNCPTIZeC4/T6NNaGRwiSI/AAAAAAAAAGs/_ryVD4uIlQ8/s800/004_UpArrow.png!
-
-- EEHUDResultViewStyleDownArrow := !https://lh6.googleusercontent.com/-DMtbUb8gOjg/T6NNaLi-D0I/AAAAAAAAAGs/ku22u4MclMo/s800/005_DownArrow.png!
-
-- EEHUDResultViewStyleRightArrow := !https://lh4.googleusercontent.com/-QlmN5Wl4pYY/T6NNaxjR-TI/AAAAAAAAAGs/D3fKWdz1PCo/s800/006_RightArrow.png!
-
-- EEHUDResultViewStyleLeftArrow := !https://lh6.googleusercontent.com/-h5s3ShJmfBo/T6NNbCL-SFI/AAAAAAAAAGs/-sgbpehM7oY/s800/007_LeftArrow.png!
+|- EEHUDResultViewStyleOK := !https://lh5.googleusercontent.com/-CUMWGJrnF0U/T6NC-g6Px9I/AAAAAAAAAFg/YJAHH5Z-tuc/s800/120504-0001.png!|- EEHUDResultViewStyleNG := !https://lh5.googleusercontent.com/-iGkr-FOK7Ew/T6NNXWUg_9I/AAAAAAAAAGs/hHcYeCOSekE/s800/002_NG.png!|- EEHUDResultViewStyleChecked := !https://lh4.googleusercontent.com/-FHd0DyQSKJw/T6NNaJdoTHI/AAAAAAAAAGs/lnQh6vFkDQo/s800/003_Checked.png!|
+|- EEHUDResultViewStyleUpArrow := !https://lh4.googleusercontent.com/-FeNCPTIZeC4/T6NNaGRwiSI/AAAAAAAAAGs/_ryVD4uIlQ8/s800/004_UpArrow.png!|- EEHUDResultViewStyleDownArrow := !https://lh6.googleusercontent.com/-DMtbUb8gOjg/T6NNaLi-D0I/AAAAAAAAAGs/ku22u4MclMo/s800/005_DownArrow.png!|- EEHUDResultViewStyleRightArrow := !https://lh4.googleusercontent.com/-QlmN5Wl4pYY/T6NNaxjR-TI/AAAAAAAAAGs/D3fKWdz1PCo/s800/006_RightArrow.png!|
+|- EEHUDResultViewStyleLeftArrow := !https://lh6.googleusercontent.com/-h5s3ShJmfBo/T6NNbCL-SFI/AAAAAAAAAGs/-sgbpehM7oY/s800/007_LeftArrow.png!|||
 
 
 h2. Installation
