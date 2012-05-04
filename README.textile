@@ -17,15 +17,17 @@ h3. features:
 h3. Images
 
 |*_EEHUDResultViewStyleOK_*
-!https://lh5.googleusercontent.com/-CUMWGJrnF0U/T6NC-g6Px9I/AAAAAAAAAFg/YJAHH5Z-tuc/s800/120504-0001.png!|*_EEHUDResultViewStyleNG_*
-!https://lh5.googleusercontent.com/-iGkr-FOK7Ew/T6NNXWUg_9I/AAAAAAAAAGs/hHcYeCOSekE/s800/002_NG.png!|*_EEHUDResultViewStyleChecked_*
-!https://lh4.googleusercontent.com/-FHd0DyQSKJw/T6NNaJdoTHI/AAAAAAAAAGs/lnQh6vFkDQo/s800/003_Checked.png!|
+!https://lh3.googleusercontent.com/-pFlgO19jpvE/T6NsNDeLXsI/AAAAAAAAAHg/fEE89ETDWEY/s800/001_OK.png!|*_EEHUDResultViewStyleNG_*
+!https://lh4.googleusercontent.com/-82jnK4tosR8/T6NsToB6MzI/AAAAAAAAAIY/pjkdZfc5KWg/s800/002_NG.png!|*_EEHUDResultViewStyleChecked_*
+!https://lh4.googleusercontent.com/-nziu6wrNLp8/T6NsNLJARQI/AAAAAAAAAHc/t2GuqKuMRBM/s800/003_Checked.png!|
 |*_EEHUDResultViewStyleUpArrow_*
-|!https://lh4.googleusercontent.com/-FeNCPTIZeC4/T6NNaGRwiSI/AAAAAAAAAGs/_ryVD4uIlQ8/s800/004_UpArrow.png!|*_EEHUDResultViewStyleDownArrow_*
-!https://lh6.googleusercontent.com/-DMtbUb8gOjg/T6NNaLi-D0I/AAAAAAAAAGs/ku22u4MclMo/s800/005_DownArrow.png!|*_EEHUDResultViewStyleRightArrow_*
-!https://lh4.googleusercontent.com/-QlmN5Wl4pYY/T6NNaxjR-TI/AAAAAAAAAGs/D3fKWdz1PCo/s800/006_RightArrow.png!|
+|!https://lh3.googleusercontent.com/-BO6K8dvEVX0/T6NsN2J4TZI/AAAAAAAAAHk/PY71ANYawUY/s800/004_UpArrow.png!|*_EEHUDResultViewStyleDownArrow_*
+!https://lh3.googleusercontent.com/-2Z2GYf97v40/T6NsOE_X25I/AAAAAAAAAHs/EDbITRbx_hk/s800/005_DownArrow.png!|*_EEHUDResultViewStyleRightArrow_*
+!https://lh3.googleusercontent.com/-0LOb05VwLug/T6NsSlIBR9I/AAAAAAAAAIU/rW-chBM081k/s800/006_RightArrow.png!|
 |*_EEHUDResultViewStyleLeftArrow_*
-!https://lh6.googleusercontent.com/-h5s3ShJmfBo/T6NNbCL-SFI/AAAAAAAAAGs/-sgbpehM7oY/s800/007_LeftArrow.png!|||
+!https://lh5.googleusercontent.com/-9fk0nCkTQ20/T6NsOyliwOI/AAAAAAAAAH8/8TRlvMP4kRE/s800/007_LeftArrow.png!|*_EEHUDResultViewStylePlay_*
+!https://lh3.googleusercontent.com/-4Wdwj9OZcaI/T6NsPn_9jlI/AAAAAAAAAIE/YTuXvP4nAvs/s800/008_Play.png!|*_EEHUDResultViewStylePause_*
+!https://lh6.googleusercontent.com/-C9VTm8I5m5w/T6NsQR7dpOI/AAAAAAAAAIA/jcobWM143Gc/s800/009_Pause.png!|
 
 
 
