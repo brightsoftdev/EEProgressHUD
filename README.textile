@@ -4,13 +4,15 @@ EEHUDView is an easy-to-use, clean and lightweight HUD for iOS.
 
 !https://lh3.googleusercontent.com/-CACjjz0IPv8/TuC6DepBWsI/AAAAAAAAAEo/FuDBSejzp0k/s912/screenshots2.png!
 
-h3. EEHUDView features:
+h3. features:
 
 * singleton class
 
 * how to use EEHUDView (when you want to show HUD with message)
  → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
 
+　
+　
 h3. Images
 
 |*_EEHUDResultViewStyleOK_*
@@ -27,15 +29,17 @@ h3. Images
 
 
 
-h2. Installation
+h1. Installation
 
 * Drag the @EEHUDView@ directory into your project.
 * Add the *QuartzCore* framework to your project
 
-h2. Credits
+h1. Credits
 
 Expansion will continue. Please use this HUD. Please request what you thing for this HUD.
-
+　
+　
+　
 ----------
 Copyright &copy; 2011 Yoshiki Kudo
 Distributed under the "MIT license":http://www.opensource.org/licenses/mit-license.php
