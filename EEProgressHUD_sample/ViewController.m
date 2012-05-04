@@ -62,7 +62,7 @@
                       showStyle:self.showStyle
                       hideStyle:self.hideStyle
                 resultViewStyle:self.resultStyle
-                       showTime:1.5];
+                       showTime:10];
 }
 
 - (IBAction)done:(id)sender
@@ -201,6 +201,18 @@
                 case 18:
                     title = @"9";
                     break;
+                case 19:
+                    title = @"!";
+                    break;
+                case 20:
+                    title = @"Cloud";
+                    break;
+                case 21:
+                    title = @"CloudUP";
+                    break;
+                case 22:
+                    title = @"CloudDOWN";
+                    break;
                 default:
                     break;
             }
@@ -335,6 +347,18 @@
                 case 18:
                     self.resultStyle = EEHUDResultViewStyleNine;
                     break;
+                case 19:
+                    self.resultStyle = EEHUDResultViewStyleExclamation;
+                    break;
+                case 20:
+                    self.resultStyle = EEHUDResultViewStyleCloud;
+                    break;
+                case 21:
+                    self.resultStyle = EEHUDResultViewStyleCloudUp;
+                    break;
+                case 22:
+                    self.resultStyle = EEHUDResultViewStyleCloudDown;
+                    break;
                 default:
                     break;
             }
@@ -361,7 +385,7 @@
             count = 8;
             break;
         case 2:
-            count = 19;
+            count = 23;
             break;
         default:
             break;

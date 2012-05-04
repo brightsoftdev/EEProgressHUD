@@ -424,9 +424,178 @@
             
             break;
             
-        default:
-        
+        case EEHUDResultViewStyleExclamation:
             
+            innerMargin = 10.0;
+            
+            path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(center.x, center.y + r - 8.0)
+                                                  radius:5.0
+                                              startAngle:0.0
+                                                endAngle:2*M_PI
+                                               clockwise:YES];
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [path fill];
+            
+            path = nil;
+            path = [UIBezierPath bezierPath];
+            
+            [path moveToPoint:CGPointMake(center.x, center.y + r - innerMargin - 15.0)];
+            [path addLineToPoint:CGPointMake(center.x - 2.0, center.y - r + innerMargin)];
+            [path addLineToPoint:CGPointMake(center.x + 2.0, center.y - r + innerMargin)];
+            [path closePath];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineWidth = 8.0;
+            path.lineJoinStyle = kCGLineJoinRound;
+            
+            [path stroke];
+            
+            break;
+            
+        case EEHUDResultViewStyleCloud:
+            
+            innerMargin = 2.0;
+            bothExpansion = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y - r + innerMargin);
+            hidarishita = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y + r - innerMargin);
+            migiue = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y - r + innerMargin);
+            migishita = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y + r - innerMargin);
+            
+            
+            path = [UIBezierPath bezierPath];
+            
+            // cloud
+            [path moveToPoint:CGPointMake(hidarishita.x + 5.0, hidarishita.y)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 15.0, hidarishita.y - 24.0)
+                    controlPoint1:CGPointMake(hidarishita.x - 8.0, hidarishita.y - 13.0)
+                    controlPoint2:CGPointMake(hidarishita.x + 5.0, hidarishita.y - 30.0)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 35.0, hidarishita.y - 30.0)
+                    controlPoint1:CGPointMake(hidarishita.x + 12.0, hidarishita.y - 40.0) 
+                    controlPoint2:CGPointMake(hidarishita.x + 31.0, hidarishita.y - 44.0)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 67.0, hidarishita.y - 8.0)
+                    controlPoint1:CGPointMake(hidarishita.x + 50.0, hidarishita.y - 70.0)
+                    controlPoint2:CGPointMake(hidarishita.x + 95.0, hidarishita.y - 28.0)];
+            [path addCurveToPoint:CGPointMake(migishita.x - 5.0, migishita.y)
+                    controlPoint1:CGPointMake(hidarishita.x + 70.0, hidarishita.y - 15.0)
+                    controlPoint2:CGPointMake(migishita.x + 5.0, migishita.y - 10.0)];
+            [path closePath];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineWidth = 3.0;
+            path.lineJoinStyle = kCGLineJoinRound;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path stroke];
+            
+            break;
+            
+        case EEHUDResultViewStyleCloudUp:
+            
+            innerMargin = 2.0;
+            bothExpansion = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y - r + innerMargin);
+            hidarishita = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y + r - innerMargin);
+            migiue = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y - r + innerMargin);
+            migishita = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y + r - innerMargin);
+            
+            
+            path = [UIBezierPath bezierPath];
+            
+            // cloud
+            [path moveToPoint:CGPointMake(hidarishita.x + 5.0, hidarishita.y)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 15.0, hidarishita.y - 24.0)
+                    controlPoint1:CGPointMake(hidarishita.x - 8.0, hidarishita.y - 13.0)
+                    controlPoint2:CGPointMake(hidarishita.x + 5.0, hidarishita.y - 30.0)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 35.0, hidarishita.y - 30.0)
+                    controlPoint1:CGPointMake(hidarishita.x + 12.0, hidarishita.y - 40.0) 
+                    controlPoint2:CGPointMake(hidarishita.x + 31.0, hidarishita.y - 44.0)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 67.0, hidarishita.y - 8.0)
+                    controlPoint1:CGPointMake(hidarishita.x + 50.0, hidarishita.y - 70.0)
+                    controlPoint2:CGPointMake(hidarishita.x + 95.0, hidarishita.y - 28.0)];
+            [path addCurveToPoint:CGPointMake(migishita.x - 5.0, migishita.y)
+                    controlPoint1:CGPointMake(hidarishita.x + 70.0, hidarishita.y - 15.0)
+                    controlPoint2:CGPointMake(migishita.x + 5.0, migishita.y - 10.0)];
+            [path closePath];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineWidth = 3.0;
+            path.lineJoinStyle = kCGLineJoinRound;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path stroke];
+            
+            [path removeAllPoints];
+            
+            // UP
+            [path moveToPoint:CGPointMake(center.x - 10.0, center.y + r - innerMargin)];
+            [path addLineToPoint:CGPointMake(center.x - 10.0, center.y + r - innerMargin - 7.0)];
+            [path addLineToPoint:CGPointMake(center.x - 20.0, center.y + r - innerMargin - 7.0)];
+            [path addLineToPoint:CGPointMake(center.x, center.y + r - innerMargin - 22.0)];
+            [path addLineToPoint:CGPointMake(center.x + 20.0, center.y + r - innerMargin - 7.0)];
+            [path addLineToPoint:CGPointMake(center.x + 10.0, center.y + r - innerMargin - 7.0)];
+            [path addLineToPoint:CGPointMake(center.x + 10.0, center.y + r - innerMargin)];
+            [path closePath];
+            
+            [path stroke];
+            
+            break;
+        
+        case EEHUDResultViewStyleCloudDown:
+            
+            innerMargin = 2.0;
+            bothExpansion = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y - r + innerMargin);
+            hidarishita = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y + r - innerMargin);
+            migiue = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y - r + innerMargin);
+            migishita = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y + r - innerMargin);
+            
+            
+            path = [UIBezierPath bezierPath];
+            
+            // cloud
+            [path moveToPoint:CGPointMake(hidarishita.x + 5.0, hidarishita.y)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 15.0, hidarishita.y - 24.0)
+                    controlPoint1:CGPointMake(hidarishita.x - 8.0, hidarishita.y - 13.0)
+                    controlPoint2:CGPointMake(hidarishita.x + 5.0, hidarishita.y - 30.0)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 35.0, hidarishita.y - 30.0)
+                    controlPoint1:CGPointMake(hidarishita.x + 12.0, hidarishita.y - 40.0) 
+                    controlPoint2:CGPointMake(hidarishita.x + 31.0, hidarishita.y - 44.0)];
+            [path addCurveToPoint:CGPointMake(hidarishita.x + 67.0, hidarishita.y - 8.0)
+                    controlPoint1:CGPointMake(hidarishita.x + 50.0, hidarishita.y - 70.0)
+                    controlPoint2:CGPointMake(hidarishita.x + 95.0, hidarishita.y - 28.0)];
+            [path addCurveToPoint:CGPointMake(migishita.x - 5.0, migishita.y)
+                    controlPoint1:CGPointMake(hidarishita.x + 70.0, hidarishita.y - 15.0)
+                    controlPoint2:CGPointMake(migishita.x + 5.0, migishita.y - 10.0)];
+            [path closePath];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineWidth = 3.0;
+            path.lineJoinStyle = kCGLineJoinRound;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path stroke];
+            
+            [path removeAllPoints];
+            
+            // DOWN
+            [path moveToPoint:CGPointMake(center.x - 5.0, center.y + r - innerMargin)];
+            [path addLineToPoint:CGPointMake(center.x - 20.0, center.y + r - innerMargin - 13.0)];
+            [path addLineToPoint:CGPointMake(center.x - 10.0, center.y + r - innerMargin - 13.0)];
+            [path addLineToPoint:CGPointMake(center.x - 10.0, center.y + r - innerMargin - 20.0)];
+            [path addLineToPoint:CGPointMake(center.x + 10.0, center.y + r - innerMargin - 20.0)];
+            [path addLineToPoint:CGPointMake(center.x + 10.0, center.y + r - innerMargin - 13.0)];
+            [path addLineToPoint:CGPointMake(center.x + 20.0, center.y + r - innerMargin - 13.0)];
+            [path addLineToPoint:CGPointMake(center.x + 5.0, center.y + r - innerMargin)];
+            
+            [path closePath];
+            
+            [path stroke];
+            
+            break;
+            
+        default:            
             break;
     }
     
