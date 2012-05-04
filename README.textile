@@ -4,14 +4,14 @@ EEHUDView is an easy-to-use, clean and lightweight HUD for iOS.
 
 !https://lh3.googleusercontent.com/-CACjjz0IPv8/TuC6DepBWsI/AAAAAAAAAEo/FuDBSejzp0k/s912/screenshots2.png!
 
-EEHUDView features:
+h3. EEHUDView features:
 
 * singleton class
 
 * how to use EEHUDView (when you want to show HUD with message)
  → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
 
-
+h3. Images
 |*_EEHUDResultViewStyleOK_*
 !https://lh5.googleusercontent.com/-CUMWGJrnF0U/T6NC-g6Px9I/AAAAAAAAAFg/YJAHH5Z-tuc/s800/120504-0001.png!|*_EEHUDResultViewStyleNG_*
 !https://lh5.googleusercontent.com/-iGkr-FOK7Ew/T6NNXWUg_9I/AAAAAAAAAGs/hHcYeCOSekE/s800/002_NG.png!|*_EEHUDResultViewStyleChecked_*
