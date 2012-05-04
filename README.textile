@@ -36,17 +36,17 @@ h3. hideStyle
 h3. resultViewStyle
 
 |*_EEHUDResultViewStyleOK_*
-!https://lh3.googleusercontent.com/-pFlgO19jpvE/T6NsNDeLXsI/AAAAAAAAAHg/fEE89ETDWEY/s800/001_OK.png!|*_EEHUDResultViewStyleNG_*
-!https://lh4.googleusercontent.com/-82jnK4tosR8/T6NsToB6MzI/AAAAAAAAAIY/pjkdZfc5KWg/s800/002_NG.png!|*_EEHUDResultViewStyleChecked_*
-!https://lh4.googleusercontent.com/-nziu6wrNLp8/T6NsNLJARQI/AAAAAAAAAHc/t2GuqKuMRBM/s800/003_Checked.png!|
+!https://lh6.googleusercontent.com/-D4TQoDbF60g/T6OIllIAN2I/AAAAAAAAALA/WjTrCnVsiWM/s800/001_OK.png!|*_EEHUDResultViewStyleNG_*
+!https://lh5.googleusercontent.com/-lxzV7SXuv8g/T6OIlv0jVdI/AAAAAAAAAK8/RXd56F5JqAE/s800/002_NG.png!|*_EEHUDResultViewStyleChecked_*
+!https://lh6.googleusercontent.com/-aAVm3jgPHHQ/T6OIlnZoCzI/AAAAAAAAALM/YVM6CwynwuM/s800/003_Checked.png!|
 |*_EEHUDResultViewStyleUpArrow_*
-|!https://lh3.googleusercontent.com/-BO6K8dvEVX0/T6NsN2J4TZI/AAAAAAAAAHk/PY71ANYawUY/s800/004_UpArrow.png!|*_EEHUDResultViewStyleDownArrow_*
-!https://lh3.googleusercontent.com/-2Z2GYf97v40/T6NsOE_X25I/AAAAAAAAAHs/EDbITRbx_hk/s800/005_DownArrow.png!|*_EEHUDResultViewStyleRightArrow_*
-!https://lh3.googleusercontent.com/-0LOb05VwLug/T6NsSlIBR9I/AAAAAAAAAIU/rW-chBM081k/s800/006_RightArrow.png!|
+|!https://lh4.googleusercontent.com/-iCXoYP753KY/T6OImLcYgqI/AAAAAAAAALE/8genv0PcDRk/s800/004_UpArrow.png!|*_EEHUDResultViewStyleDownArrow_*
+!https://lh5.googleusercontent.com/-F9HMjYUACjw/T6OIsXkIzNI/AAAAAAAAAL8/qt13-lCnDiM/s800/005_DownArrow.png!|*_EEHUDResultViewStyleRightArrow_*
+!https://lh3.googleusercontent.com/-2TAnHqO4YKM/T6OIrNlHVII/AAAAAAAAAL0/T7sbDEJ-UB4/s800/006_RightArrow.png!|
 |*_EEHUDResultViewStyleLeftArrow_*
-!https://lh5.googleusercontent.com/-9fk0nCkTQ20/T6NsOyliwOI/AAAAAAAAAH8/8TRlvMP4kRE/s800/007_LeftArrow.png!|*_EEHUDResultViewStylePlay_*
-!https://lh3.googleusercontent.com/-4Wdwj9OZcaI/T6NsPn_9jlI/AAAAAAAAAIE/YTuXvP4nAvs/s800/008_Play.png!|*_EEHUDResultViewStylePause_*
-!https://lh6.googleusercontent.com/-C9VTm8I5m5w/T6NsQR7dpOI/AAAAAAAAAIA/jcobWM143Gc/s800/009_Pause.png!|
+!https://lh6.googleusercontent.com/-rWdNEMvtEVY/T6OInfCtj2I/AAAAAAAAALc/cLXpt5e3Ghc/s800/007_LeftArrow.png!|*_EEHUDResultViewStylePlay_*
+!https://lh5.googleusercontent.com/-lEE_3lhjCp0/T6OIo09ySiI/AAAAAAAAALg/6XssC5BwdsI/s800/008_Play.png!|*_EEHUDResultViewStylePause_*
+!https://lh4.googleusercontent.com/-pFqcFsTxyZI/T6OIoydhuPI/AAAAAAAAALk/NJcqUJ3AuIA/s800/009_Pause.png!|
 
 　
 
