@@ -20,9 +20,12 @@ table{border:1px solid white; text-align:center;}.
 |!https://lh6.googleusercontent.com/-h5s3ShJmfBo/T6NNbCL-SFI/AAAAAAAAAGs/-sgbpehM7oY/s800/007_LeftArrow.png!|||
 
 
-|=. EEHUDResultViewStyleOK
-!https://lh5.googleusercontent.com/-CUMWGJrnF0U/T6NC-g6Px9I/AAAAAAAAAFg/YJAHH5Z-tuc/s800/120504-0001.png! |=. EEHUDResultViewStyleNG |=. EEHUDResultViewStyleChecked|
-||||
+|*_EEHUDResultViewStyleOK_*
+!https://lh5.googleusercontent.com/-CUMWGJrnF0U/T6NC-g6Px9I/AAAAAAAAAFg/YJAHH5Z-tuc/s800/120504-0001.png!|*_EEHUDResultViewStyleNG_*
+!https://lh5.googleusercontent.com/-iGkr-FOK7Ew/T6NNXWUg_9I/AAAAAAAAAGs/hHcYeCOSekE/s800/002_NG.png!|*_EEHUDResultViewStyleChecked_*
+!https://lh4.googleusercontent.com/-FHd0DyQSKJw/T6NNaJdoTHI/AAAAAAAAAGs/lnQh6vFkDQo/s800/003_Checked.png!|
+
+
 
 
 
