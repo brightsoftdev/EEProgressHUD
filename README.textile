@@ -48,8 +48,7 @@ h3. resultViewStyle
 !https://lh3.googleusercontent.com/-4Wdwj9OZcaI/T6NsPn_9jlI/AAAAAAAAAIE/YTuXvP4nAvs/s800/008_Play.png!|*_EEHUDResultViewStylePause_*
 !https://lh6.googleusercontent.com/-C9VTm8I5m5w/T6NsQR7dpOI/AAAAAAAAAIA/jcobWM143Gc/s800/009_Pause.png!|
 
-
-
+　
 
 h1. Installation
 
@@ -58,8 +57,9 @@ h1. Installation
 
 h1. Credits
 
-Expansion will continue. Please use this HUD. Please request what you thing for this HUD. And please reply @335g if you adopt EEHUDView because I'm happy.
-　
+Expansion will continue. Please use this HUD. 
+Please request what you thing for this HUD.
+And please reply @335g if you adopt EEHUDView because I'm happy.
 　
 
 ----------

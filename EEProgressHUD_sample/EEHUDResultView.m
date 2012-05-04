@@ -229,6 +229,61 @@
             [path stroke];
             
             break;
+            
+        case EEHUDResultViewStylePlay:
+            
+            start = CGPointMake(center.x + r, center.y);
+            relay = CGPointMake(center.x - r + r*(2.0-sqrt(3.0))/2, center.y + r);
+            end = CGPointMake(center.x - r + r*(2.0-sqrt(3.0))/2 , center.y - r);
+            
+            path = [UIBezierPath bezierPath];
+            [path moveToPoint:start];
+            [path addLineToPoint:relay];
+            [path addLineToPoint:end];
+            
+            [path closePath];
+            
+            path.lineJoinStyle = kCGLineJoinRound;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path fill];
+            
+            
+            break;
+            
+        case EEHUDResultViewStylePause:
+            
+            hidariue = CGPointMake(center.x - r, center.y - r);
+            migishita = CGPointMake(center.x + r, center.y + r);
+            migiue = CGPointMake(center.x + r, center.y - r);
+            hidarishita = CGPointMake(center.x - r, center.y + r);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            // line width = 10.0
+            path = [UIBezierPath bezierPath];
+            
+            path.lineJoinStyle = kCGLineJoinRound;
+            
+            [path moveToPoint:CGPointMake(hidariue.x + 2.0, hidariue.y)];
+            [path addLineToPoint:CGPointMake(hidariue.x + 12.0, hidariue.y)];
+            [path addLineToPoint:CGPointMake(hidariue.x + 12.0, hidarishita.y)];
+            [path addLineToPoint:CGPointMake(hidariue.x + 2.0, hidarishita.y)];
+            
+            [path closePath];
+            [path fill];
+            
+            [path removeAllPoints];
+            
+            [path moveToPoint:CGPointMake(migiue.x - 2.0, migiue.y)];
+            [path addLineToPoint:CGPointMake(migiue.x - 12.0, migiue.y)];
+            [path addLineToPoint:CGPointMake(migishita.x - 12.0, migishita.y)];
+            [path addLineToPoint:CGPointMake(migishita.x - 2.0, migishita.y)];
+            
+            [path closePath];
+            [path fill];
+            
+            break;
         default:
             
             break;

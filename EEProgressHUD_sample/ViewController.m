@@ -165,6 +165,12 @@
                 case 6:
                     title = @"Left←";
                     break;
+                case 7:
+                    title = @"Play";
+                    break;
+                case 8:
+                    title = @"Pause";
+                    break;
                 default:
                     break;
             }
@@ -263,6 +269,12 @@
                 case 6:
                     self.resultStyle = EEHUDResultViewStyleLeftArrow;
                     break;
+                case 7:
+                    self.resultStyle = EEHUDResultViewStylePlay;
+                    break;
+                case 8:
+                    self.resultStyle = EEHUDResultViewStylePause;
+                    break;
                 default:
                     break;
             }
@@ -289,7 +301,7 @@
             count = 8;
             break;
         case 2:
-            count = 7;
+            count = 9;
             break;
         default:
             break;
