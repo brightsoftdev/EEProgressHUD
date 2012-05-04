@@ -53,9 +53,9 @@ h3. resultViewStyle
 h1. Installation
 
 * Drag the below files into your project.
-** EEHUDView.h(.m)
-** EEHUDResultView(.m)
-** EEHUDViewConstants.h
+p(. EEHUDView.h(.m)
+p(. EEHUDResultView(.m)
+p(. EEHUDViewConstants.h
 
 * Add the *QuartzCore* framework to your project
 
