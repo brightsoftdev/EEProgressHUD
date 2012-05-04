@@ -13,6 +13,7 @@ h3. features:
 
 　
 　
+
 h3. Images
 
 |*_EEHUDResultViewStyleOK_*
@@ -40,6 +41,7 @@ Expansion will continue. Please use this HUD. Please request what you thing for 
 　
 　
 　
+
 ----------
 Copyright &copy; 2011 Yoshiki Kudo
 Distributed under the "MIT license":http://www.opensource.org/licenses/mit-license.php
