@@ -16,26 +16,27 @@ h3. features:
 
 h3. showStyle
 
-*EEHUDViewShowStyleFadeIn
-*EEHUDViewShowStyleLutz
-*EEHUDViewShowStyleShake
-*EEHUDViewShowStyleNoAnime
-*EEHUDViewShowStyleFromRight
-*EEHUDViewShowStyleFromLeft
-*EEHUDViewShowStyleFromTop
-*EEHUDViewShowStyleFromBottom
+@EEHUDViewShowStyleFadeIn@
+@EEHUDViewShowStyleLutz@
+@EEHUDViewShowStyleShake@
+@EEHUDViewShowStyleNoAnime@
+@EEHUDViewShowStyleFromRight@
+@EEHUDViewShowStyleFromLeft@
+@EEHUDViewShowStyleFromTop@
+@EEHUDViewShowStyleFromBottom@
+
 　
 　
 h3. hideStyle
 
-*EEHUDViewHideStyleFadeOut
-*EEHUDViewHideStyleLutz
-*EEHUDViewHideStyleShake
-*EEHUDViewHideStyleNoAnime
-*EEHUDViewHideStyleToLeft
-*EEHUDViewHideStyleToRight
-*EEHUDViewHideStyleToBottom
-*EEHUDViewHideStyleToTop
+@EEHUDViewHideStyleFadeOut@
+@EEHUDViewHideStyleLutz@
+@EEHUDViewHideStyleShake@
+@EEHUDViewHideStyleNoAnime@
+@EEHUDViewHideStyleToLeft@
+@EEHUDViewHideStyleToRight@
+@EEHUDViewHideStyleToBottom@
+@EEHUDViewHideStyleToTop@
 　
 　
 
