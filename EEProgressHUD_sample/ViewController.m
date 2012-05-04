@@ -171,6 +171,9 @@
                 case 8:
                     title = @"Pause";
                     break;
+                case 9:
+                    title = @"Cloud";
+                    break;
                 default:
                     break;
             }
@@ -275,6 +278,8 @@
                 case 8:
                     self.resultStyle = EEHUDResultViewStylePause;
                     break;
+                case 9:
+                    self.resultStyle = EEHUDResultViewStyleCloud;
                 default:
                     break;
             }
@@ -301,7 +306,7 @@
             count = 8;
             break;
         case 2:
-            count = 9;
+            count = 10;
             break;
         default:
             break;

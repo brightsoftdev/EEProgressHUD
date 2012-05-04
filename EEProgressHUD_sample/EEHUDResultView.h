@@ -18,7 +18,7 @@ typedef enum _EEHUDResultViewStyle {
     EEHUDResultViewStyleRightArrow = 6,
     EEHUDResultViewStyleLeftArrow = 7,
     EEHUDResultViewStylePlay = 8,
-    EEHUDResultViewStylePause = 9
+    EEHUDResultViewStylePause = 9,
 } EEHUDResultViewStyle;
 @interface EEHUDResultView : UIView {
     
