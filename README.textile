@@ -12,7 +12,7 @@ EEHUDView features:
  → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
  
  
-![OK](Images/001_OK.png)
+![OK][Images/001_OK.png]
 
 h2. Installation
 
