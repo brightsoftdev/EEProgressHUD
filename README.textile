@@ -60,20 +60,12 @@ h3. resultViewStyle
 !https://lh6.googleusercontent.com/-orIuTdbAQ-o/T6OYxqToEZI/AAAAAAAAANI/2FjC3jSfOno/s800/017_7.png!|*_EEHUDResultViewStyleEight_*
 !https://lh5.googleusercontent.com/-MXW5mcuSE0M/T6OYy62mgVI/AAAAAAAAANQ/N5Ot8-M40SY/s800/018_8.png!|
 |*_EEHUDResultViewStyleNine_*
-!https://lh3.googleusercontent.com/-jmho3WMMa6Q/T6OYtexGRKI/AAAAAAAAAMw/pNQaGENsj48/s800/019_9.png!|||
-
-
-
-
-
-
-
-
-
-
-
-
-
+!https://lh3.googleusercontent.com/-jmho3WMMa6Q/T6OYtexGRKI/AAAAAAAAAMw/pNQaGENsj48/s800/019_9.png!|*_EEHUDResultViewStyleExclamation_*
+!https://lh5.googleusercontent.com/-Tf2brsObTM8/T6PFWoQb9YI/AAAAAAAAANg/jUVNxIWHu4o/s800/020_exclamation.png!|*_EEHUDResultViewStyleCloud_*
+|!https://lh3.googleusercontent.com/-ClJCzZRU5EI/T6PFW82QdfI/AAAAAAAAANc/qHgqW0oWDc8/s800/021_cloud.png!
+|*_EEHUDResultViewStyleCloudUp_*
+!https://lh5.googleusercontent.com/-2XXr3OMz73g/T6PFWw9ufXI/AAAAAAAAANk/s8WIjsmQHUw/s800/022_cloudUp.png!|*_EEHUDResultViewStyleCloudDown_*
+!https://lh6.googleusercontent.com/-PWk1Bvu4s6w/T6PFXd-lCHI/AAAAAAAAANo/RuMTMHULiR4/s800/023_cloudDown.png!||
 
 
 　
