@@ -11,9 +11,6 @@ h3. features:
 * how to use EEHUDView (when you want to show HUD with message)
  → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
 
-　
-　
-
 h3. showStyle
 
 @EEHUDViewShowStyleFadeIn@
@@ -25,8 +22,6 @@ h3. showStyle
 @EEHUDViewShowStyleFromTop@
 @EEHUDViewShowStyleFromBottom@
 
-　
-　
 h3. hideStyle
 
 @EEHUDViewHideStyleFadeOut@
@@ -37,8 +32,6 @@ h3. hideStyle
 @EEHUDViewHideStyleToRight@
 @EEHUDViewHideStyleToBottom@
 @EEHUDViewHideStyleToTop@
-　
-　
 
 h3. resultViewStyle
 
