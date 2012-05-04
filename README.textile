@@ -14,7 +14,32 @@ h3. features:
 　
 　
 
-h3. Images
+h3. showStyle
+
+*EEHUDViewShowStyleFadeIn
+*EEHUDViewShowStyleLutz
+*EEHUDViewShowStyleShake
+*EEHUDViewShowStyleNoAnime
+*EEHUDViewShowStyleFromRight
+*EEHUDViewShowStyleFromLeft
+*EEHUDViewShowStyleFromTop
+*EEHUDViewShowStyleFromBottom
+　
+　
+h3. hideStyle
+
+*EEHUDViewHideStyleFadeOut
+*EEHUDViewHideStyleLutz
+*EEHUDViewHideStyleShake
+*EEHUDViewHideStyleNoAnime
+*EEHUDViewHideStyleToLeft
+*EEHUDViewHideStyleToRight
+*EEHUDViewHideStyleToBottom
+*EEHUDViewHideStyleToTop
+　
+　
+
+h3. resultViewStyle
 
 |*_EEHUDResultViewStyleOK_*
 !https://lh3.googleusercontent.com/-pFlgO19jpvE/T6NsNDeLXsI/AAAAAAAAAHg/fEE89ETDWEY/s800/001_OK.png!|*_EEHUDResultViewStyleNG_*
@@ -39,8 +64,7 @@ h1. Installation
 
 h1. Credits
 
-Expansion will continue. Please use this HUD. Please request what you thing for this HUD.
-　
+Expansion will continue. Please use this HUD. Please request what you thing for this HUD. And please reply @335g if you adopt EEHUDView because I'm happy.
 　
 　
 
