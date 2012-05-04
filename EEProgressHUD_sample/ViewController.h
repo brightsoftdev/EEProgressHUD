@@ -10,5 +10,8 @@
 
 @interface ViewController : UIViewController <UITextFieldDelegate>
 
+@property (nonatomic, strong) IBOutlet UITextField *textField;
 
+- (IBAction)start:(id)sender;
+- (IBAction)done:(id)sender;
 @end

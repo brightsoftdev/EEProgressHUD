@@ -7,20 +7,22 @@
 //
 
 #import "ViewController.h"
-
 #import "EEHUDView.h"
 
 #pragma mark - Private Interface
 @interface ViewController(){
     
-    BOOL is_;
-    int count;
-    int index;
+    
 }
+@property (nonatomic) EEHUDViewShowStyle showStyle;
+@property (nonatomic) EEHUDViewHideStyle hideStyle;
+@property (nonatomic) EEHUDResultViewStyle resultStyle;
 @end
 
 #pragma mark - Implementation
 @implementation ViewController
+@synthesize textField;
+@synthesize showStyle = _showStyle, hideStyle = _hideStyle, resultStyle = _resultStyle;
 
 - (void)didReceiveMemoryWarning
 {
@@ -33,9 +35,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    is_ = NO;
-    count = 0;
-    index = 0;
+    self.showStyle = EEHUDViewShowStyleFadeIn;
+    self.hideStyle = EEHUDViewHideStyleFadeOut;
+    self.resultStyle = EEHUDResultViewStyleOK;
 }
 
 - (void)viewDidUnload
@@ -51,166 +53,248 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-// tableView 必要メソッド とりあえず一式
-#pragma mark - TableView DataSource Method
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (IBAction)start:(id)sender
 {
-	NSString *title;
-    int row = indexPath.row;
-    
-    switch (row) {
+    /****************
+     You need only below method to use [EEHUDView].
+     *****************/
+    [EEHUDView growlWithMessage:self.textField.text
+                      showStyle:self.showStyle
+                      hideStyle:self.hideStyle
+                resultViewStyle:self.resultStyle
+                       showTime:10.0];
+}
+
+- (IBAction)done:(id)sender
+{
+    [self.textField resignFirstResponder];
+}
+
+#pragma mark - Picker Delegate
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title;
+    switch (component) {
         case 0:
-            title = @"Fade";
+            // show
+            
+            switch (row) {
+                case 0:
+                    title = @"Fadein";
+                    break;
+                case 1:
+                    title = @"Lutz";
+                    break;
+                case 2:
+                    title = @"Shake";
+                    break;
+                case 3:
+                    title = @"No";
+                    break;
+                case 4:
+                    title = @"Right";
+                    break;
+                case 5:
+                    title = @"Left";
+                    break;
+                case 6:
+                    title = @"Top";
+                    break;
+                case 7:
+                    title = @"Bottom";
+                    break;
+                default:
+                    break;
+            }
             break;
         case 1:
-            title = @"Lutz";
+            // hide
+            
+            switch (row) {
+                case 0:
+                    title = @"Fadeout";
+                    break;
+                case 1:
+                    title = @"Lutz";
+                    break;
+                case 2:
+                    title = @"Shake";
+                    break;
+                case 3:
+                    title = @"No";
+                    break;
+                case 4:
+                    title = @"Left";
+                    break;
+                case 5:
+                    title = @"Right";
+                    break;
+                case 6:
+                    title = @"Bottom";
+                    break;
+                case 7:
+                    title = @"Top";
+                    break;
+                default:
+                    break;
+            }
+            
             break;
+            
         case 2:
-            title = @"Shake";
-            break;
-        case 3:
-            title = @"NoAnime";
-            break;
-        case 4:
-            title = @"Right";
-            break;
-        case 5:
-            title = @"Left";
-            break;
-        case 6:
-            title = @"Top";
-            break;
-        case 7:
-            title = @"Bottom";
+            
+            switch (row) {
+                case 0:
+                    title = @"OK";
+                    break;
+                case 1:
+                    title = @"NG";
+                    break;
+                case 2:
+                    title = @"Checked";
+                    break;
+                case 3:
+                    title = @"Up↑";
+                    break;
+                case 4:
+                    title = @"Down↓";
+                    break;
+                case 5:
+                    title = @"Right→";
+                    break;
+                case 6:
+                    title = @"Left←";
+                    break;
+                default:
+                    break;
+            }
+            
             break;
         default:
             break;
     }
     
-    cell.textLabel.text = title;
+    return title;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-	return 8;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	static NSString *CellIdentifier = @"cellIdentifier";
-	
-	UITableViewCell	*cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	
-	if (cell == nil) {
-		
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-	}
-	
-	// セル表示
-	[self configureCell:cell atIndexPath:indexPath];
-	
-	return cell;
-}
-
-#pragma mark - TableView Delegate Method
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-	int row = indexPath.row;
-    
-    EEHUDViewShowStyle showStyle;
-    EEHUDViewHideStyle hideStyle;
-    
-    switch (row) {
+    switch (component) {
         case 0:
-            showStyle = EEHUDViewShowStyleFadeIn;
-            hideStyle = EEHUDViewHideStyleFadeOut;
+            switch (row) {
+                case 0:
+                    self.showStyle = EEHUDViewShowStyleFadeIn;
+                    break;
+                case 1:
+                    self.showStyle = EEHUDViewShowStyleLutz;
+                    break;
+                case 2:
+                    self.showStyle = EEHUDViewShowStyleShake;
+                    break;
+                case 3:
+                    self.showStyle = EEHUDViewShowStyleNoAnime;
+                    break;
+                case 4:
+                    self.showStyle = EEHUDViewShowStyleFromRight;
+                    break;
+                case 5:
+                    self.showStyle = EEHUDViewShowStyleFromLeft;
+                    break;
+                case 6:
+                    self.showStyle = EEHUDViewShowStyleFromTop;
+                    break;
+                case 7:
+                    self.showStyle = EEHUDViewShowStyleFromBottom;
+                    break;
+                default:
+                    break;
+            }
             break;
         case 1:
-            showStyle = EEHUDViewShowStyleLutz;
-            hideStyle = EEHUDViewHideStyleLutz;
+            switch (row) {
+                case 0:
+                    self.hideStyle = EEHUDViewHideStyleFadeOut;
+                    break;
+                case 1:
+                    self.hideStyle = EEHUDViewHideStyleLutz;
+                    break;
+                case 2:
+                    self.hideStyle = EEHUDViewHideStyleShake;
+                    break;
+                case 3:
+                    self.hideStyle = EEHUDViewHideStyleNoAnime;
+                    break;
+                case 4:
+                    self.hideStyle = EEHUDViewHideStyleToLeft;
+                    break;
+                case 5:
+                    self.hideStyle = EEHUDViewHideStyleToRight;
+                    break;
+                case 6:
+                    self.hideStyle = EEHUDViewHideStyleToBottom;
+                    break;
+                case 7:
+                    self.hideStyle = EEHUDViewHideStyleToTop;
+                    break;
+                default:
+                    break;
+            }
             break;
         case 2:
-            showStyle = EEHUDViewShowStyleShake;
-            hideStyle = EEHUDViewHideStyleShake;
-            break;
-        case 3:
-            showStyle = EEHUDViewShowStyleNoAnime;
-            hideStyle = EEHUDViewHideStyleNoAnime;
-            break;
-        case 4:
-            showStyle = EEHUDViewShowStyleFromRight;
-            hideStyle = EEHUDViewHideStyleToRight;
-            break;
-        case 5:
-            showStyle = EEHUDViewShowStyleFromLeft;
-            hideStyle = EEHUDViewHideStyleToLeft;
-            break;
-        case 6:
-            showStyle = EEHUDViewShowStyleFromTop;
-            hideStyle = EEHUDViewHideStyleToTop;
-            break;
-        case 7:
-            showStyle = EEHUDViewShowStyleFromBottom;
-            hideStyle = EEHUDViewHideStyleToBottom;
+            switch (row) {
+                case 0:
+                    self.resultStyle = EEHUDResultViewStyleOK;
+                    break;
+                case 1:
+                    self.resultStyle = EEHUDResultViewStyleNG;
+                    break;
+                case 2:
+                    self.resultStyle = EEHUDResultViewStyleChecked;
+                    break;
+                case 3:
+                    self.resultStyle = EEHUDResultViewStyleUpArrow;
+                    break;
+                case 4:
+                    self.resultStyle = EEHUDResultViewStyleDownArrow;
+                    break;
+                case 5:
+                    self.resultStyle = EEHUDResultViewStyleRightArrow;
+                    break;
+                case 6:
+                    self.resultStyle = EEHUDResultViewStyleLeftArrow;
+                    break;
+                default:
+                    break;
+            }
             break;
         default:
             break;
     }
-    
-    EEHUDResultViewStyle resultViewStyle;
-    switch (index%7) {
-        case 0:
-            resultViewStyle = EEHUDResultViewStyleOK;
-            break;
-        case 1:
-            resultViewStyle = EEHUDResultViewStyleNG;
-            break;
-        case 2:
-            resultViewStyle = EEHUDResultViewStyleChecked;
-            break;
-        case 3:
-            resultViewStyle = EEHUDResultViewStyleUpArrow;
-            break;
-        case 4:
-            resultViewStyle = EEHUDResultViewStyleDownArrow;
-            break;
-        case 5:
-            resultViewStyle = EEHUDResultViewStyleRightArrow;
-            break;
-        case 6:
-            resultViewStyle = EEHUDResultViewStyleLeftArrow;
-            break;
-        default:
-            resultViewStyle = EEHUDResultViewStyleOK;
-            break;
-    }
-    
-//    if (is_) {
-//        [EEHUDView hideWithMessage:@"OK"
-//                         hideStyle:hideStyle
-//                   resultViewStyle:EEProgressHUDResultViewStyleOK];
-//    }else {
-//        [EEHUDView showWithMessage:@"Downloading..."
-//                         showStyle:showStyle
-//                 progressViewStyle:EEProgressHUDProgressViewStyleIndicator];
-//    }
-    
-    NSString *countString = [NSString stringWithFormat:@"%d", count];
-    [EEHUDView growlWithMessage:countString
-                      showStyle:showStyle
-                      hideStyle:hideStyle
-                resultViewStyle:resultViewStyle
-                       showTime:3.0];
-    
-    is_ = !is_;
-    
-    // countUP
-    count++;
-    index++;
 }
 
+#pragma mark - Picker DataSource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 3;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    int count = 0;
+    switch (component) {
+        case 0:
+            count = 8;
+            break;
+        case 1:
+            count = 8;
+            break;
+        case 2:
+            count = 7;
+            break;
+        default:
+            break;
+    }
+    return count;
+}
 
 @end

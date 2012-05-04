@@ -614,8 +614,6 @@ static EEHUDView *sharedInstance_ = nil;
 
 - (void)hideAnimation:(NSTimer *)timer;
 {
-    NSLog(@"(%d)%s", self.state, __func__);
-    
     CGFloat fromAlpha, toAlpha;
     CGRect fromRect, toRect;
     CGPoint point1, point2;
@@ -1091,8 +1089,6 @@ static EEHUDView *sharedInstance_ = nil;
 #pragma mark - Animation Delegate
 - (void)animationDidStart:(CAAnimation *)anim
 {
-    NSLog(@"(%d)%s", self.state, __func__);
-    
     switch (self.state) {
         case EEHUDViewStateTransparent:
             // 非表示状態
@@ -1134,8 +1130,6 @@ static EEHUDView *sharedInstance_ = nil;
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    NSLog(@"(%d)%s (%d)", self.state, __func__, flag);
-    
     if (flag) {
         
         switch (self.state) {
@@ -1191,9 +1185,6 @@ static EEHUDView *sharedInstance_ = nil;
     [sharedInstance_.previousKeyWindow makeKeyWindow];
     sharedInstance_.previousKeyWindow = nil;
     
-    //sharedInstance_ = nil;
-    
-    //NSLog(@"cleaned");
 }
 
 @end

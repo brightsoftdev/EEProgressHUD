@@ -11,6 +11,8 @@ EEHUDView features:
 * how to use EEHUDView (when you want to show HUD with message)
  → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
  
+ 
+!https://plus.google.com/photos/114157556339895284677/albums/5738502455029514081?authkey=CI_64IWk3fO0_QE!
 
 h2. Installation
 
