@@ -47,6 +47,34 @@ h3. resultViewStyle
 !https://lh6.googleusercontent.com/-rWdNEMvtEVY/T6OInfCtj2I/AAAAAAAAALc/cLXpt5e3Ghc/s800/007_LeftArrow.png!|*_EEHUDResultViewStylePlay_*
 !https://lh5.googleusercontent.com/-lEE_3lhjCp0/T6OIo09ySiI/AAAAAAAAALg/6XssC5BwdsI/s800/008_Play.png!|*_EEHUDResultViewStylePause_*
 !https://lh4.googleusercontent.com/-pFqcFsTxyZI/T6OIoydhuPI/AAAAAAAAALk/NJcqUJ3AuIA/s800/009_Pause.png!|
+|*_EEHUDResultViewStyleZero_*
+|!https://lh5.googleusercontent.com/-hWuJEOrTtgM/T6OYqfRkc7I/AAAAAAAAAMI/OUjLYEcCjss/s800/010_0.png!|*_EEHUDResultViewStyleOne_*
+!https://lh4.googleusercontent.com/-U4cA8zK6k8E/T6OYqSJfBnI/AAAAAAAAAMM/d1FnfpP_oCE/s800/011_1.png!|*_EEHUDResultViewStyleTwo_*
+!https://lh3.googleusercontent.com/-BaqIvT8qUNA/T6OYvnjpNrI/AAAAAAAAAM0/27PdpA7d1Sk/s800/012_2.png!|
+|*_EEHUDResultViewStyleThree_*
+!https://lh6.googleusercontent.com/-ectWmpyW78Y/T6OYqz-30VI/AAAAAAAAAMQ/L2pbkD_4pVM/s800/013_3.png!|*_EEHUDResultViewStyleFour_*
+!https://lh4.googleusercontent.com/-gtxf0m7gdBQ/T6OYrAl8-zI/AAAAAAAAAMU/KaGg7WmNGXk/s800/014_4.png!|*_EEHUDResultViewStyleFive_*
+!https://lh4.googleusercontent.com/-dKxQQfmiVBU/T6OYwijezQI/AAAAAAAAAM8/zeTCf2oaIMU/s800/015_5.png!|
+|*_EEHUDResultViewStyleSix_*
+!https://lh6.googleusercontent.com/-ZmvDSK-y9fw/T6OYrzM_vDI/AAAAAAAAAMk/tfBNY0Tz6qY/s800/016_6.png!|*_EEHUDResultViewStyleSeven_*
+!https://lh6.googleusercontent.com/-orIuTdbAQ-o/T6OYxqToEZI/AAAAAAAAANI/2FjC3jSfOno/s800/017_7.png!*_EEHUDResultViewStyleEight_*
+!https://lh5.googleusercontent.com/-MXW5mcuSE0M/T6OYy62mgVI/AAAAAAAAANQ/N5Ot8-M40SY/s800/018_8.png!|
+|*_EEHUDResultViewStyleNine_*
+!https://lh3.googleusercontent.com/-jmho3WMMa6Q/T6OYtexGRKI/AAAAAAAAAMw/pNQaGENsj48/s800/019_9.png!|||
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 　
 

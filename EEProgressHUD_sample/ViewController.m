@@ -62,7 +62,7 @@
                       showStyle:self.showStyle
                       hideStyle:self.hideStyle
                 resultViewStyle:self.resultStyle
-                       showTime:10.0];
+                       showTime:1.5];
 }
 
 - (IBAction)done:(id)sender
@@ -172,7 +172,34 @@
                     title = @"Pause";
                     break;
                 case 9:
-                    title = @"Cloud";
+                    title = @"0";
+                    break;
+                case 10:
+                    title = @"1";
+                    break;
+                case 11:
+                    title = @"2";
+                    break;
+                case 12:
+                    title = @"3";
+                    break;
+                case 13:
+                    title = @"4";
+                    break;
+                case 14:
+                    title = @"5";
+                    break;
+                case 15:
+                    title = @"6";
+                    break;
+                case 16:
+                    title = @"7";
+                    break;
+                case 17:
+                    title = @"8";
+                    break;
+                case 18:
+                    title = @"9";
                     break;
                 default:
                     break;
@@ -279,7 +306,35 @@
                     self.resultStyle = EEHUDResultViewStylePause;
                     break;
                 case 9:
-                    self.resultStyle = EEHUDResultViewStyleCloud;
+                    self.resultStyle = EEHUDResultViewStyleZero;
+                    break;
+                case 10:
+                    self.resultStyle = EEHUDResultViewStyleOne;
+                    break;
+                case 11:
+                    self.resultStyle = EEHUDResultViewStyleTwo;
+                    break;
+                case 12:
+                    self.resultStyle = EEHUDResultViewStyleThree;
+                    break;
+                case 13:
+                    self.resultStyle = EEHUDResultViewStyleFour;
+                    break;
+                case 14:
+                    self.resultStyle = EEHUDResultViewStyleFive;
+                    break;
+                case 15:
+                    self.resultStyle = EEHUDResultViewStyleSix;
+                    break;
+                case 16:
+                    self.resultStyle = EEHUDResultViewStyleSeven;
+                    break;
+                case 17:
+                    self.resultStyle = EEHUDResultViewStyleEight;
+                    break;
+                case 18:
+                    self.resultStyle = EEHUDResultViewStyleNine;
+                    break;
                 default:
                     break;
             }
@@ -306,7 +361,7 @@
             count = 8;
             break;
         case 2:
-            count = 10;
+            count = 19;
             break;
         default:
             break;

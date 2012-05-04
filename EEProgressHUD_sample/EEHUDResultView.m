@@ -304,7 +304,128 @@
             
             break;
             
+        case EEHUDResultViewStyleZero:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"0" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleOne:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"1" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleTwo:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"2" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleThree:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"3" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleFour:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"4" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleFive:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"5" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleSix:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"6" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleSeven:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"7" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleEight:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"8" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
+        case EEHUDResultViewStyleNine:
+            
+            innerMargin = 12.0;
+            hidariue = CGPointMake(center.x - r + innerMargin, center.y - r + innerMargin);
+            
+            [EEHUD_COLOR_IMAGE set];
+            
+            [@"9" drawAtPoint:CGPointMake(hidariue.x + 4.0, hidariue.y - 17.0)
+                     withFont:[UIFont fontWithName:@"Helvetica-Bold" size:60.0]];
+            
+            break;
+            
         default:
+        
             
             break;
     }
