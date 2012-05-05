@@ -62,7 +62,7 @@
                       showStyle:self.showStyle
                       hideStyle:self.hideStyle
                 resultViewStyle:self.resultStyle
-                       showTime:10];
+                       showTime:1.5];
 }
 
 - (IBAction)done:(id)sender

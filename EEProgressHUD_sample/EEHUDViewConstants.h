@@ -67,8 +67,8 @@
 #define EEHUD_DURATION_TO_RIGHT         0.25
 
 // animation (Vertical Slide)
-#define EEHUD_LENGTH_FROM_BOTTOM        8.0
-#define EEHUD_LENGTH_FROM_TOP           8.0
+#define EEHUD_LENGTH_FROM_BOTTOM        12.0
+#define EEHUD_LENGTH_FROM_TOP           12.0
 #define EEHUD_LENGTH_TO_BOTTOM          12.0
 #define EEHUD_LENGTH_TO_TOP             12.0
 #define EEHUD_DURATION_FROM_BOTTOM      0.25
