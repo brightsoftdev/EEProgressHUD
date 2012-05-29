@@ -65,7 +65,8 @@ h3. resultViewStyle
 |!https://lh3.googleusercontent.com/-ClJCzZRU5EI/T6PFW82QdfI/AAAAAAAAANc/qHgqW0oWDc8/s800/021_cloud.png!|
 |*_EEHUDResultViewStyleCloudUp_*
 !https://lh5.googleusercontent.com/-2XXr3OMz73g/T6PFWw9ufXI/AAAAAAAAANk/s8WIjsmQHUw/s800/022_cloudUp.png!|*_EEHUDResultViewStyleCloudDown_*
-!https://lh6.googleusercontent.com/-PWk1Bvu4s6w/T6PFXd-lCHI/AAAAAAAAANo/RuMTMHULiR4/s800/023_cloudDown.png!||
+!https://lh6.googleusercontent.com/-PWk1Bvu4s6w/T6PFXd-lCHI/AAAAAAAAANo/RuMTMHULiR4/s800/023_cloudDown.png!|*_EEHUDResultViewStyleMail_*
+!https://lh3.googleusercontent.com/-2jku23CPft0/T8TF6aqp6RI/AAAAAAAAAOA/V3CggQtEGrQ/s800/024_mail.png|
 
 
 　

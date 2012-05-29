@@ -595,6 +595,36 @@
             
             break;
             
+        case EEHUDResultViewStyleMail:
+            
+            innerMargin = 11.0;
+            bothExpansion = 10.0;
+            hidariue = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y - r + innerMargin);
+            migishita = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y + r - innerMargin);
+            migiue = CGPointMake(center.x + r - innerMargin + bothExpansion, center.y - r + innerMargin);
+            hidarishita = CGPointMake(center.x - r + innerMargin - bothExpansion, center.y + r - innerMargin);
+            
+            
+            path = [UIBezierPath bezierPath];
+            [path moveToPoint:hidariue];
+            [path addLineToPoint:migiue];
+            [path addLineToPoint:migishita];
+            [path addLineToPoint:hidarishita];
+            [path addLineToPoint:hidariue];
+            [path moveToPoint:CGPointMake(hidariue.x, hidariue.y + 5.0)];
+            [path addLineToPoint:CGPointMake(center.x, hidarishita.y - 10.0)];
+            [path addLineToPoint:CGPointMake(migiue.x, migiue.y + 5.0)];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineJoinStyle = kCGLineJoinRound;
+            path.lineWidth = 4.0;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path stroke];
+            
+            
+            break;
+            
         default:            
             break;
     }

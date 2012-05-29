@@ -213,6 +213,9 @@
                 case 22:
                     title = @"CloudDOWN";
                     break;
+                case 23:
+                    title = @"Mail";
+                    break;
                 default:
                     break;
             }
@@ -359,6 +362,9 @@
                 case 22:
                     self.resultStyle = EEHUDResultViewStyleCloudDown;
                     break;
+                case 23:
+                    self.resultStyle = EEHUDResultViewStyleMail;
+                    break;
                 default:
                     break;
             }
@@ -385,7 +391,7 @@
             count = 8;
             break;
         case 2:
-            count = 23;
+            count = 24;
             break;
         default:
             break;
