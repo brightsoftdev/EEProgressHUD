@@ -33,8 +33,8 @@
 //#define EEHUD_DURATION_STARTWAIT    3.0
 
 // animation (Fade)
-#define EEHUD_SIZERATIO_FADEIN          0.9
-#define EEHUD_SIZERATIO_FADEOUT         0.9
+#define EEHUD_SIZERATIO_FADEIN          0.95
+#define EEHUD_SIZERATIO_FADEOUT         0.95
 #define EEHUD_DURATION_FADEIN           0.25
 #define EEHUD_DURATION_FADEOUT          0.25
 
