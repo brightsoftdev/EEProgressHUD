@@ -7,6 +7,15 @@
 //
 
 
+
+
+
+// interface orientation
+#define EEHUD_INTERFACE_ORIENTATION_PORTRAIT                YES
+#define EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_LEFT          YES
+#define EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_RIGHT         YES
+#define EEHUD_INTERFACE_ORIENTATION_PORTRAIT_UPSIDEDOWN     NO
+
 // HUDView (golden ratio)
 #define EEHUD_VIEW_WIDTH            161.8
 #define EEHUD_VIEW_HEIGHT           100.0

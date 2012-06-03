@@ -11,6 +11,201 @@
 
 #import "EEHUDViewConstants.h"
 
+#pragma mark - ** EEHUDViewController **
+@interface EEHUDViewController : UIViewController  {
+    
+    UIView *hudView_;
+    UILabel *message_;
+    EEHUDResultView *resultView_;
+    
+}
+@property (nonatomic, strong) UIView *hudView;
+@property (nonatomic, strong) UILabel *message;
+@property (nonatomic, strong) EEHUDResultView *resultView;
+
+@end
+
+@implementation EEHUDViewController
+@synthesize hudView = hudView_;
+@synthesize message = message_;
+@synthesize resultView = resultView_;
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Release any cached data, images, etc that aren't in use.
+    
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    
+    // 無ければ作る
+    if (!self.hudView) [self hudView];
+    if (!self.message) [self message];
+    if (!self.resultView) [self resultView];
+}
+
+- (void)loadView
+{
+    UIView *baseView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 1.0, 1.0)];
+    baseView.backgroundColor = [UIColor clearColor];
+    baseView.userInteractionEnabled = NO;
+    self.view = baseView;
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    
+    self.hudView = nil;
+    self.message = nil;
+    self.resultView = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    /***************************************************************
+     回転は目的に応じて
+     
+        EEHUDViewConstants.h
+     
+     内の各定数項を変更してください
+     ***************************************************************/
+    
+    BOOL boolSwitch;
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            boolSwitch = EEHUD_INTERFACE_ORIENTATION_PORTRAIT;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            boolSwitch = EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_LEFT;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            boolSwitch = EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_RIGHT;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            boolSwitch = EEHUD_INTERFACE_ORIENTATION_PORTRAIT_UPSIDEDOWN;
+            break;
+        default:
+            boolSwitch = YES;
+            break;
+    }
+    
+    return boolSwitch;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    CGRect hudRect = self.hudView.frame;
+    
+    switch (self.interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            hudRect.origin = CGPointMake((320.0 - hudRect.size.width)*0.5, (460.0 - hudRect.size.height)*0.5);
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            hudRect.origin = CGPointMake((480.0 - hudRect.size.width)*0.5, (300.0 - hudRect.size.height)*0.5);
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            hudRect.origin = CGPointMake((480.0 - hudRect.size.width)*0.5, (300.0 - hudRect.size.height)*0.5);
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            hudRect.origin = CGPointMake((320.0 - hudRect.size.width)*0.5, (460.0 - hudRect.size.height)*0.5);
+            break;
+        default:
+            hudRect.origin = CGPointMake((320.0 - hudRect.size.width)*0.5, (460.0 - hudRect.size.height)*0.5);
+            break;
+    }
+    
+    self.hudView.frame = hudRect;
+}
+
+#pragma mark - Getter
+- (UIView *)hudView
+{
+    if (!hudView_) {
+        
+        //CGSize fullRect = self.bounds.size;
+        CGSize fullSize = CGSizeMake(320.0, 460.0);
+        
+        CGRect rect;
+        rect.origin.x = (fullSize.width - EEHUD_VIEW_WIDTH) * 0.5;
+        rect.origin.y = (fullSize.height - EEHUD_VIEW_HEIGHT) * 0.5;
+        rect.size.width = EEHUD_VIEW_WIDTH;
+        rect.size.height = EEHUD_VIEW_HEIGHT;
+        
+        hudView_ = [[UIView alloc] initWithFrame:rect];
+        
+        hudView_.backgroundColor = EEHUD_COLOR_HUDVIEW;
+        hudView_.layer.cornerRadius = EEHUD_VIEW_CORNER_RADIUS;
+        hudView_.clipsToBounds = YES;
+        
+    }
+    
+    if (!hudView_.superview) {
+        [self.view addSubview:hudView_];
+    }
+    
+    return hudView_;
+}
+
+- (UILabel *)message
+{
+    if (!message_) {
+        
+        /***
+         message
+         ***/
+        CGRect messageRect = CGRectMake(EEHUD_VIEW_BOTHENDS_MARGIN,
+                                        EEHUD_VIEW_HEIGHT - EEHUD_LABEL_HEIGHT - EEHUD_LABEL_BOTTOM_MARGIN,
+                                        EEHUD_VIEW_WIDTH - 2.0*EEHUD_VIEW_BOTHENDS_MARGIN,
+                                        EEHUD_LABEL_HEIGHT);
+        message_ = [[UILabel alloc] initWithFrame:messageRect];
+        message_.backgroundColor = [UIColor clearColor];
+        message_.textAlignment = UITextAlignmentCenter;
+        message_.font = EEHUD_LABEL_FONT;
+        message_.textColor = EEHUD_LABEL_TEXTCOLOR;
+        
+    }
+    
+    if (!message_.superview) {
+        [self.hudView addSubview:message_];
+    }
+    
+    return message_;
+}
+
+- (EEHUDResultView *)resultView
+{
+    if (!resultView_) {
+        
+        /***
+         resultView
+         ***/
+        CGRect rect;
+        rect.origin = CGPointMake(EEHUD_VIEW_BOTHENDS_MARGIN, EEHUD_IMAGE_ORIGINY);
+        rect.size.width = EEHUD_IMAGE_WIDTH - 2.0 * EEHUD_VIEW_BOTHENDS_MARGIN;
+        rect.size.height = EEHUD_IMAGE_HEIGHT;
+        
+        resultView_ = [[EEHUDResultView alloc] initWithFrame:rect];
+        resultView_.backgroundColor = [UIColor clearColor];
+        
+    }
+    
+    if (!resultView_.superview) {
+        [self.hudView addSubview:resultView_];
+    }
+    
+    return resultView_;
+}
+
+@end
+
 #pragma mark - Constant
 typedef enum EEHUDViewState_{
     EEHUDViewStateTransparent = 0,          // 非表示時
@@ -19,12 +214,10 @@ typedef enum EEHUDViewState_{
     EEHUDViewStateAnimatingOut = 3          // 表示終わって消す為のアニメーション中
 }EEHUDViewState;
 
-#pragma mark - ** EEProgressHUD **
+#pragma mark - ** EEHUDView **
 @interface EEHUDView ()
 {
-    UIView *hudView_;
-    UILabel *message_;
-    EEHUDResultView *resultView_;
+    EEHUDViewController *viewController_;
     NSTimer *timer_;
     CGFloat time_;
 }
@@ -35,9 +228,7 @@ typedef enum EEHUDViewState_{
 @property (nonatomic) EEHUDViewState state;
 
 @property (nonatomic, weak) UIWindow *previousKeyWindow;
-@property (nonatomic, strong) UIView *hudView;
-@property (nonatomic, strong) UILabel *message;
-@property (nonatomic, strong) EEHUDResultView *resultView;
+@property (nonatomic, strong) EEHUDViewController *viewController;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic) CGFloat time;
 
@@ -64,9 +255,7 @@ typedef enum EEHUDViewState_{
 @synthesize state;
 
 @synthesize previousKeyWindow;
-@synthesize hudView = hudView_;
-@synthesize message = message_;
-@synthesize resultView = resultView_;
+@synthesize viewController = viewController_;
 @synthesize timer = timer_;
 @synthesize time = time_;
 
@@ -91,6 +280,8 @@ static EEHUDView *sharedInstance_ = nil;
 		self.userInteractionEnabled = NO;
         self.backgroundColor = [UIColor clearColor];
         self.state = EEHUDViewStateTransparent;
+        
+        
     }
 	
     return self;
@@ -129,10 +320,13 @@ static EEHUDView *sharedInstance_ = nil;
          resultViewStyle:(EEHUDResultViewStyle)aResultViewStyle
                 showTime:(CGFloat)aTime
 {
-    // 無ければ作る
-    [self hudView];
-    [self message];
-    [self resultView];
+    if (!self.viewController) {
+        self.viewController = [[EEHUDViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    
+    if (!self.viewController.view.superview) {
+        [self addSubview:viewController_.view];
+    }
     
     /* show */
     if(![self isKeyWindow]) {
@@ -168,8 +362,8 @@ static EEHUDView *sharedInstance_ = nil;
     switch (self.state) {
         case EEHUDViewStateTransparent:
             
-            self.message.text = aMessage;
-            self.resultView.viewStyle = aResultViewStyle;
+            self.viewController.message.text = aMessage;
+            self.viewController.resultView.viewStyle = aResultViewStyle;
             
             self.showStyle = aShowStyle;
             self.hideStyle = aHideStyle;
@@ -183,8 +377,8 @@ static EEHUDView *sharedInstance_ = nil;
         case EEHUDViewStateAnimatingIn:
             // animationDidStartで削除するので普通に追加する
             
-            self.message.text = aMessage;
-            self.resultView.viewStyle = aResultViewStyle;
+            self.viewController.message.text = aMessage;
+            self.viewController.resultView.viewStyle = aResultViewStyle;
             
             self.showStyle = aShowStyle;
             self.hideStyle = aHideStyle;
@@ -197,8 +391,8 @@ static EEHUDView *sharedInstance_ = nil;
         case EEHUDViewStateAppeal:
             
             // EEHUDViewStateAppeal状態へと遷移した模様
-            self.message.text = aMessage;
-            self.resultView.viewStyle = aResultViewStyle;
+            self.viewController.message.text = aMessage;
+            self.viewController.resultView.viewStyle = aResultViewStyle;
             
             self.hideStyle = aHideStyle;
             
@@ -208,8 +402,8 @@ static EEHUDView *sharedInstance_ = nil;
             break;
         case EEHUDViewStateAnimatingOut:
             
-            self.message.text = aMessage;
-            self.resultView.viewStyle = aResultViewStyle;
+            self.viewController.message.text = aMessage;
+            self.viewController.resultView.viewStyle = aResultViewStyle;
             
             self.showStyle = aShowStyle;
             self.hideStyle = aHideStyle;
@@ -261,11 +455,11 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 0.0;
             toAlpha = 1.0;
             
-            fromRect = self.hudView.frame;
+            fromRect = self.viewController.hudView.frame;
             fromRect.size.width *= EEHUD_SIZERATIO_FADEIN;
             fromRect.size.height *= EEHUD_SIZERATIO_FADEIN;
             
-            toRect = self.hudView.frame;
+            toRect = self.viewController.hudView.frame;
             
             duration = EEHUD_DURATION_FADEIN;
             
@@ -289,7 +483,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // start
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             
             break;
@@ -301,14 +495,14 @@ static EEHUDView *sharedInstance_ = nil;
             
             duration = EEHUD_DURATION_LUTZIN;
             
-            fromRect = self.hudView.bounds;
+            fromRect = self.viewController.hudView.bounds;
             fromRect.size.width *= EEHUD_SIZERATIO_LUTZIN;
             fromRect.size.height *= EEHUD_SIZERATIO_LUTZIN;
             
-            toRect = self.hudView.bounds;
+            toRect = self.viewController.hudView.bounds;
             
             //
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point2.y -= EEHUD_HEIGHT_JUMP_LUTZIN;
             
@@ -371,7 +565,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -444,7 +638,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             //
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -453,7 +647,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 0.0;
             toAlpha = 1.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point1.x -= EEHUD_LENGTH_FROM_LEFT;
             
@@ -479,7 +673,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -488,7 +682,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 0.0;
             toAlpha = 1.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point1.x += EEHUD_LENGTH_FROM_RIGHT;
             
@@ -514,7 +708,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -533,7 +727,7 @@ static EEHUDView *sharedInstance_ = nil;
             alphaAnime.delegate = self;
             
             //
-            [self.hudView.layer addAnimation:alphaAnime forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:alphaAnime forKey:animationKey];
             
             break;
             
@@ -542,7 +736,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 0.0;
             toAlpha = 1.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point1.y -= EEHUD_LENGTH_FROM_TOP;
             
@@ -568,7 +762,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -577,7 +771,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 0.0;
             toAlpha = 1.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point1.y += EEHUD_LENGTH_FROM_BOTTOM;
             
@@ -603,7 +797,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -646,8 +840,8 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 1.0;
             toAlpha = 0.0;
             
-            fromRect = self.hudView.frame;
-            toRect = self.hudView.frame;
+            fromRect = self.viewController.hudView.frame;
+            toRect = self.viewController.hudView.frame;
             toRect.size.width *= EEHUD_SIZERATIO_FADEOUT;
             toRect.size.height *= EEHUD_SIZERATIO_FADEOUT;
             
@@ -673,7 +867,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // start
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -684,14 +878,14 @@ static EEHUDView *sharedInstance_ = nil;
             
             duration = EEHUD_DURATION_LUTZOUT;
             
-            fromRect = self.hudView.bounds;
+            fromRect = self.viewController.hudView.bounds;
             
-            toRect = self.hudView.bounds;
+            toRect = self.viewController.hudView.bounds;
             toRect.size.width *= EEHUD_SIZERATIO_LUTZOUT;
             toRect.size.height *= EEHUD_SIZERATIO_LUTZOUT;
             
             //
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point2.y -= EEHUD_HEIGHT_JUMP_LUTZOUT;
             
@@ -754,7 +948,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -827,7 +1021,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             //
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -836,7 +1030,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 1.0;
             toAlpha = 0.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point2.x += EEHUD_LENGTH_TO_RIGHT;
             
@@ -862,7 +1056,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -871,7 +1065,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 1.0;
             toAlpha = 0.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point2.x -= EEHUD_LENGTH_TO_LEFT;
             
@@ -897,7 +1091,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -916,7 +1110,7 @@ static EEHUDView *sharedInstance_ = nil;
             alphaAnime.delegate = self;
             
             //
-            [self.hudView.layer addAnimation:alphaAnime forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:alphaAnime forKey:animationKey];
             
             break;
             
@@ -925,7 +1119,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 1.0;
             toAlpha = 0.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point2.y += EEHUD_LENGTH_TO_BOTTOM;
             
@@ -951,7 +1145,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -960,7 +1154,7 @@ static EEHUDView *sharedInstance_ = nil;
             fromAlpha = 1.0;
             toAlpha = 0.0;
             
-            point1 = self.hudView.layer.position;
+            point1 = self.viewController.hudView.layer.position;
             point2 = point1;
             point2.y -= EEHUD_LENGTH_TO_TOP;
             
@@ -986,7 +1180,7 @@ static EEHUDView *sharedInstance_ = nil;
             allAnimationGroup.delegate = self;
             
             // 
-            [self.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
+            [self.viewController.hudView.layer addAnimation:allAnimationGroup forKey:animationKey];
             
             break;
             
@@ -1008,84 +1202,6 @@ static EEHUDView *sharedInstance_ = nil;
                                                  repeats:NO];
 }
 
-#pragma mark - Getter
-- (UIView *)hudView
-{
-    if (!hudView_) {
-        
-        CGSize fullRect = self.bounds.size;
-        
-        CGRect rect;
-        rect.origin.x = (fullRect.width - EEHUD_VIEW_WIDTH) * 0.5;
-        rect.origin.y = (fullRect.height - EEHUD_VIEW_HEIGHT) * 0.5;
-        rect.size.width = EEHUD_VIEW_WIDTH;
-        rect.size.height = EEHUD_VIEW_HEIGHT;
-        
-        hudView_ = [[UIView alloc] initWithFrame:rect];
-        
-        hudView_.backgroundColor = EEHUD_COLOR_HUDVIEW;
-        hudView_.layer.cornerRadius = EEHUD_VIEW_CORNER_RADIUS;
-        hudView_.clipsToBounds = YES;
-        
-    }
-    
-    if (!hudView_.superview) {
-        [self addSubview:hudView_];
-    }
-    
-    return hudView_;
-}
-
-- (UILabel *)message
-{
-    if (!message_) {
-        
-        /***
-         message
-         ***/
-        CGRect messageRect = CGRectMake(EEHUD_VIEW_BOTHENDS_MARGIN,
-                                        EEHUD_VIEW_HEIGHT - EEHUD_LABEL_HEIGHT - EEHUD_LABEL_BOTTOM_MARGIN,
-                                        EEHUD_VIEW_WIDTH - 2.0*EEHUD_VIEW_BOTHENDS_MARGIN,
-                                        EEHUD_LABEL_HEIGHT);
-        message_ = [[UILabel alloc] initWithFrame:messageRect];
-        message_.backgroundColor = [UIColor clearColor];
-        message_.textAlignment = UITextAlignmentCenter;
-        message_.font = EEHUD_LABEL_FONT;
-        message_.textColor = EEHUD_LABEL_TEXTCOLOR;
-        
-    }
-    
-    if (!message_.superview) {
-        [self.hudView addSubview:message_];
-    }
-    
-    return message_;
-}
-
-- (EEHUDResultView *)resultView
-{
-    if (!resultView_) {
-        
-        /***
-         resultView
-         ***/
-        CGRect rect;
-        rect.origin = CGPointMake(EEHUD_VIEW_BOTHENDS_MARGIN, EEHUD_IMAGE_ORIGINY);
-        rect.size.width = EEHUD_IMAGE_WIDTH - 2.0 * EEHUD_VIEW_BOTHENDS_MARGIN;
-        rect.size.height = EEHUD_IMAGE_HEIGHT;
-        
-        resultView_ = [[EEHUDResultView alloc] initWithFrame:rect];
-        resultView_.backgroundColor = [UIColor clearColor];
-        
-    }
-    
-    if (!resultView_.superview) {
-        [self.hudView addSubview:resultView_];
-    }
-    
-    return resultView_;
-}
-
 #pragma mark - Animation Delegate
 - (void)animationDidStart:(CAAnimation *)anim
 {
@@ -1102,9 +1218,9 @@ static EEHUDView *sharedInstance_ = nil;
             // アニメーション中
             
             // 削除
-            for (NSString *key in self.hudView.layer.animationKeys) {
-                if (![[self.hudView.layer animationForKey:key] isEqual:anim]) {
-                    [self.hudView.layer removeAnimationForKey:key];
+            for (NSString *key in self.viewController.hudView.layer.animationKeys) {
+                if (![[self.viewController.hudView.layer animationForKey:key] isEqual:anim]) {
+                    [self.viewController.hudView.layer removeAnimationForKey:key];
                 }
             }
             break;
@@ -1139,7 +1255,7 @@ static EEHUDView *sharedInstance_ = nil;
                 self.state = EEHUDViewStateAppeal;
                 
                 // 消去 (resultViewとmessage出てくる)
-                [self.hudView.layer removeAllAnimations];
+                [self.viewController.hudView.layer removeAllAnimations];
                 
                 // なぜかこのタイミングでタイマー発動
                 self.timer = [NSTimer scheduledTimerWithTimeInterval:self.time
@@ -1175,10 +1291,16 @@ static EEHUDView *sharedInstance_ = nil;
         self.timer = nil;
     }
     
-    if (self.hudView.superview) {
-        [self.hudView removeFromSuperview];
+    if (self.viewController.hudView.superview) {
+        [self.viewController.hudView removeFromSuperview];
     }
-    self.hudView = nil;
+    self.viewController.hudView = nil;
+    
+    if (self.viewController.view.superview) {
+        [self.viewController.view removeFromSuperview];
+    }
+    
+    self.viewController = nil;
     
     self.state = EEHUDViewStateTransparent;
     

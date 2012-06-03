@@ -1,39 +1,40 @@
 h1. EEHUDView
 
+EEHUDViewは非常に軽量で使いやすいiOS用のHUDです。
 EEHUDView is an easy-to-use, clean and lightweight HUD for iOS.
 
 !https://lh3.googleusercontent.com/-CACjjz0IPv8/TuC6DepBWsI/AAAAAAAAAEo/FuDBSejzp0k/s912/screenshots2.png!
 
-h3. features:
+h3. features(特徴):
 
-* singleton class
+* Singleton Class
 
-* how to use EEHUDView (when you want to show HUD with message)
- → call @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
+* 以下のクラスメソッドを呼ぶ事でHUDを表示する事ができます。
+@+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
 
-h3. showStyle
+h3. showStyle (表示方法)
 
-@EEHUDViewShowStyleFadeIn@
-@EEHUDViewShowStyleLutz@
-@EEHUDViewShowStyleShake@
-@EEHUDViewShowStyleNoAnime@
-@EEHUDViewShowStyleFromRight@
-@EEHUDViewShowStyleFromLeft@
-@EEHUDViewShowStyleFromTop@
-@EEHUDViewShowStyleFromBottom@
+@EEHUDViewShowStyleFadeIn@      フェードイン
+@EEHUDViewShowStyleLutz@        回転しながらジャンプ
+@EEHUDViewShowStyleShake@       z軸を回転軸として震える
+@EEHUDViewShowStyleNoAnime@     アニメーション無し
+@EEHUDViewShowStyleFromRight@   右からフェードイン
+@EEHUDViewShowStyleFromLeft@    左からフェードイン
+@EEHUDViewShowStyleFromTop@     上からフェードイン
+@EEHUDViewShowStyleFromBottom@  下からフェードイン
 
-h3. hideStyle
+h3. hideStyle (削除方法)
 
-@EEHUDViewHideStyleFadeOut@
-@EEHUDViewHideStyleLutz@
-@EEHUDViewHideStyleShake@
-@EEHUDViewHideStyleNoAnime@
-@EEHUDViewHideStyleToLeft@
-@EEHUDViewHideStyleToRight@
-@EEHUDViewHideStyleToBottom@
-@EEHUDViewHideStyleToTop@
+@EEHUDViewHideStyleFadeOut@     フェードアウト
+@EEHUDViewHideStyleLutz@        回転しながらジャンプ
+@EEHUDViewHideStyleShake@       z軸を回転軸として震える
+@EEHUDViewHideStyleNoAnime@     アニメーション無し
+@EEHUDViewHideStyleToLeft@      左へフェードアウト
+@EEHUDViewHideStyleToRight@     右へフェードアウト
+@EEHUDViewHideStyleToBottom@    下へフェードアウト
+@EEHUDViewHideStyleToTop@       上へフェードアウト
 
-h3. resultViewStyle
+h3. resultViewStyle (アイコン)
 
 |*_EEHUDResultViewStyleOK_*
 !https://lh6.googleusercontent.com/-D4TQoDbF60g/T6OIllIAN2I/AAAAAAAAALA/WjTrCnVsiWM/s800/001_OK.png!|*_EEHUDResultViewStyleNG_*
@@ -71,21 +72,38 @@ h3. resultViewStyle
 
 　
 
-h1. Installation
+h1. Installation (インストール方法)
 
-* Drag the below files into your project.
+* 1.以下のファイルをプロジェクトへコピーする (Drag the below files into your project.)
 @EEHUDView.h(.m)@
 @EEHUDResultView(.m)@
 @EEHUDViewConstants.h@
 
-* Add the *QuartzCore* framework to your project
+* 2.以下フレームワークを追加してください(Add the below framework to your project)
+@QuartzCore@
+
+h1. Warning (注意)
+回転対応しました。
+EEHUDViewの回転は@EEHUDViewConstants.h@内の以下定数により制御しております。
+
+@EEHUD_INTERFACE_ORIENTATION_PORTRAIT@
+@EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_LEFT@
+@EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_RIGHT@
+@EEHUD_INTERFACE_ORIENTATION_PORTRAIT_UPSIDEDOWN@
+
+必ず、所望の定数を定義してください。
 
 h1. Credits
 
+開発は現在継続しています。安心してお使いください。
 Expansion will continue. Please use this HUD. 
+
+HUDに対するリクエスト等ありましたらご連絡ください。
 Please request what you thing for this HUD.
+
+また、使用する際@335gまで連絡していただけると励みになり非常に嬉しいです。
 And please reply @335g if you adopt EEHUDView because I'm happy.
-　
+
 
 ----------
 Copyright &copy; 2011 Yoshiki Kudo
