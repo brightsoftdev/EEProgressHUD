@@ -25,6 +25,7 @@ EEHUDViewの回転は EEHUDViewConstants.h 内の以下定数により制御し�
 必ず、所望の定数を定義してください。
 
 h2. Arguments (引数)
+
 h3. showStyle (表示方法)
 
 @EEHUDViewShowStyleFadeIn@      フェードイン
