@@ -83,6 +83,7 @@ h1. Installation (インストール方法)
 @QuartzCore@
 
 h1. Warning (注意)
+
 回転対応しました。
 EEHUDViewの回転は@EEHUDViewConstants.h@内の以下定数により制御しております。
 
