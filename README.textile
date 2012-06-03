@@ -5,12 +5,24 @@ EEHUDView is an easy-to-use, clean and lightweight HUD for iOS.
 
 !https://lh3.googleusercontent.com/-CACjjz0IPv8/TuC6DepBWsI/AAAAAAAAAEo/FuDBSejzp0k/s912/screenshots2.png!
 
-h3. features(特徴):
+h2. features(特徴):
 
 * Singleton Class
 
 * 以下のクラスメソッドを呼ぶ事でHUDを表示する事ができます。
 @+ (void)growlWithMessage:showStyle:hideStyle:resultViewStyle:showTime:@
+
+h2. Warning (注意)
+
+回転対応しました。
+EEHUDViewの回転は EEHUDViewConstants.h 内の以下定数により制御しております。
+
+@EEHUD_INTERFACE_ORIENTATION_PORTRAIT@
+@EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_LEFT@
+@EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_RIGHT@
+@EEHUD_INTERFACE_ORIENTATION_PORTRAIT_UPSIDEDOWN@
+
+必ず、所望の定数を定義してください。
 
 h3. showStyle (表示方法)
 
@@ -72,7 +84,7 @@ h3. resultViewStyle (アイコン)
 
 　
 
-h1. Installation (インストール方法)
+h2. Installation (インストール方法)
 
 * 1.以下のファイルをプロジェクトへコピーする (Drag the below files into your project.)
 @EEHUDView.h(.m)@
@@ -82,19 +94,7 @@ h1. Installation (インストール方法)
 * 2.以下フレームワークを追加してください(Add the below framework to your project)
 @QuartzCore@
 
-h1. Warning (注意)
-
-回転対応しました。
-EEHUDViewの回転は EEHUDViewConstants.h 内の以下定数により制御しております。
-
-@EEHUD_INTERFACE_ORIENTATION_PORTRAIT@
-@EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_LEFT@
-@EEHUD_INTERFACE_ORIENTATION_LANDSCAPE_RIGHT@
-@EEHUD_INTERFACE_ORIENTATION_PORTRAIT_UPSIDEDOWN@
-
-必ず、所望の定数を定義してください。
-
-h1. Credits
+h2. Credits
 
 開発は現在継続しています。安心してお使いください。
 Expansion will continue. Please use this HUD. 
