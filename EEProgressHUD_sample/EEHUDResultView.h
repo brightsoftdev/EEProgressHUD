@@ -32,7 +32,11 @@ typedef enum _EEHUDResultViewStyle {
     EEHUDResultViewStyleCloud = 20,
     EEHUDResultViewStyleCloudUp = 21,
     EEHUDResultViewStyleCloudDown = 22,
-    EEHUDResultViewStyleMail = 23
+    EEHUDResultViewStyleMail = 23,
+    EEHUDResultViewStyleMicrophone = 24,
+    EEHUDResultViewStyleLocation = 25,
+    EEHUDResultViewStyleHome = 26,
+    EEHUDResultViewStyleTweet = 27
 } EEHUDResultViewStyle;
 @interface EEHUDResultView : UIView {
     

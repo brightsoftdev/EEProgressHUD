@@ -46,6 +46,8 @@
     CGPoint start, relay, end;
     CGFloat innerMargin;
     CGFloat bothExpansion;
+    CGFloat ueMargin, hidariMargin, migiMargin, shitaMargin;
+    CGFloat theta;
     
     EEHUDResultViewStyle style = self.viewStyle;
     
@@ -625,6 +627,236 @@
             
             break;
             
+        case EEHUDResultViewStyleMicrophone:
+            
+            ueMargin = 2.0;
+            hidariMargin = 7.0;
+            migiMargin = 7.0;
+            shitaMargin = 0.0;
+            
+            hidariue = CGPointMake(center.x - r + hidariMargin, center.y - r + ueMargin);
+            migiue = CGPointMake(center.x + r - migiMargin, center.y - r + ueMargin);
+            migishita = CGPointMake(center.x + r - migiMargin, center.y + r - shitaMargin);
+            hidarishita = CGPointMake(center.x - r + hidariMargin, center.y + r - shitaMargin);
+            
+            path = nil;
+            path = [UIBezierPath bezierPath];
+            
+            [path moveToPoint:CGPointMake(center.x - 7.0, hidariue.y + 10.0)];
+            [path addArcWithCenter:CGPointMake(center.x, hidariue.y + 10.0)
+                            radius:7.0
+                        startAngle:M_PI
+                          endAngle:0.0
+                         clockwise:YES];
+            [path addLineToPoint:CGPointMake(center.x + 7.0, center.y - 4.0)];
+            [path addArcWithCenter:CGPointMake(center.x, center.y + 7.0 - 4.0)
+                            radius:7.0
+                        startAngle:0.0
+                          endAngle:M_PI
+                         clockwise:YES];
+            [path addLineToPoint:CGPointMake(center.x - 7.0, hidariue.y + 10.0)];
+            [path closePath];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineWidth = 3.0;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path fill];
+            
+            // 
+            path = nil;
+            path = [UIBezierPath bezierPath];
+            [path moveToPoint:CGPointMake(center.x + 7.0 + 5.0, center.y - 4.0 - 1.0)];
+            [path addLineToPoint:CGPointMake(center.x + 7.0 + 5.0, center.y - 4.0)];
+            [path addArcWithCenter:CGPointMake(center.x, center.y + 7.0 - 4.0)
+                            radius:12.0
+                        startAngle:0.0
+                          endAngle:M_PI
+                         clockwise:YES];
+            [path addLineToPoint:CGPointMake(center.x - 7.0 - 5.0, center.y - 4.0 - 1.0)];
+            
+            [path moveToPoint:CGPointMake(center.x, center.y + 7.0 - 4.0 + 12.0)];
+            [path addLineToPoint:CGPointMake(center.x, hidarishita.y - 3.0)];
+            [path moveToPoint:CGPointMake(center.x - 7.0, hidarishita.y - 3.0)];
+            [path addLineToPoint:CGPointMake(center.x + 7.0, hidarishita.y - 3.0)];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineWidth = 4.0;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path stroke];
+            
+            
+            break;
+            
+        case EEHUDResultViewStyleLocation:
+            
+            ueMargin = 2.0;
+            hidariMargin = 5.0;
+            migiMargin = 5.0;
+            shitaMargin = -4.0;
+            
+            hidariue = CGPointMake(center.x - r + hidariMargin, center.y - r + ueMargin);
+            migiue = CGPointMake(center.x + r - migiMargin, center.y - r + ueMargin);
+            migishita = CGPointMake(center.x + r - migiMargin, center.y + r - shitaMargin);
+            hidarishita = CGPointMake(center.x - r + hidariMargin, center.y + r - shitaMargin);
+            
+            path = [UIBezierPath bezierPath];
+            
+            [path moveToPoint:CGPointMake(center.x - 2, hidarishita.y - 7)];
+            [path addLineToPoint:CGPointMake(center.x, hidarishita.y - 5)];
+            [path addLineToPoint:CGPointMake(center.x + 2, hidarishita.y - 7)];
+            [path addLineToPoint:CGPointMake(center.x + 20.0, hidariue.y + 24.0)];
+            [path addArcWithCenter:CGPointMake(center.x, hidariue.y + 20.0)
+                            radius:(sqrt(416))
+                        startAngle:atan(5.0/20.0)
+                          endAngle:(M_PI - atan(5.0/20.0))
+                         clockwise:NO];
+            [path closePath];
+            
+            path.lineCapStyle = kCGLineCapRound;
+            path.lineJoinStyle = kCGLineJoinRound;
+            path.lineWidth = 4.0;
+            
+            [path addArcWithCenter:CGPointMake(center.x, center.y - 9.0)
+                            radius:9.0
+                        startAngle:0.0
+                          endAngle:1.999999*M_PI
+                         clockwise:YES];
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path fill];
+            
+            break;
+            
+        case EEHUDResultViewStyleHome:
+            
+            ueMargin = 5.0;
+            hidariMargin = -5.0;
+            migiMargin = -5.0;
+            shitaMargin = 0.0;
+            
+            hidariue = CGPointMake(center.x - r + hidariMargin, center.y - r + ueMargin);
+            migiue = CGPointMake(center.x + r - migiMargin, center.y - r + ueMargin);
+            migishita = CGPointMake(center.x + r - migiMargin, center.y + r - shitaMargin);
+            hidarishita = CGPointMake(center.x - r + hidariMargin, center.y + r - shitaMargin);
+            
+            path = [UIBezierPath bezierPath];
+            
+            [path moveToPoint:CGPointMake(center.x, hidariue.y)];
+            
+            theta = atan((center.y + 2.0 - hidariue.y)/(center.x - hidariue.x));
+            
+            [path addLineToPoint:CGPointMake(hidariue.x, center.y + 2.0)];
+            [path addCurveToPoint:CGPointMake(hidariue.x + 9.0*sin(theta) + 9.0*2.0*cos(theta), center.y + 2.0 + 9.0*cos(theta) - 2.0*9.0*sin(theta))
+                    controlPoint1:CGPointMake(hidariue.x + 9.0*sin(theta), center.y + 2.0 + 9.0*cos(theta))
+                    controlPoint2:CGPointMake(hidariue.x + 9.0*sin(theta) + 9.0*cos(theta), center.y + 2.0 + 9.0*cos(theta) - 9.0*sin(theta))];
+            [path addLineToPoint:CGPointMake(center.x, hidariue.y + 9.0/cos(atan((center.y + 2.0 - hidariue.y)/(center.x - hidariue.x))))];
+            [path addLineToPoint:CGPointMake(migiue.x - 9.0*sin(theta) - 9.0*2.0*cos(theta), center.y + 2.0 + 9.0*cos(theta) - 2.0*9.0*sin(theta))];
+            [path addCurveToPoint:CGPointMake(migiue.x, center.y + 2.0)
+                    controlPoint1:CGPointMake(migiue.x - 9.0*sin(theta) - 9.0*cos(theta), center.y + 2.0 + 9.0*cos(theta) - 9.0*sin(theta))
+                    controlPoint2:CGPointMake(migiue.x - 9.0*sin(theta), center.y + 2.0 + 9.0*cos(theta))];
+            [path closePath];
+            
+            path.lineWidth = 1.0;
+            path.lineJoinStyle = kCGLineJoinRound;
+            path.lineCapStyle = kCGLineCapRound;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path fill];
+            
+            path = nil;
+            path = [UIBezierPath bezierPath];
+            
+            [path moveToPoint:CGPointMake(center.x - 10.0, hidarishita.y)];
+            [path addLineToPoint:CGPointMake(center.x - 10.0, hidarishita.y - 5.0)];
+            [path addArcWithCenter:CGPointMake(center.x, hidarishita.y - 5.0)
+                            radius:10.0
+                        startAngle:M_PI
+                          endAngle:0.0
+                         clockwise:YES];
+            [path addLineToPoint:CGPointMake(center.x + 10.0, migishita.y)];
+            [path addLineToPoint:CGPointMake(center.x + 20.0, migishita.y)];
+            [path addLineToPoint:CGPointMake(center.x + 20.0, migishita.y - 20.0)];
+            [path addLineToPoint:CGPointMake(center.x, migishita.y - 20.0 - (20.0*tan(theta)))];
+            [path addLineToPoint:CGPointMake(center.x - 20.0, hidarishita.y - 20.0)];
+            [path addLineToPoint:CGPointMake(center.x - 20.0, hidarishita.y)];
+            [path closePath];
+            
+            path.lineWidth = 4.0;
+            path.lineJoinStyle = kCGLineJoinRound;
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path fill];
+            
+            break;
+        case EEHUDResultViewStyleTweet:
+            
+            ueMargin = 5.0;
+            hidariMargin = -5.0;
+            migiMargin = -5.0;
+            shitaMargin = 0.0;
+            
+            hidariue = CGPointMake(center.x - r + hidariMargin, center.y - r + ueMargin);
+            migiue = CGPointMake(center.x + r - migiMargin, center.y - r + ueMargin);
+            migishita = CGPointMake(center.x + r - migiMargin, center.y + r - shitaMargin);
+            hidarishita = CGPointMake(center.x - r + hidariMargin, center.y + r - shitaMargin);
+            
+//            path = [UIBezierPath bezierPath];
+//            [path moveToPoint:hidariue];
+//            [path addLineToPoint:migiue];
+//            [path addLineToPoint:migishita];
+//            [path addLineToPoint:hidarishita];
+//            [path closePath];
+//            
+//            [EEHUD_COLOR_IMAGE set];
+//            [path stroke];
+//            
+//            path = nil;
+            
+            path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(hidariue.x, 
+                                                                     hidariue.y, 
+                                                                     migiue.x - hidariue.x, 
+                                                                     hidarishita.y - hidariue.y - 8.0)];
+            
+            [path addArcWithCenter:CGPointMake(center.x - 15.0, center.y)
+                            radius:4.0
+                        startAngle:0.0
+                          endAngle:1.999999*M_PI
+                         clockwise:YES];
+            [path closePath];
+            
+            [path addArcWithCenter:CGPointMake(center.x - 0.0, center.y)
+                            radius:4.0
+                        startAngle:0.0
+                          endAngle:1.999999*M_PI
+                         clockwise:YES];
+            [path closePath];
+
+            [path addArcWithCenter:CGPointMake(center.x + 15.0, center.y)
+                            radius:4.0
+                        startAngle:0.0
+                          endAngle:1.999999*M_PI
+                         clockwise:YES];
+            [path closePath];
+            
+            path.usesEvenOddFillRule = YES;
+            [EEHUD_COLOR_IMAGE set];
+            [path fill];
+            
+            path = nil;
+            path = [UIBezierPath bezierPath];
+            
+            [path moveToPoint:CGPointMake(hidarishita.x + 10.0, hidarishita.y - 15.0)];
+            [path addQuadCurveToPoint:CGPointMake(hidarishita.x + 15.0, hidarishita.y)
+                         controlPoint:CGPointMake(hidarishita.x + 20.0, hidarishita.y - 10.0)];
+            [path addLineToPoint:CGPointMake(hidarishita.x + 40.0, hidarishita.y - 10.0)];
+            [path closePath];
+            
+            [EEHUD_COLOR_IMAGE set];
+            [path fill];
+            
+            break;
         default:            
             break;
     }

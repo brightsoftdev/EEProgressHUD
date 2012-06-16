@@ -55,7 +55,7 @@ h3. resultViewStyle (アイコン)
 !https://lh5.googleusercontent.com/-lxzV7SXuv8g/T6OIlv0jVdI/AAAAAAAAAK8/RXd56F5JqAE/s800/002_NG.png!|*_EEHUDResultViewStyleChecked_*
 !https://lh6.googleusercontent.com/-aAVm3jgPHHQ/T6OIlnZoCzI/AAAAAAAAALM/YVM6CwynwuM/s800/003_Checked.png!|
 |*_EEHUDResultViewStyleUpArrow_*
-|!https://lh4.googleusercontent.com/-iCXoYP753KY/T6OImLcYgqI/AAAAAAAAALE/8genv0PcDRk/s800/004_UpArrow.png!|*_EEHUDResultViewStyleDownArrow_*
+!https://lh4.googleusercontent.com/-iCXoYP753KY/T6OImLcYgqI/AAAAAAAAALE/8genv0PcDRk/s800/004_UpArrow.png!|*_EEHUDResultViewStyleDownArrow_*
 !https://lh5.googleusercontent.com/-F9HMjYUACjw/T6OIsXkIzNI/AAAAAAAAAL8/qt13-lCnDiM/s800/005_DownArrow.png!|*_EEHUDResultViewStyleRightArrow_*
 !https://lh3.googleusercontent.com/-2TAnHqO4YKM/T6OIrNlHVII/AAAAAAAAAL0/T7sbDEJ-UB4/s800/006_RightArrow.png!|
 |*_EEHUDResultViewStyleLeftArrow_*
@@ -63,7 +63,7 @@ h3. resultViewStyle (アイコン)
 !https://lh5.googleusercontent.com/-lEE_3lhjCp0/T6OIo09ySiI/AAAAAAAAALg/6XssC5BwdsI/s800/008_Play.png!|*_EEHUDResultViewStylePause_*
 !https://lh4.googleusercontent.com/-pFqcFsTxyZI/T6OIoydhuPI/AAAAAAAAALk/NJcqUJ3AuIA/s800/009_Pause.png!|
 |*_EEHUDResultViewStyleZero_*
-|!https://lh5.googleusercontent.com/-hWuJEOrTtgM/T6OYqfRkc7I/AAAAAAAAAMI/OUjLYEcCjss/s800/010_0.png!|*_EEHUDResultViewStyleOne_*
+!https://lh5.googleusercontent.com/-hWuJEOrTtgM/T6OYqfRkc7I/AAAAAAAAAMI/OUjLYEcCjss/s800/010_0.png!|*_EEHUDResultViewStyleOne_*
 !https://lh4.googleusercontent.com/-U4cA8zK6k8E/T6OYqSJfBnI/AAAAAAAAAMM/d1FnfpP_oCE/s800/011_1.png!|*_EEHUDResultViewStyleTwo_*
 !https://lh3.googleusercontent.com/-BaqIvT8qUNA/T6OYvnjpNrI/AAAAAAAAAM0/27PdpA7d1Sk/s800/012_2.png!|
 |*_EEHUDResultViewStyleThree_*
@@ -77,13 +77,20 @@ h3. resultViewStyle (アイコン)
 |*_EEHUDResultViewStyleNine_*
 !https://lh3.googleusercontent.com/-jmho3WMMa6Q/T6OYtexGRKI/AAAAAAAAAMw/pNQaGENsj48/s800/019_9.png!|*_EEHUDResultViewStyleExclamation_*
 !https://lh5.googleusercontent.com/-Tf2brsObTM8/T6PFWoQb9YI/AAAAAAAAANg/jUVNxIWHu4o/s800/020_exclamation.png!|*_EEHUDResultViewStyleCloud_*
-|!https://lh3.googleusercontent.com/-ClJCzZRU5EI/T6PFW82QdfI/AAAAAAAAANc/qHgqW0oWDc8/s800/021_cloud.png!|
+!https://lh3.googleusercontent.com/-ClJCzZRU5EI/T6PFW82QdfI/AAAAAAAAANc/qHgqW0oWDc8/s800/021_cloud.png!|
 |*_EEHUDResultViewStyleCloudUp_*
 !https://lh5.googleusercontent.com/-2XXr3OMz73g/T6PFWw9ufXI/AAAAAAAAANk/s8WIjsmQHUw/s800/022_cloudUp.png!|*_EEHUDResultViewStyleCloudDown_*
 !https://lh6.googleusercontent.com/-PWk1Bvu4s6w/T6PFXd-lCHI/AAAAAAAAANo/RuMTMHULiR4/s800/023_cloudDown.png!|*_EEHUDResultViewStyleMail_*
 !https://lh3.googleusercontent.com/-2jku23CPft0/T8TF6aqp6RI/AAAAAAAAAOA/V3CggQtEGrQ/s800/024_mail.png!|
-
-
+|*_EEHUDResultViewStyleMicrophone_*
+!https://lh6.googleusercontent.com/-4887D1xNGJc/T9wZESmsELI/AAAAAAAAAOQ/1b6KljBRKk8/s800/025_microphone.png!|
+*_EEHUDResultViewStyleLocation_*
+!https://lh5.googleusercontent.com/-YFwjubFI3Pg/T9wZES0HlWI/AAAAAAAAAOM/MDZbRF4O7dQ/s800/026_location.png!|
+*_EEHUDResultViewStyleHome_*
+!https://lh3.googleusercontent.com/-_7I5KJ1koEk/T9wZEpL0eWI/AAAAAAAAAOU/HHAISS8BSIg/s800/027_home.png!|
+|*_EEHUDResultViewStyleTweet_*
+!https://lh3.googleusercontent.com/-E7WdM3PlDdw/T9wZE31b7MI/AAAAAAAAAOk/H5lbspSEPXI/s800/028_tweet.png!|
+||
 　
 
 h2. Installation (インストール方法)

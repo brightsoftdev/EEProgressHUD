@@ -216,6 +216,18 @@
                 case 23:
                     title = @"Mail";
                     break;
+                case 24:
+                    title = @"Microphone";
+                    break;
+                case 25:
+                    title = @"Location";
+                    break;
+                case 26:
+                    title = @"Home";
+                    break;
+                case 27:
+                    title = @"Tweet";
+                    break;
                 default:
                     break;
             }
@@ -365,6 +377,18 @@
                 case 23:
                     self.resultStyle = EEHUDResultViewStyleMail;
                     break;
+                case 24:
+                    self.resultStyle = EEHUDResultViewStyleMicrophone;
+                    break;
+                case 25:
+                    self.resultStyle = EEHUDResultViewStyleLocation;
+                    break;
+                case 26:
+                    self.resultStyle = EEHUDResultViewStyleHome;
+                    break;
+                case 27:
+                    self.resultStyle = EEHUDResultViewStyleTweet;
+                    break;
                 default:
                     break;
             }
@@ -391,7 +415,7 @@
             count = 8;
             break;
         case 2:
-            count = 24;
+            count = 28;
             break;
         default:
             break;
