@@ -83,10 +83,8 @@ h3. resultViewStyle (アイコン)
 !https://lh6.googleusercontent.com/-PWk1Bvu4s6w/T6PFXd-lCHI/AAAAAAAAANo/RuMTMHULiR4/s800/023_cloudDown.png!|*_EEHUDResultViewStyleMail_*
 !https://lh3.googleusercontent.com/-2jku23CPft0/T8TF6aqp6RI/AAAAAAAAAOA/V3CggQtEGrQ/s800/024_mail.png!|
 |*_EEHUDResultViewStyleMicrophone_*
-!https://lh6.googleusercontent.com/-4887D1xNGJc/T9wZESmsELI/AAAAAAAAAOQ/1b6KljBRKk8/s800/025_microphone.png!|
-*_EEHUDResultViewStyleLocation_*
-!https://lh5.googleusercontent.com/-YFwjubFI3Pg/T9wZES0HlWI/AAAAAAAAAOM/MDZbRF4O7dQ/s800/026_location.png!|
-*_EEHUDResultViewStyleHome_*
+!https://lh6.googleusercontent.com/-4887D1xNGJc/T9wZESmsELI/AAAAAAAAAOQ/1b6KljBRKk8/s800/025_microphone.png!|*_EEHUDResultViewStyleLocation_*
+!https://lh5.googleusercontent.com/-YFwjubFI3Pg/T9wZES0HlWI/AAAAAAAAAOM/MDZbRF4O7dQ/s800/026_location.png!|*_EEHUDResultViewStyleHome_*
 !https://lh3.googleusercontent.com/-_7I5KJ1koEk/T9wZEpL0eWI/AAAAAAAAAOU/HHAISS8BSIg/s800/027_home.png!|
 |*_EEHUDResultViewStyleTweet_*
 !https://lh3.googleusercontent.com/-E7WdM3PlDdw/T9wZE31b7MI/AAAAAAAAAOk/H5lbspSEPXI/s800/028_tweet.png!|||
