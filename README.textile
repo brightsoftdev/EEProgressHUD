@@ -84,9 +84,9 @@ h3. resultViewStyle (アイコン)
 !https://lh3.googleusercontent.com/-2jku23CPft0/T8TF6aqp6RI/AAAAAAAAAOA/V3CggQtEGrQ/s800/024_mail.png!|
 |*_EEHUDResultViewStyleMicrophone_*
 !https://lh6.googleusercontent.com/-4887D1xNGJc/T9wZESmsELI/AAAAAAAAAOQ/1b6KljBRKk8/s800/025_microphone.png!|
-
 ||
-　
+
+
 
 h2. Installation (インストール方法)
 
